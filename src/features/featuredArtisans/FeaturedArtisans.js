@@ -87,11 +87,11 @@ const FeaturedArtisans = () => {
           />
 
           <CardMedia
-          component="img"
-          height="100"
-          image={artisan.profileImage}
-          alt="Paella dish"
-        />
+            component="img"
+            height="100"
+            image={artisan.profileImage}
+            alt="Paella dish"
+          />
 
           <CardContent>
             <Divider textAlign="center">Info</Divider>
