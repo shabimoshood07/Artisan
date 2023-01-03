@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Box,
@@ -13,8 +13,12 @@ import {
   Toolbar,
   Typography,
   Button,
+  Avatar,
+  MenuItem,
+  Badge,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Mail, Notifications } from "@mui/icons-material";
 
 import { useSelector } from "react-redux";
 import {
@@ -33,7 +37,7 @@ function Navbar(props) {
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
-  const { data: artisans } = useGetAllArtisansQuery();
+  const { data: artisans, isSuccess } = useGetAllArtisansQuery();
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -68,7 +72,10 @@ function Navbar(props) {
     content = (
       <Box sx={{ display: "flex", border: "solid red" }}>
         <CssBaseline />
-        <AppBar component="nav">
+        <AppBar
+          component="nav"
+          sx={{ border: "solid red", background: "#000729" }}
+        >
           <Toolbar>
             <IconButton
               color="inherit"
@@ -122,14 +129,23 @@ function Navbar(props) {
     );
   }
 
-  if (isLoggedIn && role == "artisan") {
-    let navItems = ["Logout"];
-
+  if (isLoggedIn && role == "artisan" && isSuccess) {
+    const artisan = artisans.find((artisan) => artisan.email == email);
     content = (
-      <Box sx={{ display: "flex", border: "solid red" }}>
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar component="nav">
-          <Toolbar>
+        <AppBar
+          component="nav"
+          sx={{ border: "solid red", background: "#000729" }}
+        >
+          <Toolbar
+            sx={{
+              border: "solid yellow",
+              width: { xs: "97%", md: "85%" },
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -147,11 +163,31 @@ function Navbar(props) {
               ARTISAN
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {/* {navItems.map((item) => (
-                <Button key={item} sx={{ color: "#fff" }}>
-                  {item}
-                </Button>
-              ))} */}
+              <Button>
+                <Avatar
+                  src={artisan.profileImage}
+                  // sx={{ width: 40, height: 40}}
+                  alt={artisan.name}
+                />
+              </Button>
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <Badge badgeContent={4} color="error">
+                  <Mail />
+                </Badge>
+              </IconButton>
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={17} color="error">
+                  <Notifications />
+                </Badge>
+              </IconButton>
               <Button sx={{ color: "#fff" }}>Logout</Button>
             </Box>
           </Toolbar>
@@ -179,6 +215,35 @@ function Navbar(props) {
               </Typography>
               <Divider />
               <List>
+                <ListItem>
+                  <ListItemButton sx={{ textAlign: "center" }}>
+                    <IconButton
+                      size="large"
+                      aria-label="show 4 new mails"
+                      color="inherit"
+                    >
+                      <Badge badgeContent={4} color="error">
+                        <Mail />
+                      </Badge>
+                    </IconButton>
+                    <p>Messages</p>
+                  </ListItemButton>
+                </ListItem>
+
+                <ListItem>
+                  <ListItemButton>
+                    <IconButton
+                      size="large"
+                      aria-label="show 17 new notifications"
+                      color="inherit"
+                    >
+                      <Badge badgeContent={17} color="error">
+                        <Notifications />
+                      </Badge>
+                    </IconButton>
+                    <p>Notifications</p>
+                  </ListItemButton>
+                </ListItem>
                 <ListItem disablePadding>
                   <ListItemButton sx={{ textAlign: "center" }}>
                     <ListItemText primary="Logout" />
