@@ -5,7 +5,7 @@ import {
   selectArtisanCredentials,
 } from "../authSlice/artisanAuthSlice";
 
-import { useGetAllArtisansQuery } from "../api/apiSlice";
+import { useGetAllArtisansQuery, useGetAllUsersQuery } from "../api/apiSlice";
 import {
   AppBar,
   Box,
@@ -45,6 +45,8 @@ function Navbar(props) {
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
   const { data: artisans, isSuccess } = useGetAllArtisansQuery();
+
+  const { data: users, isSuccess: userSuccess } = useGetAllUsersQuery();
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -137,7 +139,7 @@ function Navbar(props) {
   }
 
   if (isLoggedIn && role == "artisan" && isSuccess) {
-    content = <ArtisanNav/>
+    content = <ArtisanNav />;
   }
 
   // if (isLoggedIn && role == "artisan" && isSuccess) {
