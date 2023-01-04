@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   selectLoggedInStatus,
-  selectUserCredentials,
-} from "../authSlice/authSlice";
+  selectArtisanCredentials,
+} from "../authSlice/artisanAuthSlice";
 
 import { useGetAllArtisansQuery } from "../api/apiSlice";
 import {
@@ -40,7 +40,7 @@ let navItems = ["Login", "Sign Up"];
 
 function Navbar(props) {
   // User Credentials
-  const { user, token, role, email } = useSelector(selectUserCredentials);
+  const { user, token, role, email } = useSelector(selectArtisanCredentials);
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 

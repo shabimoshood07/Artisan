@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   selectLoggedInStatus,
-  selectArtisanCredentials,
+  selectUserCredentials,
 } from "../authSlice/artisanAuthSlice";
 
-import { useGetAllArtisansQuery } from "../api/apiSlice";
+import { useGetAllUsersQuery } from "../api/apiSlice";
 import {
   AppBar,
   Box,
@@ -38,7 +38,7 @@ let navItems = ["Login", "Sign Up"];
 
 function ArtisanNav(props) {
   // User Credentials
-  const { user, token, role, email } = useSelector(selectArtisanCredentials);
+  const { user, token, role, email } = useSelector(selectUserCredentials);
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
@@ -53,8 +53,8 @@ function ArtisanNav(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-  let content;
-
+    let content;
+    
   if (isLoggedIn && role == "artisan" && isSuccess) {
     const artisan = artisans.find((artisan) => artisan.email == email);
     content = (

@@ -5,13 +5,17 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3600",
   }),
-  tagTypes: ['Artisans'],
+  tagTypes: ["Artisans", "Users"],
   endpoints: (builder) => ({
     getAllArtisans: builder.query({
       query: () => "/artisans",
-      providesTags: ['Artisans']
+      providesTags: ["Artisans"],
+    }),
+    getAllUsers: builder.query({
+      query: () => "/users",
+      providesTags: ["Users"],
     }),
   }),
 });
 
-export const { useGetAllArtisansQuery } = apiSlice;
+export const { useGetAllArtisansQuery, useGetAllUsersQuery } = apiSlice;
