@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLoggedIn: true,
   userCredentials: {
-    user: null,
-    token: null,
+    user: "Moshood Olawale",
+    token: 1234567890,
     role: "artisan",
     email: "moh@gmail.com",
   },

@@ -1,0 +1,22 @@
+.logout-btn{
+    background-color: #d32f2f;
+    margin-left: 2rem;
+    color: #D7C1CE;
+    font-weight: bold;
+    transition: all  .9s;
+} 
+.logout-btn:hover{
+    color: #d32f2f;
+    background-color: #D7C1CE;
+}
+
+.icon{
+    /* padding: 1rem; */
+    color: #D7C1CE;
+    margin-left: .5rem;
+    transition: all  .9s;
+}
+.icon:hover{
+    background-color: #D7C1CE;
+    color: #000729;
+}
