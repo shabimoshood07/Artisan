@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import {
   selectLoggedInStatus,
   selectUserCredentials,
-} from "../authSlice/artisanAuthSlice";
+} from "../authSlice/authSlice";
 
 import { useGetAllUsersQuery } from "../api/apiSlice";
 import {
@@ -36,13 +36,13 @@ import "./style.css";
 const drawerWidth = 240;
 let navItems = ["Login", "Sign Up"];
 
-function ArtisanNav(props) {
+const USerNav = (props) => {
   // User Credentials
-  const { user, token, role, email } = useSelector(selectUserCredentials);
+  const { userName, role } = useSelector(selectUserCredentials);
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
-  const { data: artisans, isSuccess } = useGetAllArtisansQuery();
+  const { data: users, isSuccess } = useGetAllUsersQuery();
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -53,10 +53,14 @@ function ArtisanNav(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-    let content;
-    
-  if (isLoggedIn && role == "artisan" && isSuccess) {
-    const artisan = artisans.find((artisan) => artisan.email == email);
+  let content;
+
+  if (isLoggedIn && isSuccess) {
+    console.log(users);
+    const user = users.find(
+      (user) => user.userName.toLowerCase() == userName.toLowerCase()
+    );
+    console.log(user);
     content = (
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -94,9 +98,9 @@ function ArtisanNav(props) {
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Button>
-                <Avatar src={artisan.profileImage} alt={artisan.name} />
+                <Avatar alt={user.userName}>{userName.charAt(0)}</Avatar>
               </Button>
-              <IconButton size="large" className="icon">
+              {/* <IconButton size="large" className="icon">
                 <Badge badgeContent={4} color="error">
                   <CommentOutlined />
                 </Badge>
@@ -105,7 +109,7 @@ function ArtisanNav(props) {
                 <Badge badgeContent={17} color="error">
                   <StarOutline />
                 </Badge>
-              </IconButton>
+              </IconButton> */}
               <Button className="logout-btn">
                 Logout
                 <LogoutOutlined />
@@ -136,7 +140,7 @@ function ArtisanNav(props) {
               </Typography>
               <Divider />
               <List>
-                <ListItem>
+                {/* <ListItem>
                   <ListItemButton sx={{ textAlign: "center" }}>
                     <IconButton
                       size="large"
@@ -149,9 +153,9 @@ function ArtisanNav(props) {
                     </IconButton>
                     <p>Comments</p>
                   </ListItemButton>
-                </ListItem>
+                </ListItem> */}
 
-                <ListItem>
+                {/* <ListItem>
                   <ListItemButton>
                     <IconButton
                       size="large"
@@ -164,6 +168,11 @@ function ArtisanNav(props) {
                     </IconButton>
                     <p>Rating</p>
                   </ListItemButton>
+                </ListItem> */}
+                <ListItem>
+                  <Button>
+                    <Avatar alt={user.userName}>{userName.charAt(0)}</Avatar>
+                  </Button>
                 </ListItem>
                 <ListItem disablePadding>
                   <Button className="logout-btn">
@@ -183,6 +192,6 @@ function ArtisanNav(props) {
   }
 
   return content;
-}
+};
 
-export default ArtisanNav;
+export default USerNav;

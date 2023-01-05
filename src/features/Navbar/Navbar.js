@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   selectLoggedInStatus,
-  selectArtisanCredentials,
-} from "../authSlice/artisanAuthSlice";
+  selectUserCredentials,
+} from "../authSlice/authSlice";
 
 import { useGetAllArtisansQuery, useGetAllUsersQuery } from "../api/apiSlice";
 import {
@@ -32,7 +32,7 @@ import {
 
 // Import the different navs
 import ArtisanNav from "./ArtisanNav";
-
+import USerNav from "./UserNav";
 import "./style.css";
 
 const drawerWidth = 240;
@@ -40,7 +40,7 @@ let navItems = ["Login", "Sign Up"];
 
 function Navbar(props) {
   // User Credentials
-  const { user, token, role, email } = useSelector(selectArtisanCredentials);
+  const { user, token, role, email } = useSelector(selectUserCredentials);
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
@@ -140,6 +140,9 @@ function Navbar(props) {
 
   if (isLoggedIn && role == "artisan" && isSuccess) {
     content = <ArtisanNav />;
+  }
+  if (isLoggedIn && role == "user" && isSuccess) {
+    content = <USerNav />;
   }
 
   // if (isLoggedIn && role == "artisan" && isSuccess) {
