@@ -78,7 +78,7 @@ function Navbar(props) {
 
   let content;
   if (!isLoggedIn) {
-    content = (
+    return (
       <Box sx={{ display: "flex", border: "solid red" }}>
         <CssBaseline />
         <AppBar
@@ -138,11 +138,11 @@ function Navbar(props) {
     );
   }
 
-  if (isLoggedIn && role == "artisan" && isSuccess) {
-    content = <ArtisanNav />;
+  if (isLoggedIn && role == "artisan") {
+    return <ArtisanNav />;
   }
-  if (isLoggedIn && role == "user" && isSuccess) {
-    content = <USerNav />;
+  if (isLoggedIn && role == "user") {
+    return <USerNav />;
   }
 
   // if (isLoggedIn && role == "artisan" && isSuccess) {
@@ -275,7 +275,7 @@ function Navbar(props) {
   //   );
   // }
 
-  return content;
+  // return content;
 }
 
 export default Navbar;

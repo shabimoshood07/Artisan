@@ -1,22 +1,38 @@
-.logout-btn{
-    background-color: #d32f2f;
-    margin-left: 2rem;
-    color: #D7C1CE;
-    font-weight: bold;
-    transition: all  .9s;
-} 
-.logout-btn:hover{
-    color: #d32f2f;
-    background-color: #D7C1CE;
+.logout-btn {
+  background-color: #d32f2f;
+  /* margin-left: 2rem; */
+  color: #d7c1ce;
+  font-weight: bold;
+  transition: all 0.9s;
+}
+.logout-btn:hover {
+  color: #d32f2f;
+  background-color: #d7c1ce;
 }
 
-.icon{
-    /* padding: 1rem; */
-    color: #D7C1CE;
-    margin-left: .5rem;
-    transition: all  .9s;
+.icon {
+  /* padding: 1rem; */
+  color: #d7c1ce;
+  margin-left: 0.5rem;
+  transition: all 0.9s;
 }
-.icon:hover{
-    background-color: #D7C1CE;
-    color: #000729;
+.icon:hover {
+  background-color: #d7c1ce;
+  color: #000729;
 }
+
+.list-items {
+  /* border: solid; */
+  justify-content: center;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.list-items button{
+    transition: all .9s;
+
+}
+/* .list-items:hover > button {
+  background-color: #000729;
+  color: #d7c1ce;
+} */

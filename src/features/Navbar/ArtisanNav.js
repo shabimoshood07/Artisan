@@ -101,7 +101,7 @@ function ArtisanNav(props) {
                   <CommentOutlined />
                 </Badge>
               </IconButton>
-              <IconButton size="large" className="icon">
+              <IconButton size="large" className="icon" sx={{ mr: 2 }}>
                 <Badge badgeContent={17} color="error">
                   <StarOutline />
                 </Badge>
@@ -136,8 +136,18 @@ function ArtisanNav(props) {
               </Typography>
               <Divider />
               <List>
-                <ListItem>
-                  <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItem className="list-items">
+                  <ListItemButton
+                    sx={{ textAlign: "center", justifyContent: "center" }}
+                  >
+                    <Avatar src={artisan.profileImage} />
+                    <p>Profile</p>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem className="list-items">
+                  <ListItemButton
+                    sx={{ textAlign: "center", justifyContent: "center" }}
+                  >
                     <IconButton
                       size="large"
                       aria-label="show 4 new mails"
@@ -151,8 +161,8 @@ function ArtisanNav(props) {
                   </ListItemButton>
                 </ListItem>
 
-                <ListItem>
-                  <ListItemButton>
+                <ListItem className="list-items">
+                  <ListItemButton sx={{ justifyContent: "center" }}>
                     <IconButton
                       size="large"
                       aria-label="show 17 new notifications"
@@ -165,7 +175,7 @@ function ArtisanNav(props) {
                     <p>Rating</p>
                   </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
+                <ListItem disablePadding className="list-items">
                   <Button className="logout-btn">
                     Logout
                     <LogoutOutlined />

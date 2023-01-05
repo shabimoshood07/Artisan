@@ -34,7 +34,6 @@ import {
 import "./style.css";
 
 const drawerWidth = 240;
-let navItems = ["Login", "Sign Up"];
 
 const USerNav = (props) => {
   // User Credentials
@@ -56,7 +55,6 @@ const USerNav = (props) => {
   let content;
 
   if (isLoggedIn && isSuccess) {
-    console.log(users);
     const user = users.find(
       (user) => user.userName.toLowerCase() == userName.toLowerCase()
     );
@@ -67,13 +65,11 @@ const USerNav = (props) => {
         <AppBar
           component="nav"
           sx={{
-            // border: "solid red",
             background: "#001166",
           }}
         >
           <Toolbar
             sx={{
-              // border: "solid yellow",
               width: { xs: "97%", md: "85%" },
               marginLeft: "auto",
               marginRight: "auto",
@@ -97,8 +93,10 @@ const USerNav = (props) => {
               ARTISAN
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Button>
-                <Avatar alt={user.userName}>{userName.charAt(0)}</Avatar>
+              <Button sx={{ marginRight: "2rem" }}>
+                <Avatar alt={user.userName}>{`${userName.charAt(
+                  0
+                )} ${userName.charAt(2)}`}</Avatar>
               </Button>
               {/* <IconButton size="large" className="icon">
                 <Badge badgeContent={4} color="error">
@@ -169,13 +167,34 @@ const USerNav = (props) => {
                     <p>Rating</p>
                   </ListItemButton>
                 </ListItem> */}
-                <ListItem>
-                  <Button>
-                    <Avatar alt={user.userName}>{userName.charAt(0)}</Avatar>
-                  </Button>
+                <ListItem className="list-items">
+                  {/* <Button
+                    sx={{
+                      color: "#000729",
+                      textTransform: "capitalize",
+                      width: "100%",
+                      padding: "1rem",
+                      fontWeight: "bold",
+                      borderRadius: "0",
+                    }}
+                  > */}
+
+                  <ListItemButton sx={{ justifyContent: "center" }}>
+                    <Avatar
+                      alt={user.userName}
+                      sx={{ marginRight: "1rem", textTransform: "uppercase" }}
+                    >
+                      {`${userName.charAt(0)} ${userName.charAt(2)}`}
+                    </Avatar>
+                    <p>View Profile</p>
+                  </ListItemButton>
+                  {/* </Button> */}
                 </ListItem>
-                <ListItem disablePadding>
-                  <Button className="logout-btn">
+                <ListItem disablePadding className="list-items">
+                  <Button
+                    className="logout-btn"
+                    sx={{ marginLeft: "0", width: "50%" }}
+                  >
                     Logout
                     <LogoutOutlined />
                   </Button>
