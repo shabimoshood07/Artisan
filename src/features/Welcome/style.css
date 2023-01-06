@@ -1,0 +1,14 @@
+.main-con{
+    padding: 0;
+    margin: 0;
+    max-width: unset;
+    background-color:#D7C1CE ;
+    height: 80vh;
+}
+
+.welcome-text{
+    font-size:1.5rem ;
+}
+
+
+

@@ -63,13 +63,11 @@ function ArtisanNav(props) {
         <AppBar
           component="nav"
           sx={{
-            // border: "solid red",
             background: "#001166",
           }}
         >
           <Toolbar
             sx={{
-              // border: "solid yellow",
               width: { xs: "97%", md: "85%" },
               marginLeft: "auto",
               marginRight: "auto",

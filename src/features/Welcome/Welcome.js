@@ -1,19 +1,42 @@
 import React from "react";
-import { Container } from "@mui/system";
+
+// MATERIAL UI IMPORT
+import { Box, Container, Grid, Typography } from "@mui/material";
+
+// CSS IMPORT
+import "./style.css";
+
 const Welcome = () => {
   return (
-    <Container
-      sx={{
-        // border: "solid green",
-        padding: "0",
-        paddingTop: "1rem",
-        paddingBottom: "2rem",
-        margin: "0",
-        maxWidth: "unset !important",
-        background: "#D7C1CE",
-        height:"80vh"
-      }}
-    ></Container>
+    <Container className="main-con">
+      <Box sx={{ border: "solid", height: "100%" }}>
+        <Grid
+          direction={{ xs: "column", md: "row" }}
+          container
+          spacing={2}
+          columns={16}
+          sx={{
+            border: "solid blue",
+            margin: "0",
+            width: "100%",
+            // height: "100%",
+          }}
+        >
+          <Grid md={8} sx={{ border: "solid yellow", height: "100%", p: 4 }}>
+            <Typography className="welcome-text" align="left">
+              "Welcome to <span>Artisans! </span> We provide access to a team of
+              dedicated professionals committed to providing top-quality
+              products and services to customers. We hope you find what you're
+              looking for,and if you have any questions, don't hesitate to
+              contact us."
+            </Typography>
+          </Grid>
+          <Grid md={8} sx={{ border: "solid green" }}>
+            <Typography>buttons</Typography>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
 

@@ -79,13 +79,21 @@ function Navbar(props) {
   let content;
   if (!isLoggedIn) {
     return (
-      <Box sx={{ display: "flex", border: "solid red" }}>
+      <Box sx={{ display: "flex"}}>
         <CssBaseline />
         <AppBar
           component="nav"
-          sx={{ border: "solid red", background: "#000729" }}
+          sx={{
+            background: "#001166",
+          }}
         >
-          <Toolbar>
+          <Toolbar
+            sx={{
+              width: { xs: "97%", md: "85%" },
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
