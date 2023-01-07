@@ -1,25 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Artisan from "./Artisan";
-import { useGetAllArtisansQuery } from "../api/apiSlice";
-import { Container, Stack } from "@mui/material";
+import {
+  selectSearchError,
+  selectSearchList,
+  selectSearchStatus,
+  searchArtisan,
+} from "../Search/SearchSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { Container, Stack, Typography } from "@mui/material";
+
+// CSS
+import "./style.css";
+
 const ArtisanList = () => {
-  const { data: artisans, isLoading, isSuccess } = useGetAllArtisansQuery();
+  const dispatch = useDispatch();
+
+  const status = useSelector(selectSearchStatus);
+  const searchList = useSelector(selectSearchList);
+  const error = useSelector(selectSearchError);
+
+  console.log(status);
   let content;
-  if (isSuccess) {
-    content = artisans.map((artisan) => {
-      return <Artisan key={artisan.id} artisan={artisan} />;
-    });
+
+  if (status === "failed") {
+    content = <p>{error}</p>;
+  } else if (status === "loading") {
+    content = <p>Loading....</p>;
+  } else if (status === "succeeded") {
+    if (searchList.length == 0) {
+      content = <Typography>NO Artisan found!</Typography>;
+    } else {
+      content = searchList.map((artisan) => {
+        return <Artisan key={artisan.id} artisan={artisan} />;
+      });
+    }
   }
   return (
     <Container
       sx={{
-        padding: "0",
         paddingTop: "1rem",
         paddingBottom: "2rem",
-        margin: "0",
-        maxWidth: "unset !important",
         background: "#000729",
+        minHeight: "60vh",
+        maxWidth: "unset !important",
       }}
+
+      //   className="container search-con"
     >
       <Stack
         direction={{ xs: "column", sm: "row" }}

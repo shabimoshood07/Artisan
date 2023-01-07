@@ -15,4 +15,9 @@
     text-transform: capitalize;
     font-weight: 600;
   }
+
+  .search-con{
+    border: solid;
+    padding: 2rem;
+  }
   
