@@ -1,0 +1,18 @@
+.btn{
+    border: solid;
+}
+
+.MuiCardHeader-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #000729;
+  }
+  
+  .MuiDivider-root {
+    color: #000729;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+  

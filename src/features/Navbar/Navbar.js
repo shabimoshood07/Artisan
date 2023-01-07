@@ -34,6 +34,7 @@ import {
 import ArtisanNav from "./ArtisanNav";
 import USerNav from "./UserNav";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 let navItems = ["Login", "Sign Up"];
@@ -79,7 +80,7 @@ function Navbar(props) {
   let content;
   if (!isLoggedIn) {
     return (
-      <Box sx={{ display: "flex"}}>
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
           component="nav"
@@ -108,7 +109,7 @@ function Navbar(props) {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              ARTISAN
+              <Link to="/">ARTISAN</Link>
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {navItems.map((item) => (

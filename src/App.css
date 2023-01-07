@@ -13,4 +13,11 @@
   }
   a {
     text-decoration: none;
+    color: unset;
+  }
+
+  .container{
+    padding: 0;
+    margin: 0;
+    max-width: unset;
   }

@@ -18,14 +18,7 @@ const Home = () => {
   } = useGetAllArtisansQuery();
 
   return (
-    <Container
-      sx={{
-        // border: "solid blue",
-        padding: "0 !important",
-        margin: "0",
-        maxWidth: "unset !important",
-      }}
-    >
+    <Container className = "container">
       <Welcome />
       <FeaturedArtisans />
     </Container>

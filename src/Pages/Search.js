@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import SearchForm from "../features/Search/SearchForm";
+import ArtisanList from "../features/Search/ArtisanList";
+import { Container } from "@mui/material";
 
 const Search = () => {
   return (
-    <div>Search</div>
-  )
-}
+    <Container
+      className="container"
+      sx={{ border: "solid", minHeight: "95vh", backgroundColor: "#d7c1ce" }}
+    >
+      <SearchForm />
+      <ArtisanList />
+    </Container>
+  );
+};
 
-export default Search
+export default Search;

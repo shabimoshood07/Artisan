@@ -31,6 +31,7 @@ import {
   LogoutOutlined,
 } from "@mui/icons-material";
 
+import { Link } from "react-router-dom";
 import "./style.css";
 
 const drawerWidth = 240;
@@ -90,7 +91,7 @@ const USerNav = (props) => {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              ARTISAN
+              <Link to="/">ARTISAN</Link>
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Button sx={{ marginRight: "2rem" }}>

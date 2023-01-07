@@ -15,7 +15,16 @@ export const apiSlice = createApi({
       query: () => "/users",
       providesTags: ["Users"],
     }),
+    getSearchedArtisan: builder.query({
+      query: ({ profession, location }) =>
+        `/artisans?profession_like=${profession}&address_like=${location}`,
+      providesTags: ["Artisans"],
+    }),
   }),
 });
 
-export const { useGetAllArtisansQuery, useGetAllUsersQuery } = apiSlice;
+export const {
+  useGetAllArtisansQuery,
+  useGetAllUsersQuery,
+  useGetSearchedArtisanQuery,
+} = apiSlice;

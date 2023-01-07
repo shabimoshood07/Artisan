@@ -31,10 +31,12 @@ import {
   LogoutOutlined,
 } from "@mui/icons-material";
 
+import { Link } from "react-router-dom";
+
 import "./style.css";
 
 const drawerWidth = 240;
-let navItems = ["Login", "Sign Up"];
+
 
 function ArtisanNav(props) {
   // User Credentials
@@ -88,7 +90,7 @@ function ArtisanNav(props) {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              ARTISAN
+              <Link to="/">ARTISAN</Link>
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Button>
