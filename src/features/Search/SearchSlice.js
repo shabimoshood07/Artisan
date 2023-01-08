@@ -3,7 +3,7 @@ import { CreateApi } from "@reduxjs/toolkit/dist/query";
 import axios from "axios";
 
 const initialState = {
-  status: "idle",
+  status: "loading",
   searchList: [],
   error: null,
 };

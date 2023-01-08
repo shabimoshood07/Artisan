@@ -7,7 +7,12 @@ const Search = () => {
   return (
     <Container
       className="container"
-      sx={{ border: "solid red", minHeight: "95vh", backgroundColor: "#d7c1ce" }}
+      sx={{
+        // border: "solid",
+        // minHeight: "95vh",
+        backgroundColor: "#d7c1ce",
+        paddingTop:"1.8rem !important"
+      }}
     >
       <SearchForm />
       <ArtisanList />

@@ -27,7 +27,6 @@ import "./style.css";
 import { Link } from "react-router-dom";
 
 const FeaturedArtisans = () => {
-  // Rating
 
   const { data: artisans, isLoading, isSuccess } = useGetAllArtisansQuery();
 
@@ -48,20 +47,10 @@ const FeaturedArtisans = () => {
         <Card
           key={artisan.id}
           sx={{
-            maxWidth: 310,
-            minWidth: 310,
-            minHeight: 320,
-            maxHeight: 500,
-            flex: 1,
+            height: 450,
           }}
         >
           <CardHeader
-            // avatar={
-            //   <Avatar
-            //     src={artisan.profileImage}
-            //     sx={{ width: 56, height: 56 }}
-            //   />
-            // }
             title={artisan.profession}
             subheader={
               <Rating
@@ -107,38 +96,6 @@ const FeaturedArtisans = () => {
           </CardContent>
 
           <CardActions>
-            {/* <a
-            href={`https://facebook.com/${artisan.socials.facebook}`}
-            target="_blank"
-          >
-            <IconButton aria-label="add to favorites">
-              <FacebookOutlined />
-            </IconButton>
-          </a>
-          <a
-            href={`https://instagram.com/${artisan.socials.instagram}`}
-            target="_blank"
-          >
-            <IconButton aria-label="share">
-              <Instagram />
-            </IconButton>
-          </a>
-          <a
-            href={`https://twitter.com/${artisan.socials.twitter}`}
-            target="_blank"
-          >
-            <IconButton aria-label="more">
-              <Twitter />
-            </IconButton>
-          </a>
-          <a
-            href={`https://twitter.com/${artisan.phoneNumber}`}
-            target="_blank"
-          >
-            <IconButton aria-label="more">
-              <PhoneOutlined />
-            </IconButton>
-          </a> */}
           </CardActions>
         </Card>
       );
@@ -147,9 +104,7 @@ const FeaturedArtisans = () => {
 
   return (
     <Container
-      //   maxWidth="lg"
       sx={{
-        // border: "solid green",
         padding: "0",
         paddingTop: "1rem",
         paddingBottom: "2rem",
@@ -166,15 +121,15 @@ const FeaturedArtisans = () => {
         Featured Artisans
       </Typography>
       <Stack
-        direction={{ xs: "column", sm: "row" }}
-        alignItems="center"
-        // justifyContent="space-evenly"
         sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "2rem",
+          margin: "0 auto",
+          width: { xs: "85%", sm: "60%", md: "100%" },
+          maxWidth: 1500,
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gap: "20px",
+          alignItems: "stretch",
         }}
-        className="stack"
       >
         {content}
       </Stack>

@@ -24,26 +24,26 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-import "./style.css"
+import "./style.css";
 const Artisan = ({ artisan }) => {
   return (
     <Card
-      key={artisan.id}
       sx={{
-        maxWidth: 310,
-        minWidth: 310,
-        minHeight: 320,
+        // maxWidth: 300,
+        // minWidth: 300,
+        // minHeight: 320,
         // maxHeight: 500,
-        flex: 1,
+        // flex: 1,
+        height: { sm: 420, md: 420 },
+        //     float: {xs:"unset",md:"left"},
+        //     margin: "10px",
+        //    border:"solid yellow"
       }}
     >
       <CardHeader
-        // avatar={
-        //   <Avatar
-        //     src={artisan.profileImage}
-        //     sx={{ width: 56, height: 56 }}
-        //   />
-        // }
+        avatar={
+          <Avatar src={artisan.profileImage} sx={{ width: 56, height: 56 }} />
+        }
         title={artisan.profession}
         subheader={
           <Rating
@@ -68,12 +68,12 @@ const Artisan = ({ artisan }) => {
         }}
       />
 
-      <CardMedia
+      {/* <CardMedia
         component="img"
         height="100"
         image={artisan.profileImage}
         alt="Paella dish"
-      />
+      /> */}
 
       <CardContent>
         <Divider textAlign="center">Info</Divider>

@@ -9,19 +9,20 @@ const SearchForm = () => {
   const [location, setLocation] = useState("");
   const [profession, setProfession] = useState("");
 
-  useEffect(() => {
-    dispatch(searchArtisan({profession, location}));
-  }, []);
+//   useEffect(() => {
+//     dispatch(searchArtisan({ profession, location }));
+//   }, []);
 
-  const handleSearch = () => {
-    dispatch(searchArtisan({profession, location}));
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(searchArtisan({ profession, location }));
   };
 
   return (
     <Box
       sx={{
         width: { xs: 500, md: 900 },
-        margin: "2rem auto",
+        margin: "auto",
         maxWidth: "100%",
         // border: "solid red",
         padding: "1rem",
@@ -30,6 +31,8 @@ const SearchForm = () => {
         flexDirection: { xs: "column", md: "row" },
       }}
       component="form"
+      noValidate
+      autoComplete="off"
     >
       <TextField
         fullWidth
@@ -43,7 +46,7 @@ const SearchForm = () => {
         margin="normal"
         onChange={(e) => setProfession(e.target.value)}
       />
-      <Button className="btn" onClick={handleSearch}>
+      <Button type="submit" className="btn" onClick={handleSearch}>
         Search
       </Button>
     </Box>
