@@ -1,17 +1,11 @@
 import React from "react";
-import {
-  Stack,
-  Box,
-  Paper,
-  Avatar,
-  Typography,
-  Rating,
-  Grid,
-} from "@mui/material";
-import { useParams } from "react-router-dom";
+
+import { Container, CircularProgress, Box } from "@mui/material";
 import { useGetArtisanQuery } from "../features/api/apiSlice";
-import { deepOrange, deepPurple } from "@mui/material/colors";
-import { border } from "@mui/system";
+import { useParams } from "react-router-dom";
+// COMPONENTS
+import Details from "../features/ArtisanDetails/Details";
+
 const ArtisanDetails = () => {
   const { id } = useParams();
   const {
@@ -25,51 +19,30 @@ const ArtisanDetails = () => {
 
   if (isSuccess) {
     console.log(artisan);
-    const {
-      profileImage,
-      phoneNumber,
-      alternativeNumber,
-      name,
-      role,
-      username,
-      email,
-      address,
-      profession,
-      gender,
-      about,
-      rating,
-      socials,
-      comments,
-    } = artisan;
     content = (
-      <Stack p={5} direction={{ xs: "column", md: "row" }}>
-        <Box sx={{ border: "solid", width: "50%" }}>
-          <Paper elevation={16}>
-            <Grid container  columns={{ xs: 2}} sx={{ border: "solid" }}>
-              <Avatar
-                src={profileImage}
-                sx={{ width: 200, height: 200 }}
-              ></Avatar>
-              <Box sx={{ border: "solid yellow" }}>
-                <Typography>{username}</Typography>
-                <Typography sx={{ textTransform: "uppercase" }}>
-                  {profession}
-                </Typography>
-              </Box>
-            </Grid>
-            <Typography sx={{ textTransform: "uppercase" }}>{name}</Typography>
-            <Box>
-              <Rating value={rating} readOnly precision={0.5} size="large" />
-              <Typography>{rating}</Typography>
-            </Box>
-            <Box>
-              <Typography>Comments</Typography>
-              <Typography>{comments.length}</Typography>
-            </Box>
-          </Paper>
+      <Container sx={{ backgroundColor: "#d7c1ce", minHeight: "95vh" }} className="container">
+        <Details artisan={artisan} />
+      </Container>
+    );
+  }
+  if (isLoading) {
+    content = (
+      <Container
+        sx={{ backgroundColor: "#d7c1ce", }}
+        className="container"
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            paddingTop: "2rem",
+            minHeight: "95vh",
+          }}
+        >
+          <CircularProgress size={100} />
         </Box>
-        <Box sx={{ border: "solid red", width: "50%" }}></Box>
-      </Stack>
+      </Container>
     );
   }
 
