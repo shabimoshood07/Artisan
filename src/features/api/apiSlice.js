@@ -11,16 +11,13 @@ export const apiSlice = createApi({
       query: () => "/artisans",
       providesTags: ["Artisans"],
     }),
+    getArtisan: builder.query({
+      query: (id) => `/artisans/${id}`,
+      providesTags: ["Artisans"],
+    }),
     getAllUsers: builder.query({
       query: () => "/users",
       providesTags: ["Users"],
-    }),
-    getSearchedArtisan: builder.query({
-      query: (profession, location) =>
-        "/artisans?profession_like=" +
-        `${profession}` +
-        "&address_like=" +
-        `${location}`,
     }),
   }),
 });
@@ -28,5 +25,5 @@ export const apiSlice = createApi({
 export const {
   useGetAllArtisansQuery,
   useGetAllUsersQuery,
-  useGetSearchedArtisanQuery,
+  useGetArtisanQuery,
 } = apiSlice;

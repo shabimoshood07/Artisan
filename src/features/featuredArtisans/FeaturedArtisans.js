@@ -27,7 +27,6 @@ import "./style.css";
 import { Link } from "react-router-dom";
 
 const FeaturedArtisans = () => {
-
   const { data: artisans, isLoading, isSuccess } = useGetAllArtisansQuery();
 
   let content;
@@ -62,7 +61,7 @@ const FeaturedArtisans = () => {
               />
             }
             action={
-              <Link>
+              <Link to={`/details/${artisan.id}`}>
                 <IconButton aria-label="settings">
                   <ArrowForwardOutlined />
                 </IconButton>
@@ -95,8 +94,7 @@ const FeaturedArtisans = () => {
             <Typography variant="body2">{artisan.address}</Typography>
           </CardContent>
 
-          <CardActions>
-          </CardActions>
+          <CardActions></CardActions>
         </Card>
       );
     });

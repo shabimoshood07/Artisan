@@ -8,10 +8,9 @@ const Search = () => {
     <Container
       className="container"
       sx={{
-        // border: "solid",
-        // minHeight: "95vh",
         backgroundColor: "#d7c1ce",
-        paddingTop:"1.8rem !important"
+        paddingTop: "1.8rem !important",
+        // paddingBottom: "1.8rem !important",
       }}
     >
       <SearchForm />

@@ -59,7 +59,6 @@ const USerNav = (props) => {
     const user = users.find(
       (user) => user.userName.toLowerCase() == userName.toLowerCase()
     );
-    console.log(user);
     content = (
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -94,7 +93,16 @@ const USerNav = (props) => {
               <Link to="/">ARTISAN</Link>
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Button sx={{ marginRight: "2rem" }}>
+              <Button sx={{ marginRight: "2rem", border: "solid 1px #d7c1ce", }}>
+                <Typography
+                  sx={{
+                    color: "#d7c1ce",
+                    textTransform: "capitalize",
+                    marginRight: "10px",
+                  }}
+                >
+                  View Profile
+                </Typography>
                 <Avatar alt={user.userName}>{`${userName.charAt(
                   0
                 )} ${userName.charAt(2)}`}</Avatar>

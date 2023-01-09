@@ -6,8 +6,9 @@ const initialState = {
     user: null,
     userName:"xabi",
     token: 1234567890,
-    role: "artisan",
+    role: "user",
     email: "moh@gmail.com",
+    id:null
   },
 };
 

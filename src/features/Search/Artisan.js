@@ -35,6 +35,8 @@ const Artisan = ({ artisan }) => {
         // maxHeight: 500,
         // flex: 1,
         height: { sm: 420, md: 420 },
+        width:{xs:250, sm:"unset"},
+        margin:"0 auto",
         //     float: {xs:"unset",md:"left"},
         //     margin: "10px",
         //    border:"solid yellow"
@@ -55,7 +57,7 @@ const Artisan = ({ artisan }) => {
           />
         }
         action={
-          <Link>
+          <Link to={`/details/${artisan.id}`}>
             <IconButton aria-label="settings">
               <ArrowForwardOutlined />
             </IconButton>

@@ -55,18 +55,20 @@ const ArtisanList = () => {
   return (
     <Container
       sx={{
-        paddingTop: "1rem",
+        padding:"0",
+        paddingTop: "2rem",
         paddingBottom: "2rem",
         background: "#000729",
         minHeight: "80vh",
         maxWidth: "unset !important",
+        // border:"solid green"
       }}
     >
       <Box
         sx={{
-          border: "solid red",
+        //   border: "solid red",
           margin: "0 auto",
-          width: { xs: "85%", sm: "60%", md: "100%" },
+          width: { xs: "100%", sm: "60%", md: "100%" },
           maxWidth: 1500,
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
