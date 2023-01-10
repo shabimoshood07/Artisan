@@ -30,14 +30,14 @@ const Details = ({ artisan }) => {
 
   return (
     <>
-      <Box sx={{ width: { md: "50%", xs: "90% " } }}>
+      <Box sx={{ width: { lg: "50%", xs: "90% " } }}>
         <Paper elevation={16}>
           <Grid
             container
             // columns={{ xs: 2 }}
             sx={{
               display: "flex",
-              border: "solid yellow",
+              // border: "solid yellow",
               backgroundColor: "#000729",
               justifyContent: "center",
             }}
@@ -58,7 +58,7 @@ const Details = ({ artisan }) => {
                 color="#d7c1ce"
                 sx={{
                   textTransform: "capitalize",
-                  fontSize: { xs: 25, sm: 50 },
+                  fontSize: { xs: 20, sm: 30 },
                 }}
               >
                 {username}
@@ -69,8 +69,8 @@ const Details = ({ artisan }) => {
                 variant="h3"
                 color="#d7c1ce"
                 sx={{
-                  textTransform: "uppercase",
-                  fontSize: { xs: 35, sm: 60 },
+                  textTransform: "capitalize",
+                  fontSize: { xs: 25, sm: 50 },
                 }}
               >
                 {profession}
@@ -85,6 +85,7 @@ const Details = ({ artisan }) => {
             }}
             variant="h5"
             align="center"
+            color="#000729"
             p={2}
           >
             {name}
@@ -105,15 +106,15 @@ const Details = ({ artisan }) => {
                   justifyContent: "center",
                 }}
               />
-              <Typography align="center" variant="h5">
+              <Typography align="center" variant="h5" color="#000729">
                 {rating}
               </Typography>
             </Box>
             <Box sx={{ flex: "1", border: "solid 1px #000729 " }}>
-              <Typography align="center" variant="h6">
+              <Typography align="center" variant="h6" color="#000729">
                 Comments
               </Typography>
-              <Typography align="center" variant="h5">
+              <Typography align="center" variant="h5" color="#000729">
                 {comments.length}
               </Typography>
             </Box>

@@ -26,12 +26,12 @@ const ArtisanDetails = () => {
       >
         <Stack
           p={{ xs: 1, md: 5 }}
-          direction={{ xs: "column", md: "row" }}
+          direction={{ xs: "column", lg: "row" }}
           sx={{
             justifyContent: "center",
-            alignItems: { xs: "center", md: "unset" },
-            border: "solid green",
-            width: { xs: "90%", md: "80%" },
+            alignItems: { xs: "center", lg: "unset" },
+            // border: "solid green",
+            width: { xs: "90%", md: "85%" },
             margin:"0 auto"
           }}
         >
