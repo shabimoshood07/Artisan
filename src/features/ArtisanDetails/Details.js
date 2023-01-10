@@ -29,15 +29,7 @@ const Details = ({ artisan }) => {
   } = artisan;
 
   return (
-    <Stack
-      p={{ xs: 1, md: 5 }}
-      direction={{ xs: "column", md: "row" }}
-      sx={{
-        justifyContent: "center",
-        alignItems: { xs: "center", md: "unset" },
-        border: "solid green",
-      }}
-    >
+    <>
       <Box sx={{ width: { md: "50%", xs: "90% " } }}>
         <Paper elevation={16}>
           <Grid
@@ -128,8 +120,7 @@ const Details = ({ artisan }) => {
           </Grid>
         </Paper>
       </Box>
-      <Box sx={{ border: "solid red", width: "50%" }}></Box>
-    </Stack>
+    </>
   );
 };
 
