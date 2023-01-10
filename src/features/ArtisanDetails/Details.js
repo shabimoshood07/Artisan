@@ -30,7 +30,7 @@ const Details = ({ artisan }) => {
 
   return (
     <Stack
-      p={{ xs: 3, md: 5 }}
+      p={{ xs: 1, md: 5 }}
       direction={{ xs: "column", md: "row" }}
       sx={{
         justifyContent: "center",
@@ -44,7 +44,7 @@ const Details = ({ artisan }) => {
             container
             // columns={{ xs: 2 }}
             sx={{
-              display:"flex",
+              display: "flex",
               border: "solid yellow",
               backgroundColor: "#000729",
               justifyContent: "center",
@@ -52,14 +52,22 @@ const Details = ({ artisan }) => {
           >
             <Avatar
               src={profileImage}
-              sx={{ width: 220, height: 220, margin: "auto", margin: "1rem" }}
+              sx={{
+                width: { xs: 120, sm: 220 },
+                height: { xs: 120, sm: 220 },
+                margin: "auto",
+                margin: "1rem",
+              }}
             ></Avatar>
             <Box sx={{ flex: "1", margin: "auto" }}>
               <Typography
                 align="center"
                 variant="h4"
                 color="#d7c1ce"
-                sx={{ textTransform: "capitalize" }}
+                sx={{
+                  textTransform: "capitalize",
+                  fontSize: { xs: 25, sm: 50 },
+                }}
               >
                 {username}
               </Typography>
@@ -68,7 +76,10 @@ const Details = ({ artisan }) => {
                 align="center"
                 variant="h3"
                 color="#d7c1ce"
-                sx={{ textTransform: "uppercase" }}
+                sx={{
+                  textTransform: "uppercase",
+                  fontSize: { xs: 35, sm: 60 },
+                }}
               >
                 {profession}
               </Typography>
@@ -78,6 +89,7 @@ const Details = ({ artisan }) => {
             sx={{
               textTransform: "uppercase",
               borderBottom: "solid 1px #000729",
+              fontSize: { xs: 20, sm: 25 },
             }}
             variant="h5"
             align="center"
