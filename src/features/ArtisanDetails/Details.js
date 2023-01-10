@@ -29,25 +29,38 @@ const Details = ({ artisan }) => {
   } = artisan;
 
   return (
-    <Stack p={5} direction={{ xs: "column", md: "row" }}>
-      <Box sx={{ border: "solid", width: "50%" }}>
+    <Stack
+      p={{ xs: 3, md: 5 }}
+      direction={{ xs: "column", md: "row" }}
+      sx={{
+        justifyContent: "center",
+        alignItems: { xs: "center", md: "unset" },
+        border: "solid green",
+      }}
+    >
+      <Box sx={{ width: { md: "50%", xs: "90% " } }}>
         <Paper elevation={16}>
           <Grid
             container
-            columns={{ xs: 2 }}
-            sx={{ border: "solid", backgroundColor: "#000729" }}
+            // columns={{ xs: 2 }}
+            sx={{
+              display:"flex",
+              border: "solid yellow",
+              backgroundColor: "#000729",
+              justifyContent: "center",
+            }}
           >
             <Avatar
               src={profileImage}
-              sx={{ width: 220, height: 220, margin: "auto" }}
+              sx={{ width: 220, height: 220, margin: "auto", margin: "1rem" }}
             ></Avatar>
-            <Box sx={{ border: "solid yellow", flex: "1", margin: "auto" }}>
+            <Box sx={{ flex: "1", margin: "auto" }}>
               <Typography
                 align="center"
                 variant="h4"
                 color="#d7c1ce"
                 sx={{ textTransform: "capitalize" }}
-                >
+              >
                 {username}
               </Typography>
               <Typography
@@ -61,15 +74,46 @@ const Details = ({ artisan }) => {
               </Typography>
             </Box>
           </Grid>
-          <Typography sx={{ textTransform: "uppercase" }}>{name}</Typography>
-          <Box>
-            <Rating value={rating} readOnly precision={0.5} size="large" />
-            <Typography>{rating}</Typography>
-          </Box>
-          <Box>
-            <Typography>Comments</Typography>
-            <Typography>{comments.length}</Typography>
-          </Box>
+          <Typography
+            sx={{
+              textTransform: "uppercase",
+              borderBottom: "solid 1px #000729",
+            }}
+            variant="h5"
+            align="center"
+            p={2}
+          >
+            {name}
+          </Typography>
+          <Grid
+            container
+            columns={{ xs: 2 }}
+            // sx={{ border: "solid", backgroundColor: "#000729" }}
+          >
+            <Box sx={{ flex: "1", border: "solid 1px #000729 " }}>
+              <Rating
+                value={rating}
+                readOnly
+                precision={0.5}
+                size="large"
+                sx={{
+                  width: "100%",
+                  justifyContent: "center",
+                }}
+              />
+              <Typography align="center" variant="h5">
+                {rating}
+              </Typography>
+            </Box>
+            <Box sx={{ flex: "1", border: "solid 1px #000729 " }}>
+              <Typography align="center" variant="h6">
+                Comments
+              </Typography>
+              <Typography align="center" variant="h5">
+                {comments.length}
+              </Typography>
+            </Box>
+          </Grid>
         </Paper>
       </Box>
       <Box sx={{ border: "solid red", width: "50%" }}></Box>
