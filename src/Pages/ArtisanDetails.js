@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container, CircularProgress, Box, Stack } from "@mui/material";
+import { Container, CircularProgress, Box, Stack, Button } from "@mui/material";
 import { useGetArtisanQuery } from "../features/api/apiSlice";
 import { useParams } from "react-router-dom";
 // COMPONENTS
@@ -24,6 +24,7 @@ const ArtisanDetails = () => {
         sx={{ backgroundColor: "#d7c1ce", minHeight: "95vh" }}
         className="container"
       >
+        <Button>Back</Button>
         <Stack
           p={{ xs: 1, md: 5 }}
           direction={{ xs: "column", lg: "row" }}
@@ -32,7 +33,7 @@ const ArtisanDetails = () => {
             alignItems: { xs: "center", lg: "unset" },
             // border: "solid green",
             width: { xs: "90%", md: "85%" },
-            margin:"0 auto"
+            margin: "0 auto",
           }}
         >
           <Details artisan={artisan} />

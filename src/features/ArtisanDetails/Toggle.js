@@ -1,21 +1,26 @@
 import React, { useEffect } from "react";
-import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
-import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
-import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import { ToggleButton, Box, Typography } from "@mui/material";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
+import {
+  ToggleButton,
+  Box,
+  Typography,
+  ToggleButtonGroup,
+} from "@mui/material";
 
 import { selectToggleValue, toggle } from "./toggleSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 // CSS
 import "./style.css";
+import About from "./About";
+import Comment from "./Comment";
+
+
 const Toggle = () => {
   useEffect(() => {
     dispatch(toggle("about"));
   }, []);
-  
+
   const dispatch = useDispatch();
 
   const toggleValue = useSelector(selectToggleValue);
@@ -62,6 +67,10 @@ const Toggle = () => {
           <Typography sx={{ textTransform: "capitalize" }}>comments</Typography>
         </ToggleButton>
       </ToggleButtonGroup>
+      <Box>
+        {toggleValue == "about" && <About />}
+        {toggleValue == "comments" && <Comment />}
+      </Box>
     </Box>
   );
 };
