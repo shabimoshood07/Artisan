@@ -18,12 +18,8 @@ const ArtisanDetails = () => {
   let content;
 
   if (isSuccess) {
-    console.log(artisan);
     content = (
-      <Container
-        sx={{ backgroundColor: "#d7c1ce", minHeight: "95vh" }}
-        className="container"
-      >
+      <Container sx={{ backgroundColor: "#d7c1ce" }} className="container">
         <Button>Back</Button>
         <Stack
           p={{ xs: 1, md: 5 }}
@@ -33,11 +29,12 @@ const ArtisanDetails = () => {
             alignItems: { xs: "center", lg: "unset" },
             // border: "solid green",
             width: { xs: "90%", md: "85%" },
+            maxWidth: "1200px",
             margin: "0 auto",
           }}
         >
           <Details artisan={artisan} />
-          <Toggle />
+          <Toggle artisan={artisan} />
         </Stack>
       </Container>
     );

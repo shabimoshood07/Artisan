@@ -15,8 +15,24 @@ import "./style.css";
 import About from "./About";
 import Comment from "./Comment";
 
+const Toggle = ({ artisan }) => {
+  const {
+    profileImage,
+    phoneNumber,
+    alternativeNumber,
+    name,
+    role,
+    username,
+    email,
+    address,
+    profession,
+    gender,
+    about,
+    rating,
+    socials,
+    comments,
+  } = artisan;
 
-const Toggle = () => {
   useEffect(() => {
     dispatch(toggle("about"));
   }, []);
@@ -26,7 +42,12 @@ const Toggle = () => {
   const toggleValue = useSelector(selectToggleValue);
 
   return (
-    <Box sx={{ border: "solid red", width: { lg: "50%", xs: "90% " } }}>
+    <Box
+      sx={{
+        border: "solid 1px  #000729",
+        width: { lg: "50%", xs: "90% " },
+      }}
+    >
       <ToggleButtonGroup
         value={toggleValue}
         exclusive
@@ -68,8 +89,8 @@ const Toggle = () => {
         </ToggleButton>
       </ToggleButtonGroup>
       <Box>
-        {toggleValue == "about" && <About />}
-        {toggleValue == "comments" && <Comment />}
+        {toggleValue == "about" && <About about={about} />}
+        {toggleValue == "comments" && <Comment comments={comments} />}
       </Box>
     </Box>
   );

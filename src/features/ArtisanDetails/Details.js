@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 const Details = ({ artisan }) => {
-  console.log(artisan);
+
   const {
     profileImage,
     phoneNumber,

@@ -1,9 +1,19 @@
-import React from 'react'
+import React from "react";
+import { Box, Typography } from "@mui/material";
 
-const About = () => {
+const About = ({ about }) => {
   return (
-    <div>About</div>
-  )
-}
+    <Box
+      sx={{
+        width: "100%",
+      }}
+      p={2}
+    >
+      <Typography align="left" sx={{ fontSize: 20 }}>
+        {about}
+      </Typography>
+    </Box>
+  );
+};
 
-export default About
+export default About;
