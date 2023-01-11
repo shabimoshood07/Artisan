@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 // COMPONENTS
 import Details from "../features/ArtisanDetails/Details";
 import Toggle from "../features/ArtisanDetails/Toggle";
+import BasicTabs from "../features/ArtisanDetails/Tabs";
 const ArtisanDetails = () => {
   const { id } = useParams();
   const {
@@ -22,7 +23,7 @@ const ArtisanDetails = () => {
       <Container sx={{ backgroundColor: "#d7c1ce" }} className="container">
         <Button>Back</Button>
         <Stack
-          p={{ xs: 1, md: 5 }}
+          p={{ xs: 1, md: 3 }}
           direction={{ xs: "column", lg: "row" }}
           sx={{
             justifyContent: "center",
@@ -31,10 +32,12 @@ const ArtisanDetails = () => {
             width: { xs: "90%", md: "85%" },
             maxWidth: "1200px",
             margin: "0 auto",
+            transition: "all 1s",
           }}
         >
           <Details artisan={artisan} />
-          <Toggle artisan={artisan} />
+          {/* <Toggle artisan={artisan} /> */}
+          <BasicTabs artisan={artisan} />
         </Stack>
       </Container>
     );

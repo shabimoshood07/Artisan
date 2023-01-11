@@ -14,6 +14,8 @@ import { useSelector, useDispatch } from "react-redux";
 import "./style.css";
 import About from "./About";
 import Comment from "./Comment";
+import { Link } from "react-router-dom";
+import Contact from "./Contact";
 
 const Toggle = ({ artisan }) => {
   const {
@@ -46,6 +48,8 @@ const Toggle = ({ artisan }) => {
       sx={{
         border: "solid 1px  #000729",
         width: { lg: "50%", xs: "90% " },
+        transition: "all 1s",
+        backgroundColor: "white",
       }}
     >
       <ToggleButtonGroup
@@ -62,35 +66,55 @@ const Toggle = ({ artisan }) => {
         <ToggleButton
           value="about"
           sx={{ flex: 1 }}
-          disabled={toggleValue == "about"}
+          disabled={toggleValue === "about"}
         >
+          {/* <a href="#about"> */}
           <Typography sx={{ textTransform: "capitalize" }}>About</Typography>
+          {/* </a> */}
         </ToggleButton>
         <ToggleButton
           value="contact"
           sx={{ flex: 1 }}
-          disabled={toggleValue == "contact"}
+          disabled={toggleValue === "contact"}
         >
-          <Typography sx={{ textTransform: "capitalize" }}>contact</Typography>
+          <a href="#contact">
+            <Typography sx={{ textTransform: "capitalize" }}>
+              contact
+            </Typography>
+          </a>
         </ToggleButton>
         <ToggleButton
           value="rating"
           sx={{ flex: 1 }}
-          disabled={toggleValue == "rating"}
+          disabled={toggleValue === "rating"}
         >
-          <Typography sx={{ textTransform: "capitalize" }}>rating</Typography>
+          <a href="#rating">
+            <Typography sx={{ textTransform: "capitalize" }}>rating</Typography>
+          </a>
         </ToggleButton>
         <ToggleButton
           value="comments"
           sx={{ flex: 1 }}
-          disabled={toggleValue == "comments"}
+          disabled={toggleValue === "comments"}
         >
+          {/* <a href="#comments"> */}
           <Typography sx={{ textTransform: "capitalize" }}>comments</Typography>
+          {/* </a> */}
         </ToggleButton>
       </ToggleButtonGroup>
-      <Box>
-        {toggleValue == "about" && <About about={about} />}
-        {toggleValue == "comments" && <Comment comments={comments} />}
+
+      <Box
+        sx={{
+          transition: "all 1s",
+          height: "fit-content",
+          border: "solid pink",
+        }}
+      >
+        {toggleValue === "about" && <About about={about} />}
+        {toggleValue === "comments" && <Comment comments={comments} />}
+        {toggleValue === "contact" && <Contact artisan={artisan} />}
+        {/* <About about={about} />
+        <Comment comments={comments} /> */}
       </Box>
     </Box>
   );
