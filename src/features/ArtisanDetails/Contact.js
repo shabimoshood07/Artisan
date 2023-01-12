@@ -7,7 +7,11 @@ import {
   PhoneOutlined,
 } from "@mui/icons-material";
 import { BsFacebook } from "react-icons/bs";
-import { AiOutlineTwitter, AiOutlineInstagram,AiOutlinePhone } from "react-icons/ai";
+import {
+  AiOutlineTwitter,
+  AiOutlineInstagram,
+  AiOutlinePhone,
+} from "react-icons/ai";
 const Contact = ({ artisan }) => {
   const {
     profileImage,
@@ -44,26 +48,22 @@ const Contact = ({ artisan }) => {
         <Typography sx={{ fontSize: 20 }}>Socials</Typography>
         <a href={`https://facebook.com/${socials.facebook}`} target="_blank">
           <IconButton>
-            {/* <FacebookOutlined /> */}
             <BsFacebook color="blue" />
           </IconButton>
         </a>
         <a href={`https://instagram.com/${socials.instagram}`} target="_blank">
           <IconButton>
-            {/* <Instagram color="red" /> */}
-            <AiOutlineInstagram color="red"/>
+            <AiOutlineInstagram color="red" />
           </IconButton>
         </a>
         <a href={`https://twitter.com/${socials.twitter}`} target="_blank">
           <IconButton>
-            {/* <Twitter /> */}
             <AiOutlineTwitter color="blue" />
           </IconButton>
         </a>
         <a href={`https://twitter.com/${phoneNumber}`} target="_blank">
           <IconButton>
-            {/* <PhoneOutlined /> */}
-            <AiOutlinePhone color="#000729"/>
+            <AiOutlinePhone color="#000729" />
           </IconButton>
         </a>
       </Box>

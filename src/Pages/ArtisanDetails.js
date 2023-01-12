@@ -21,9 +21,18 @@ const ArtisanDetails = () => {
   if (isSuccess) {
     content = (
       <Container sx={{ backgroundColor: "#d7c1ce" }} className="container">
-        <Button>Back</Button>
+        <Box
+          sx={{
+            width: { xs: "90%", md: "85%" },
+            maxWidth: "1200px",
+            margin: "0 auto",
+          }}
+          p={{ xs: 1, md: 2 }}
+        >
+          <Button sx={{ border: "solid" }}>Back</Button>
+        </Box>
         <Stack
-          p={{ xs: 1, md: 3 }}
+          p={{ xs: 1, md: 2 }}
           direction={{ xs: "column", lg: "row" }}
           sx={{
             justifyContent: "center",
@@ -32,7 +41,6 @@ const ArtisanDetails = () => {
             width: { xs: "90%", md: "85%" },
             maxWidth: "1200px",
             margin: "0 auto",
-            transition: "all 1s",
           }}
         >
           <Details artisan={artisan} />
