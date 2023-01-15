@@ -9,7 +9,7 @@ import {
   Grid,
 } from "@mui/material";
 
-const Details = ({ artisan }) => {
+const Details = ({artisan} ) => {
 
   const {
     profileImage,

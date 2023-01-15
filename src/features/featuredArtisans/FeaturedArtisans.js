@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useGetAllArtisansQuery } from "../api/apiSlice";
 import {
   Typography,
@@ -9,26 +9,17 @@ import {
   CardMedia,
   CardContent,
   CardActions,
-  Avatar,
   Stack,
   Rating,
   Divider,
 } from "@mui/material";
 
-import {
-  FacebookOutlined,
-  Twitter,
-  Instagram,
-  PhoneOutlined,
-  MoreVert,
-  ArrowForwardOutlined,
-} from "@mui/icons-material";
+import { ArrowForwardOutlined } from "@mui/icons-material";
 import "./style.css";
 import { Link } from "react-router-dom";
 
 const FeaturedArtisans = () => {
   const { data: artisans, isLoading, isSuccess } = useGetAllArtisansQuery();
-
   let content;
   if (isLoading) {
     content = <Typography align="center">Loading...</Typography>;
@@ -37,14 +28,13 @@ const FeaturedArtisans = () => {
   if (isSuccess) {
     const sortedArtisan = artisans
       .slice()
-      .sort((a, b) => b.rating - a.rating)
+      .sort((a, b) => b.ratings - a.ratings)
       .slice(0, 5);
-    console.log(sortedArtisan);
 
     content = sortedArtisan.map((artisan) => {
       return (
         <Card
-          key={artisan.id}
+          key={artisan._id}
           sx={{
             height: 450,
           }}
@@ -61,7 +51,7 @@ const FeaturedArtisans = () => {
               />
             }
             action={
-              <Link to={`/details/${artisan.id}`}>
+              <Link to={`/details/${artisan._id}`}>
                 <IconButton aria-label="settings">
                   <ArrowForwardOutlined />
                 </IconButton>
@@ -84,7 +74,7 @@ const FeaturedArtisans = () => {
           <CardContent>
             <Divider textAlign="center">Info</Divider>
             <Typography variant="body2" align="left" mb={2}>
-              Business Name: {artisan.username}
+              Business Name: {artisan.businessName}
             </Typography>
             <Divider textAlign="center">summary</Divider>
             <Typography variant="body2" align="left" mb={2}>

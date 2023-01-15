@@ -1,6 +1,7 @@
-import { Container, Typography } from "@mui/material";
-import React from "react";
+import { Button, Container, Typography } from "@mui/material";
+import React, { useState } from "react";
 import FeaturedArtisans from "../features/featuredArtisans/FeaturedArtisans";
+import LoginForm from "../features/LoginForm/Login";
 const Login = () => {
   return (
     <Container
@@ -11,6 +12,7 @@ const Login = () => {
       }}
     >
       <Typography>LOGIN</Typography>
+      <LoginForm />
       <FeaturedArtisans />
     </Container>
   );

@@ -1,7 +1,9 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 
-const Comment = ({ comments }) => {
+const Comment = (comments) => {
+  console.log(comments);
+
   return (
     <Box
       sx={{
@@ -10,10 +12,10 @@ const Comment = ({ comments }) => {
       p={2}
     >
       <>
-        {comments.map((com) => {
-          const { id, text, date, user } = com;
+        {comments.comments.map((com) => {
+          const { _id, commentText, createdAt, createdBy } = com;
           return (
-            <Box key={id} mb={3} sx={{ borderBottom: "solid 1px " }}>
+            <Box key={_id} mb={3} sx={{ borderBottom: "solid 1px " }}>
               <Grid
                 container
                 columns={{ xs: 4 }}
@@ -21,17 +23,17 @@ const Comment = ({ comments }) => {
               >
                 <Grid>
                   <Typography align="left" sx={{ textTransform: "capitalize" }}>
-                    {user}
+                    {createdBy}
                   </Typography>
                 </Grid>
                 <Grid>
                   <Typography align="right" sx={{ fontSize: 13 }}>
-                    {date}
+                    {createdAt}
                   </Typography>
                 </Grid>
               </Grid>
               <Typography align="left" sx={{ fontSize: 15 }}>
-                {text}
+                {commentText}
               </Typography>
             </Box>
           );

@@ -38,7 +38,7 @@ const drawerWidth = 240;
 
 const USerNav = (props) => {
   // User Credentials
-  const { userName, role } = useSelector(selectUserCredentials);
+  const { username, role } = useSelector(selectUserCredentials);
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
@@ -57,7 +57,7 @@ const USerNav = (props) => {
 
   if (isLoggedIn && isSuccess) {
     const user = users.find(
-      (user) => user.userName.toLowerCase() == userName.toLowerCase()
+      (user) => user.username.toLowerCase() == username.toLowerCase()
     );
     content = (
       <Box sx={{ display: "flex" }}>
@@ -103,9 +103,9 @@ const USerNav = (props) => {
                 >
                   View Profile
                 </Typography>
-                <Avatar alt={user.userName}>{`${userName.charAt(
+                <Avatar alt={user.username}>{`${username.charAt(
                   0
-                )} ${userName.charAt(2)}`}</Avatar>
+                )} ${username.charAt(2)}`}</Avatar>
               </Button>
               {/* <IconButton size="large" className="icon">
                 <Badge badgeContent={4} color="error">
@@ -190,10 +190,10 @@ const USerNav = (props) => {
 
                   <ListItemButton sx={{ justifyContent: "center" }}>
                     <Avatar
-                      alt={user.userName}
+                      alt={user.username}
                       sx={{ marginRight: "1rem", textTransform: "uppercase" }}
                     >
-                      {`${userName.charAt(0)} ${userName.charAt(2)}`}
+                      {`${username.charAt(0)} ${username.charAt(2)}`}
                     </Avatar>
                     <p>View Profile</p>
                   </ListItemButton>

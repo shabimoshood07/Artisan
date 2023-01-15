@@ -61,6 +61,7 @@ export default function BasicTabs({ artisan }) {
     socials,
     comments,
   } = artisan;
+
   useEffect(() => {
     dispatch(toggle(0));
   }, []);
