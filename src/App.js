@@ -12,7 +12,16 @@ import Search from "./Pages/Search";
 import ArtisanDetails from "./Pages/ArtisanDetails";
 import ArtisanProfile from "./Pages/ArtisanProfile";
 
+import { useDispatch } from "react-redux";
+import { setUserCredentials } from "./features/authSlice/authSlice";
+
 function App() {
+  const dispatch = useDispatch();
+  const loginData = localStorage.getItem("login data");
+
+  dispatch(setUserCredentials(JSON.parse(loginData)));
+
+  console.log(loginData);
   return (
     <>
       <StyledEngineProvider injectFirst>

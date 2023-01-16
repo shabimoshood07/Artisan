@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
-
+import { Box, Grid, IconButton, Typography } from "@mui/material";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 const Comment = (comments) => {
   console.log(comments);
 
@@ -35,6 +35,11 @@ const Comment = (comments) => {
               <Typography align="left" sx={{ fontSize: 15 }}>
                 {commentText}
               </Typography>
+              <Box>
+                <IconButton>
+                  <FavoriteBorderOutlinedIcon />
+                </IconButton>
+              </Box>
             </Box>
           );
         })}

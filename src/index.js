@@ -11,15 +11,11 @@ import { ApiProvider } from "@reduxjs/toolkit/query/react";
 // import store
 import { store } from "./features/store/store";
 
-// import apiSlice
-import { apiSlice } from "./features/api/apiSlice";
-
 import { BrowserRouter as Router } from "react-router-dom";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-
-  
   <React.StrictMode>
     <Provider store={store}>
       <Router>

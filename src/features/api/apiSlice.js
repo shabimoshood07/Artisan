@@ -4,8 +4,16 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000",
+    credentials: "include",
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().authSlice.userCredentials.token;
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
-  tagTypes: ["Artisans", "Users"],
+  tagTypes: ["Artisans", "Users", "Auth"],
   endpoints: (builder) => ({
     getAllArtisans: builder.query({
       query: () => "/artisan",
@@ -19,34 +27,20 @@ export const apiSlice = createApi({
       query: () => "/user",
       providesTags: ["Users"],
     }),
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: { ...credentials },
+      }),
+    }),
   }),
 });
-
-
-// export const apiSlice = createApi({
-//   reducerPath: "api",
-//   baseQuery: fetchBaseQuery({
-//     baseUrl: "http://localhost:3600",
-//   }),
-//   tagTypes: ["Artisans", "Users"],
-//   endpoints: (builder) => ({
-//     getAllArtisans: builder.query({
-//       query: () => "/artisans",
-//       providesTags: ["Artisans"],
-//     }),
-//     getArtisan: builder.query({
-//       query: (id) => `/artisans/${id}`,
-//       providesTags: ["Artisans"],
-//     }),
-//     getAllUsers: builder.query({
-//       query: () => "/users",
-//       providesTags: ["Users"],
-//     }),
-//   }),
-// });
 
 export const {
   useGetAllArtisansQuery,
   useGetAllUsersQuery,
   useGetArtisanQuery,
+  useLoginMutation
 } = apiSlice;
+

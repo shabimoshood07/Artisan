@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   selectLoggedInStatus,
   selectUserCredentials,
+  logout,
 } from "../authSlice/authSlice";
 
-import { useGetAllArtisansQuery } from "../api/apiSlice";
+import { useGetArtisanQuery } from "../api/apiSlice";
 import {
   AppBar,
   Box,
@@ -24,6 +25,7 @@ import {
   MenuItem,
   Badge,
 } from "@mui/material";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   CommentOutlined,
@@ -33,18 +35,26 @@ import {
 
 import { Link } from "react-router-dom";
 
+// useDispatch
+import { useDispatch } from "react-redux";
+
+// CSS
 import "./style.css";
 
 const drawerWidth = 240;
 
-
 function ArtisanNav(props) {
+  const dispatch = useDispatch();
   // User Credentials
-  const { user, token, role, email } = useSelector(selectUserCredentials);
+  const { username, token, role, email, id, name } = useSelector(
+    selectUserCredentials
+  );
+
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
-  const { data: artisans, isSuccess } = useGetAllArtisansQuery();
+  const { data: artisan, isSuccess } = useGetArtisanQuery(id);
+  // const { data: artisans, isSuccess } = useGetAllArtisansQuery();
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -53,12 +63,18 @@ function ArtisanNav(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
+  // LOGOUT
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   const container =
     window !== undefined ? () => window().document.body : undefined;
   let content;
 
   if (isLoggedIn && isSuccess) {
-    const artisan = artisans.find((artisan) => artisan.email == email);
+    console.log(artisan);
+    
     content = (
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -97,7 +113,7 @@ function ArtisanNav(props) {
                 <Avatar src={artisan.profileImage} alt={artisan.name} />
               </Button>
               <IconButton size="large" className="icon">
-                <Badge badgeContent={4} color="error">
+                <Badge badgeContent={artisan.unreadCount} color="error">
                   <CommentOutlined />
                 </Badge>
               </IconButton>
@@ -106,7 +122,7 @@ function ArtisanNav(props) {
                   <StarOutline />
                 </Badge>
               </IconButton>
-              <Button className="logout-btn">
+              <Button className="logout-btn" onClick={handleLogout}>
                 Logout
                 <LogoutOutlined />
               </Button>
@@ -175,7 +191,11 @@ function ArtisanNav(props) {
                     <p>Rating</p>
                   </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding className="list-items">
+                <ListItem
+                  disablePadding
+                  className="list-items"
+                  onClick={handleLogout}
+                >
                   <Button className="logout-btn">
                     Logout
                     <LogoutOutlined />
