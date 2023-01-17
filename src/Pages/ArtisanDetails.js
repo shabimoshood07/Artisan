@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Container, CircularProgress, Box, Stack, Button } from "@mui/material";
 import { useGetArtisanQuery } from "../features/api/apiSlice";
-import { useParams } from "react-router-dom";
+import { selectUserCredentials } from "../features/authSlice/authSlice";
+import { useNavigate, useParams } from "react-router-dom";
+
 // COMPONENTS
 import Details from "../features/ArtisanDetails/Details";
-import Toggle from "../features/ArtisanDetails/Toggle";
 import BasicTabs from "../features/ArtisanDetails/Tabs";
+import { useSelector } from "react-redux";
 const ArtisanDetails = () => {
   const { id } = useParams();
+  const naviagte = useNavigate();
   const {
     data: artisan,
     isLoading,
     isSuccess,
     isError,
   } = useGetArtisanQuery(id);
+
+  const { id: artisanId } = useSelector(selectUserCredentials);
+
+  useEffect(() => {
+    if (id == artisanId) {
+      naviagte(`/profile/${id}`);
+    }
+  }, []);
 
   let content;
 

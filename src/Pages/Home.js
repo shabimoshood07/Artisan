@@ -15,7 +15,7 @@ const Home = () => {
     isSuccess,
     isError,
     error,
-  } = useGetAllArtisansQuery();
+  } = useGetAllArtisansQuery("getArtisans");
 
   return (
     <Container className = "container">

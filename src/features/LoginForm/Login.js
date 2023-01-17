@@ -14,7 +14,7 @@ const LoginForm = () => {
     e.preventDefault();
     const { data } = await login({ data: inputData, password: password });
     console.log(data);
-    dispatch(setUserCredentials(data));
+    if (data) dispatch(setUserCredentials(data));
   };
 
   return (

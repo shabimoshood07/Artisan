@@ -74,7 +74,7 @@ function ArtisanNav(props) {
 
   if (isLoggedIn && isSuccess) {
     console.log(artisan);
-    
+
     content = (
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -196,7 +196,7 @@ function ArtisanNav(props) {
                   className="list-items"
                   onClick={handleLogout}
                 >
-                  <Button className="logout-btn">
+                  <Button className="logout-btn" onClick={handleLogout}>
                     Logout
                     <LogoutOutlined />
                   </Button>

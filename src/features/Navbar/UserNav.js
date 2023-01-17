@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import {
   selectLoggedInStatus,
   selectUserCredentials,
+  logout,
 } from "../authSlice/authSlice";
 
 import { useGetAllUsersQuery } from "../api/apiSlice";
@@ -32,11 +33,14 @@ import {
 } from "@mui/icons-material";
 
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./style.css";
 
 const drawerWidth = 240;
 
 const USerNav = (props) => {
+  const dispatch = useDispatch();
+
   // User Credentials
   const { username, role } = useSelector(selectUserCredentials);
   // logged in status
@@ -49,6 +53,11 @@ const USerNav = (props) => {
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  // LOGOUT
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   const container =
@@ -93,7 +102,7 @@ const USerNav = (props) => {
               <Link to="/">ARTISAN</Link>
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Button sx={{ marginRight: "2rem", border: "solid 1px #d7c1ce", }}>
+              <Button sx={{ marginRight: "2rem", border: "solid 1px #d7c1ce" }}>
                 <Typography
                   sx={{
                     color: "#d7c1ce",
@@ -107,17 +116,7 @@ const USerNav = (props) => {
                   0
                 )} ${username.charAt(2)}`}</Avatar>
               </Button>
-              {/* <IconButton size="large" className="icon">
-                <Badge badgeContent={4} color="error">
-                  <CommentOutlined />
-                </Badge>
-              </IconButton>
-              <IconButton size="large" className="icon">
-                <Badge badgeContent={17} color="error">
-                  <StarOutline />
-                </Badge>
-              </IconButton> */}
-              <Button className="logout-btn">
+              <Button className="logout-btn" onClick={handleLogout}>
                 Logout
                 <LogoutOutlined />
               </Button>
@@ -147,47 +146,7 @@ const USerNav = (props) => {
               </Typography>
               <Divider />
               <List>
-                {/* <ListItem>
-                  <ListItemButton sx={{ textAlign: "center" }}>
-                    <IconButton
-                      size="large"
-                      aria-label="show 4 new mails"
-                      color="inherit"
-                    >
-                      <Badge badgeContent={4} color="error">
-                        <CommentOutlined />
-                      </Badge>
-                    </IconButton>
-                    <p>Comments</p>
-                  </ListItemButton>
-                </ListItem> */}
-
-                {/* <ListItem>
-                  <ListItemButton>
-                    <IconButton
-                      size="large"
-                      aria-label="show 17 new notifications"
-                      color="inherit"
-                    >
-                      <Badge badgeContent={17} color="error">
-                        <StarOutline />
-                      </Badge>
-                    </IconButton>
-                    <p>Rating</p>
-                  </ListItemButton>
-                </ListItem> */}
                 <ListItem className="list-items">
-                  {/* <Button
-                    sx={{
-                      color: "#000729",
-                      textTransform: "capitalize",
-                      width: "100%",
-                      padding: "1rem",
-                      fontWeight: "bold",
-                      borderRadius: "0",
-                    }}
-                  > */}
-
                   <ListItemButton sx={{ justifyContent: "center" }}>
                     <Avatar
                       alt={user.username}
@@ -197,12 +156,12 @@ const USerNav = (props) => {
                     </Avatar>
                     <p>View Profile</p>
                   </ListItemButton>
-                  {/* </Button> */}
                 </ListItem>
                 <ListItem disablePadding className="list-items">
                   <Button
                     className="logout-btn"
                     sx={{ marginLeft: "0", width: "50%" }}
+                    onClick={handleLogout}
                   >
                     Logout
                     <LogoutOutlined />

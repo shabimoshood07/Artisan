@@ -21,7 +21,6 @@ function App() {
 
   dispatch(setUserCredentials(JSON.parse(loginData)));
 
-  console.log(loginData);
   return (
     <>
       <StyledEngineProvider injectFirst>
@@ -32,7 +31,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/search" element={<Search />} />
             <Route path="/details/:id" element={<ArtisanDetails />} />
-            <Route path="/profile/:username" element={<ArtisanProfile />} />
+            <Route path="/profile/:id" element={<ArtisanProfile />} />
           </Route>
         </Routes>
       </StyledEngineProvider>

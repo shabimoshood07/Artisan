@@ -1,5 +1,6 @@
 import React from "react";
 import { useGetAllArtisansQuery } from "../api/apiSlice";
+import { selectUserCredentials } from "../authSlice/authSlice";
 import {
   Typography,
   Container,
@@ -17,9 +18,11 @@ import {
 import { ArrowForwardOutlined } from "@mui/icons-material";
 import "./style.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const FeaturedArtisans = () => {
   const { data: artisans, isLoading, isSuccess } = useGetAllArtisansQuery();
+  const { id } = useSelector(selectUserCredentials);
   let content;
   if (isLoading) {
     content = <Typography align="center">Loading...</Typography>;
@@ -51,7 +54,13 @@ const FeaturedArtisans = () => {
               />
             }
             action={
-              <Link to={`/details/${artisan._id}`}>
+              <Link
+                to={
+                  artisan._id == id
+                    ? `/profile/${artisan._id}`
+                    : `/details/${artisan._id}`
+                }
+              >
                 <IconButton aria-label="settings">
                   <ArrowForwardOutlined />
                 </IconButton>
