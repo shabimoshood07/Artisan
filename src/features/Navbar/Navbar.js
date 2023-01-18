@@ -34,7 +34,7 @@ import "./style.css";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
-let navItems = ["Login", "Sign Up"];
+const navItems = ["Login", "Sign Up"];
 
 let Navbar = (props) => {
 
@@ -154,5 +154,5 @@ let Navbar = (props) => {
   );
 };
 
-Navbar = React.memo(Navbar);
+
 export default Navbar;

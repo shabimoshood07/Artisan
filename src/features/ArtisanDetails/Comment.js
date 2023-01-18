@@ -11,7 +11,7 @@ import {
 import { selectUserId } from "../authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetAllArtisansQuery } from "../api/apiSlice";
-let Comment = (comments) => {
+const  Comment = (comments) => {
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => selectUserId(state));
@@ -105,5 +105,5 @@ let Comment = (comments) => {
     </Box>
   );
 };
-Comment = React.memo(Comment);
+
 export default Comment;

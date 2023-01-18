@@ -38,7 +38,7 @@ import "./style.css";
 
 const drawerWidth = 240;
 
-let USerNav = (props) => {
+const USerNav = (props) => {
   const dispatch = useDispatch();
 
   // User Credentials
@@ -182,5 +182,5 @@ let USerNav = (props) => {
   return content;
 };
 
-USerNav = React.memo(USerNav)
+
 export default USerNav;
