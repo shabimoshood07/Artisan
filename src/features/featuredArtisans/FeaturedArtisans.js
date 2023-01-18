@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetAllArtisansQuery } from "../api/apiSlice";
-import { selectUserCredentials } from "../authSlice/authSlice";
+import { selectUserId } from "../authSlice/authSlice";
 import {
   Typography,
   Container,
@@ -22,7 +22,7 @@ import { useSelector } from "react-redux";
 
 const FeaturedArtisans = () => {
   const { data: artisans, isLoading, isSuccess } = useGetAllArtisansQuery();
-  const { id } = useSelector(selectUserCredentials);
+  const id  = useSelector(selectUserId);
   let content;
   if (isLoading) {
     content = <Typography align="center">Loading...</Typography>;

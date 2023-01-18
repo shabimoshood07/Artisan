@@ -8,25 +8,18 @@ import {
   useUnlikeCommentMutation,
 } from "../api/apiSlice";
 // AUTH SLICE
-import { selectUserCredentials } from "../authSlice/authSlice";
+import { selectUserId } from "../authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetAllArtisansQuery } from "../api/apiSlice";
-const Comment = (comments) => {
+let Comment = (comments) => {
   const dispatch = useDispatch();
-  console.log(comments);
-  const {
-    username,
-    token,
-    role,
-    email,
-    id: userId,
-    name,
-  } = useSelector(selectUserCredentials);
-  const [likeComment, { isLoading, isError }] =
-    useLikeCommentMutation("getArtisans");
+
+  const userId = useSelector((state) => selectUserId(state));
+
+  const [likeComment, { isLoading, isError }] = useLikeCommentMutation();
 
   const [unlikeComment, { isLoading: isLodaingUnlike }] =
-    useUnlikeCommentMutation("getArtisans");
+    useUnlikeCommentMutation();
 
   // handle like comment
   const handleLikeComment = async (commentId, userId) => {
@@ -112,5 +105,5 @@ const Comment = (comments) => {
     </Box>
   );
 };
-
+Comment = React.memo(Comment);
 export default Comment;

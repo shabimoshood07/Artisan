@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoggedIn: false,
@@ -42,6 +41,22 @@ const authSlice = createSlice({
 export const { setUserCredentials, logout } = authSlice.actions;
 
 export const selectLoggedInStatus = (state) => state.authSlice.isLoggedIn;
-export const selectUserCredentials = (state) => state.authSlice.userCredentials;
+export const selectUsername = (state) =>
+  state.authSlice.userCredentials.username;
+export const selectUserRole = (state) => state.authSlice.userCredentials.role;
+export const selectUserEmail = (state) => state.authSlice.userCredentials.email;
+// export const selectUserId = (state) => state.authSlice.userCredentials.id;
+export const selectName = (state) => state.authSlice.userCredentials.name;
+export const selectUsertoken = (state) => state.authSlice.userCredentials.token;
+
+export const selectUserId = createSelector(
+  [(state) => state.authSlice.userCredentials.id],
+  (state) => state
+);
+
+// export const selectUserCredentials = createSelector(
+//   [authSlice.getInitialState],
+//   (state) => state.userCredentials
+// );
 
 export default authSlice.reducer;

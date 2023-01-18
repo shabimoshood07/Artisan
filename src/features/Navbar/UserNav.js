@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   selectLoggedInStatus,
-  selectUserCredentials,
+  selectUsername,
   logout,
 } from "../authSlice/authSlice";
 
@@ -38,11 +38,11 @@ import "./style.css";
 
 const drawerWidth = 240;
 
-const USerNav = (props) => {
+let USerNav = (props) => {
   const dispatch = useDispatch();
 
   // User Credentials
-  const { username, role } = useSelector(selectUserCredentials);
+  const username  = useSelector(selectUsername);
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
@@ -65,6 +65,7 @@ const USerNav = (props) => {
   let content;
 
   if (isLoggedIn && isSuccess) {
+ 
     const user = users.find(
       (user) => user.username.toLowerCase() == username.toLowerCase()
     );
@@ -181,4 +182,5 @@ const USerNav = (props) => {
   return content;
 };
 
+USerNav = React.memo(USerNav)
 export default USerNav;

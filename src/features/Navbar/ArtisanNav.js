@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   selectLoggedInStatus,
-  selectUserCredentials,
+  selectUserId,
   logout,
 } from "../authSlice/authSlice";
 
@@ -46,9 +46,7 @@ const drawerWidth = 240;
 function ArtisanNav(props) {
   const dispatch = useDispatch();
   // User Credentials
-  const { username, token, role, email, id, name } = useSelector(
-    selectUserCredentials
-  );
+  const  id  = useSelector(selectUserId);
 
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
@@ -73,7 +71,6 @@ function ArtisanNav(props) {
   let content;
 
   if (isLoggedIn && isSuccess) {
-    console.log(artisan);
 
     content = (
       <Box sx={{ display: "flex" }}>

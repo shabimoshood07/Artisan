@@ -13,7 +13,6 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data } = await login({ data: inputData, password: password });
-    console.log(data);
     if (data) dispatch(setUserCredentials(data));
   };
 

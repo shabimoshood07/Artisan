@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { Container, CircularProgress, Box, Stack, Button } from "@mui/material";
 import { useGetArtisanQuery } from "../features/api/apiSlice";
-import { selectUserCredentials } from "../features/authSlice/authSlice";
+import { selectUserId } from "../features/authSlice/authSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
 // COMPONENTS
@@ -19,7 +19,7 @@ const ArtisanDetails = () => {
     isError,
   } = useGetArtisanQuery(id);
 
-  const { id: artisanId } = useSelector(selectUserCredentials);
+  const { id: artisanId } = useSelector(selectUserId);
 
   useEffect(() => {
     if (id == artisanId) {
