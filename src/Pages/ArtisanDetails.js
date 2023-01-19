@@ -19,7 +19,7 @@ const ArtisanDetails = () => {
     isError,
   } = useGetArtisanQuery(id);
 
-  const { id: artisanId } = useSelector(selectUserId);
+  const  artisanId  = useSelector(selectUserId);
 
   useEffect(() => {
     if (id == artisanId) {
@@ -55,7 +55,6 @@ const ArtisanDetails = () => {
           }}
         >
           <Details artisan={artisan} />
-          {/* <Toggle artisan={artisan} /> */}
           <BasicTabs artisan={artisan} />
         </Stack>
       </Container>

@@ -45,22 +45,7 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs({ artisan }) {
-  const {
-    profileImage,
-    phoneNumber,
-    alternativeNumber,
-    name,
-    role,
-    username,
-    email,
-    address,
-    profession,
-    gender,
-    about,
-    rating,
-    socials,
-    comments,
-  } = artisan;
+  const { about, comments } = artisan;
 
   useEffect(() => {
     dispatch(toggle(0));
@@ -78,7 +63,6 @@ export default function BasicTabs({ artisan }) {
           value={toggleValue}
           onChange={(e, value) => {
             dispatch(toggle(value));
-            console.log(value);
           }}
           aria-label="basic tabs example"
           variant="fullWidth"
