@@ -45,14 +45,14 @@ export const selectUsername = (state) =>
   state.authSlice.userCredentials.username;
 export const selectUserRole = (state) => state.authSlice.userCredentials.role;
 export const selectUserEmail = (state) => state.authSlice.userCredentials.email;
-// export const selectUserId = (state) => state.authSlice.userCredentials.id;
+export const selectUserId = (state) => state.authSlice.userCredentials.id;
 export const selectName = (state) => state.authSlice.userCredentials.name;
 export const selectUsertoken = (state) => state.authSlice.userCredentials.token;
 
-export const selectUserId = createSelector(
-  [(state) => state.authSlice.userCredentials.id],
-  (state) => state
-);
+// export const selectUserId = createSelector(
+//   [(state) => state.authSlice.userCredentials.id],
+//   (state) => state
+// );
 
 // export const selectUserCredentials = createSelector(
 //   [authSlice.getInitialState],

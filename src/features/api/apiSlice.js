@@ -48,6 +48,14 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Artisans"],
     }),
+    comment: builder.mutation({
+      query: ({ artisanId, userId, commentText }) => ({
+        url: `user/comment/${artisanId}/${userId}`,
+        method: "POST",
+        body: { commentText },
+      }),
+      invalidatesTags: ["Artisans"],
+    }),
   }),
 });
 
@@ -58,4 +66,5 @@ export const {
   useLoginMutation,
   useLikeCommentMutation,
   useUnlikeCommentMutation,
+  useCommentMutation,
 } = apiSlice;
