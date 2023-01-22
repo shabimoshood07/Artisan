@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Box, Button, Rating } from "@mui/material";
+import { TextField, Box, Button, Rating, Typography } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -18,7 +18,6 @@ const CommentForm = () => {
     rating: yup.number().positive().integer(),
   });
 
-  console.log(artisanId, userId);
   const {
     register,
     control,
@@ -30,9 +29,11 @@ const CommentForm = () => {
 
   const onSubmit = async (data) => {
     const doc = await comment({ artisanId, userId, commentText: data.comment });
-    console.log(data.comment);
+    console.log(data);
     console.log(doc);
   };
+
+
 
   return (
     <Box
@@ -42,25 +43,24 @@ const CommentForm = () => {
       sx={{ border: "solid 1px", my: 2, py: 2 }}
     >
       <TextField
-        id="outlined-helperText"
+        id="outlined-multiline-helperText"
         label="Comment"
         variant="outlined"
+        fullWidth
         {...register("comment")}
         helperText="Not more than 500 words"
       />
-      {/* <Controller
+      <Typography>{errors.comment?.message}</Typography>
+      <Controller
         name="rating"
         control={control}
         defaultValue={3}
         rules={{ required: true }}
         render={({ field }) => (
-          <Rating
-            name="rating"
-            // value={Number(props.value)}
-            onChange={field.onChange}
-          />
+          <Rating name="rating" onChange={field.onChange} />
         )}
-      /> */}
+      />
+      <Typography>{errors.rating?.message}</Typography>
 
       <input type="submit" />
     </Box>
