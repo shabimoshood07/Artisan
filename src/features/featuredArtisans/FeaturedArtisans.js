@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetAllArtisansQuery } from "../api/apiSlice";
 import { selectUserId } from "../authSlice/authSlice";
 import {
@@ -21,8 +21,18 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const FeaturedArtisans = () => {
-  const { data: artisans, isLoading, isSuccess } = useGetAllArtisansQuery();
-  const id  = useSelector(selectUserId);
+  const {
+    data: artisans,
+    isLoading,
+    isSuccess,
+    refetch,
+  } = useGetAllArtisansQuery();
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  const id = useSelector(selectUserId);
+
   let content;
   if (isLoading) {
     content = <Typography align="center">Loading...</Typography>;

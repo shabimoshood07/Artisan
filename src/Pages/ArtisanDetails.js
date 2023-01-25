@@ -7,8 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 // COMPONENTS
 import Details from "../features/ArtisanDetails/Details";
-import BasicTabs from "../features/ArtisanDetails/Tabs";
 import { useSelector } from "react-redux";
+import DetailsTab from "../features/ArtisanDetails/DetailsTabs";
 const ArtisanDetails = () => {
   const { id } = useParams();
   const naviagte = useNavigate();
@@ -55,7 +55,7 @@ const ArtisanDetails = () => {
           }}
         >
           <Details artisan={artisan} />
-          <BasicTabs artisan={artisan} />
+          <DetailsTab artisan={artisan} />
         </Stack>
       </Container>
     );

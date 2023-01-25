@@ -1,0 +1,13 @@
+/* COMMENT FORM */
+
+.error-msg{
+    font-size: 14px;
+    color: red;
+}
+
+.submit-btn{
+    width: 50%;
+    margin: 0 auto;
+    font-size: 2rem;
+}
+

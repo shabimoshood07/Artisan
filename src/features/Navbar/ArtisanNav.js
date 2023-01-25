@@ -17,12 +17,12 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemText,
-  Toolbar,
   Typography,
   Button,
   Avatar,
   MenuItem,
+  Popover,
+  Toolbar,
   Badge,
 } from "@mui/material";
 
@@ -41,18 +41,33 @@ import { useDispatch } from "react-redux";
 // CSS
 import "./style.css";
 
+import NotificationPopup from "./NotificationPopup";
+
 const drawerWidth = 240;
 
 function ArtisanNav(props) {
+  // Notification popover
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
   const dispatch = useDispatch();
   // User Credentials
-  const  id  = useSelector(selectUserId);
+  const artisanId = useSelector(selectUserId);
 
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
-  const { data: artisan, isSuccess } = useGetArtisanQuery(id);
-  // const { data: artisans, isSuccess } = useGetAllArtisansQuery();
+  const { data: artisan, isSuccess } = useGetArtisanQuery(artisanId);
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -71,7 +86,6 @@ function ArtisanNav(props) {
   let content;
 
   if (isLoggedIn && isSuccess) {
-
     content = (
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -110,7 +124,23 @@ function ArtisanNav(props) {
                 <Avatar src={artisan.profileImage} alt={artisan.name} />
               </Button>
               <IconButton size="large" className="icon">
-                <Badge badgeContent={artisan.unreadCount} color="error">
+                <Popover
+                  id={id}
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                >
+                  <NotificationPopup />
+                </Popover>
+                <Badge
+                  badgeContent={artisan.unreadCount}
+                  color="error"
+                  onClick={handleClick}
+                >
                   <CommentOutlined />
                 </Badge>
               </IconButton>
