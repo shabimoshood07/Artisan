@@ -4,9 +4,17 @@ import { useSelector } from "react-redux";
 import { useGetArtisanQuery } from "../api/apiSlice";
 import { selectUserId } from "../authSlice/authSlice";
 import { formatDistance, format } from "date-fns";
+import { useEffect } from "react";
+
+// CSS
+import "./style.css";
 const NotificationPopup = () => {
   const artisanId = useSelector(selectUserId);
-  const { data, isSuccess, isLoading } = useGetArtisanQuery(artisanId);
+  const { data, isSuccess, isLoading, refetch } = useGetArtisanQuery(artisanId);
+
+  useEffect(() => {
+    refetch();
+  }, []);
   let content;
 
   if (isSuccess) {
@@ -29,7 +37,6 @@ const NotificationPopup = () => {
       const dateFromComment = formatDistance(new Date(backendDate), new Date());
 
       return (
-        // <Box key={_id}>
         <MenuItem
           key={_id}
           sx={{ flexDirection: "column", borderBottom: "solid 1px" }}
@@ -38,18 +45,26 @@ const NotificationPopup = () => {
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              //   border: "solid",
               width: "100%",
             }}
           >
             <Typography sx={{ fontSize: "10px" }}>
-              Review by {createdBy}
+              Review from {createdBy}
             </Typography>
-            <Typography sx={{ fontSize: "10px" }}> {dateFromComment}</Typography>
+            <Typography sx={{ fontSize: "10px" }}>
+              {dateFromComment} ago
+            </Typography>
           </Box>
-          <Typography>{commentText.substring(0, 20)}</Typography>
+          <Typography
+            sx={{
+              // border: "solid",
+              width: "100%",
+              textTransform: "capitalize",
+            }}
+          >
+            {commentText.substring(0, 20)}
+          </Typography>
         </MenuItem>
-        // </Box>
       );
     });
   }

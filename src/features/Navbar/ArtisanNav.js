@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   selectLoggedInStatus,
@@ -24,6 +24,7 @@ import {
   Popover,
   Toolbar,
   Badge,
+  Menu,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -42,23 +43,18 @@ import { useDispatch } from "react-redux";
 import "./style.css";
 
 import NotificationPopup from "./NotificationPopup";
+import zIndex from "@mui/material/styles/zIndex";
 
 const drawerWidth = 240;
 
-function ArtisanNav(props) {
-  // Notification popover
-  const [anchorEl, setAnchorEl] = React.useState(null);
+const ArtisanNav = (props) => {
+  // select notifiaction element
+  const notificationPopup = useRef();
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  // Toggle notification
+  const handleToggleNotification = () => {
+    notificationPopup.current.classList.toggle("show-notification");
   };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
 
   const dispatch = useDispatch();
   // User Credentials
@@ -87,19 +83,19 @@ function ArtisanNav(props) {
 
   if (isLoggedIn && isSuccess) {
     content = (
-      <Box sx={{ display: "flex" }}>
+      <Box
+        sx={{
+          display: "flex",
+        }}
+      >
         <CssBaseline />
-        <AppBar
-          component="nav"
-          sx={{
-            background: "#001166",
-          }}
-        >
+        <AppBar component="nav" sx={{ background: "#001166" }}>
           <Toolbar
             sx={{
               width: { xs: "97%", md: "85%" },
               marginLeft: "auto",
               marginRight: "auto",
+              justifyContent: "space-between",
             }}
           >
             <IconButton
@@ -119,40 +115,72 @@ function ArtisanNav(props) {
             >
               <Link to="/">ARTISAN</Link>
             </Typography>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Button>
+            <Box
+              sx={{
+                display: {
+                  // xs: "none"
+                  sm: "block",
+                },
+              }}
+            >
+              <Button
+                sx={{
+                  display: {
+                    xs: "none",
+                    sm: "inline-flex",
+                  },
+                }}
+              >
                 <Avatar src={artisan.profileImage} alt={artisan.name} />
               </Button>
-              <IconButton size="large" className="icon">
-                <Popover
-                  id={id}
-                  open={open}
-                  anchorEl={anchorEl}
-                  onClose={handleClose}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                >
-                  <NotificationPopup />
-                </Popover>
-                <Badge
-                  badgeContent={artisan.unreadCount}
-                  color="error"
-                  onClick={handleClick}
-                >
+              <IconButton
+                size="large"
+                className="icon"
+                onClick={handleToggleNotification}
+              >
+                <Badge badgeContent={artisan.unreadCount} color="error">
                   <CommentOutlined />
                 </Badge>
               </IconButton>
               <IconButton size="large" className="icon" sx={{ mr: 2 }}>
-                <Badge badgeContent={17} color="error">
+                <Badge badgeContent={artisan.ratingsCount} color="error">
                   <StarOutline />
                 </Badge>
               </IconButton>
-              <Button className="logout-btn" onClick={handleLogout}>
+              <Button
+                className="logout-btn"
+                onClick={handleLogout}
+                sx={{
+                  display: {
+                    xs: "none",
+                    sm: "inline-flex",
+                  },
+                }}
+              >
                 Logout
                 <LogoutOutlined />
               </Button>
+              <div className="notification" ref={notificationPopup}>
+                <Box
+                  sx={{
+                    backgroundColor: "white",
+                    width: "100%",
+                    borderBottom: "solid 1px",
+                    zIndex: 3,
+                  }}
+                >
+                  <Typography align="center">Notifications</Typography>
+                </Box>
+                <Box
+                  sx={{
+                    scrollBehavior: "smooth",
+                    overflowY: "scroll",
+                    height: "296px",
+                  }}
+                >
+                  <NotificationPopup />
+                </Box>
+              </div>
             </Box>
           </Toolbar>
         </AppBar>
@@ -187,37 +215,7 @@ function ArtisanNav(props) {
                     <p>Profile</p>
                   </ListItemButton>
                 </ListItem>
-                <ListItem className="list-items">
-                  <ListItemButton
-                    sx={{ textAlign: "center", justifyContent: "center" }}
-                  >
-                    <IconButton
-                      size="large"
-                      aria-label="show 4 new mails"
-                      color="inherit"
-                    >
-                      <Badge badgeContent={4} color="error">
-                        <CommentOutlined />
-                      </Badge>
-                    </IconButton>
-                    <p>Comments</p>
-                  </ListItemButton>
-                </ListItem>
 
-                <ListItem className="list-items">
-                  <ListItemButton sx={{ justifyContent: "center" }}>
-                    <IconButton
-                      size="large"
-                      aria-label="show 17 new notifications"
-                      color="inherit"
-                    >
-                      <Badge badgeContent={17} color="error">
-                        <StarOutline />
-                      </Badge>
-                    </IconButton>
-                    <p>Rating</p>
-                  </ListItemButton>
-                </ListItem>
                 <ListItem
                   disablePadding
                   className="list-items"
@@ -240,6 +238,6 @@ function ArtisanNav(props) {
   }
 
   return content;
-}
+};
 
 export default ArtisanNav;

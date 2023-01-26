@@ -28,11 +28,33 @@
   margin-bottom: 2rem;
 }
 
-.list-items button{
-    transition: all .9s;
-
+.list-items button {
+  transition: all 0.9s;
 }
-/* .list-items:hover > button {
-  background-color: #000729;
-  color: #d7c1ce;
-} */
+
+.notification {
+  position: absolute;
+  background-color: #fff;
+  top: 60px;
+  right: 0;
+  z-index: -1;
+  color: #000729;
+  height: 0;
+  transition: all 0.5s ease-in-out;
+  min-width: 300px;
+  overflow: hidden;
+}
+
+.notification::-webkit-scrollbar {
+  display: none;
+}
+.show-notification {
+  height: 320px;
+  overflow: hidden;
+}
+
+@media screen and (min-width:800px) {
+  .notification {
+    right: 100px;
+  }
+}
