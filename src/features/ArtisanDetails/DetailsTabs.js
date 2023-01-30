@@ -47,10 +47,6 @@ function a11yProps(index) {
 const DetailsTab = ({ artisan }) => {
   const { about, comments } = artisan;
 
-  // Sort comment by date posted
-  const sortedComment = [...comments].sort((a, b) => {
-    return new Date(b.createdAt) - new Date(a.createdAt);
-  });
 
   useEffect(() => {
     dispatch(toggle(0));
@@ -84,7 +80,7 @@ const DetailsTab = ({ artisan }) => {
         <Contact artisan={artisan} />
       </TabPanel>
       <TabPanel value={toggleValue} index={2}>
-        <Comment comments={sortedComment} />
+        <Comment />
       </TabPanel>
     </Box>
   );

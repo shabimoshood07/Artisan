@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
 
-import { Container, CircularProgress, Box, Stack, Button } from "@mui/material";
+import {
+  Container,
+  CircularProgress,
+  Box,
+  Stack,
+  Button,
+  Typography,
+} from "@mui/material";
 import { useGetArtisanQuery } from "../features/api/apiSlice";
 import { selectUserId } from "../features/authSlice/authSlice";
 import { useNavigate, useParams } from "react-router-dom";
@@ -17,9 +24,10 @@ const ArtisanDetails = () => {
     isLoading,
     isSuccess,
     isError,
+    error,
   } = useGetArtisanQuery(id);
 
-  const  artisanId  = useSelector(selectUserId);
+  const artisanId = useSelector(selectUserId);
 
   useEffect(() => {
     if (id == artisanId) {
@@ -48,7 +56,6 @@ const ArtisanDetails = () => {
           sx={{
             justifyContent: "center",
             alignItems: { xs: "center", lg: "unset" },
-            // border: "solid green",
             width: { xs: "90%", md: "85%" },
             maxWidth: "1200px",
             margin: "0 auto",
@@ -74,6 +81,26 @@ const ArtisanDetails = () => {
         >
           <CircularProgress size={100} />
         </Box>
+      </Container>
+    );
+  }
+
+  if (error) {
+    content = (
+      <Container sx={{ backgroundColor: "#d7c1ce" }} className="container">
+        <Box
+          sx={{
+            width: { xs: "90%", md: "85%" },
+            maxWidth: "1200px",
+            margin: "0 auto",
+          }}
+          p={{ xs: 1, md: 2 }}
+        >
+          <Button sx={{ border: "solid" }}>Back</Button>
+        </Box>
+        <Typography mt={6} align="center" fontSize={50} color="#000729">
+          No Artisan Found!!
+        </Typography>
       </Container>
     );
   }

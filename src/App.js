@@ -14,6 +14,7 @@ import ArtisanProfile from "./Pages/ArtisanProfile";
 
 import { useDispatch } from "react-redux";
 import { setUserCredentials } from "./features/authSlice/authSlice";
+import ErrorPage from "./Pages/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
             <Route path="/details/:id" element={<ArtisanDetails />} />
             <Route path="/profile/:id" element={<ArtisanProfile />} />
           </Route>
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </StyledEngineProvider>
     </>

@@ -9,24 +9,15 @@ import {
   Grid,
 } from "@mui/material";
 
-const Details = ({artisan} ) => {
+import { useGetAllCommentsQuery } from "../api/apiSlice";
+import { useParams } from "react-router-dom";
 
-  const {
-    profileImage,
-    phoneNumber,
-    alternativeNumber,
-    name,
-    role,
-    username,
-    email,
-    address,
-    profession,
-    gender,
-    about,
-    rating,
-    socials,
-    comments,
-  } = artisan;
+const Details = ({ artisan }) => {
+  // TO GET COMMENT COUNT
+  const { id: artisanId } = useParams();
+  const { data, isLoading, isSuccess } = useGetAllCommentsQuery(artisanId);
+
+  const { profileImage, name, username, profession, rating } = artisan;
 
   return (
     <>
@@ -34,7 +25,6 @@ const Details = ({artisan} ) => {
         <Paper elevation={16}>
           <Grid
             container
-            // columns={{ xs: 2 }}
             sx={{
               display: "flex",
               // border: "solid yellow",
@@ -93,7 +83,6 @@ const Details = ({artisan} ) => {
           <Grid
             container
             columns={{ xs: 2 }}
-            // sx={{ border: "solid", backgroundColor: "#000729" }}
           >
             <Box sx={{ flex: "1", border: "solid 1px #000729 " }}>
               <Rating
@@ -115,7 +104,7 @@ const Details = ({artisan} ) => {
                 Comments
               </Typography>
               <Typography align="center" variant="h5" color="#000729">
-                {comments.length}
+                {isSuccess && data.comments.length}
               </Typography>
             </Box>
           </Grid>
