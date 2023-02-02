@@ -4,6 +4,7 @@ import {
   selectLoggedInStatus,
   selectUsername,
   logout,
+  setLoggedInStatus
 } from "../authSlice/authSlice";
 
 import { useGetAllUsersQuery } from "../api/apiSlice";
@@ -58,6 +59,7 @@ const USerNav = (props) => {
   // LOGOUT
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(setLoggedInStatus(false));
   };
 
   const container =

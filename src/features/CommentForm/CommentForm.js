@@ -12,6 +12,7 @@ import { selectUserId } from "../authSlice/authSlice";
 // CSS
 import "./style.css";
 
+
 const CommentForm = () => {
   const [rating, setRating] = useState(0);
   const { id: artisanId } = useParams();
@@ -22,7 +23,7 @@ const CommentForm = () => {
 
   // SCHEMA TO VALIDATE FORM
   const schema = yup.object().shape({
-    comment: yup.string().required("comment is required!").max(500),
+    comment: yup.string().required("Review is required!").max(500),
   });
 
   const {
@@ -74,7 +75,7 @@ const CommentForm = () => {
       <Box>
         <TextField
           id="outlined-helperText"
-          label="Add Comment"
+          label="Leave A Review"
           variant="outlined"
           fullWidth
           multiline
@@ -93,6 +94,7 @@ const CommentForm = () => {
           justifyContent: { xs: "center", sm: "flex-start" },
           gap: 2,
           my: 2,
+          px:2,
         }}
       >
         <Typography component="legend">Add Rating</Typography>

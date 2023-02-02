@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLoginMutation } from "../api/apiSlice";
-import { setUserCredentials } from "../authSlice/authSlice";
+import { setUserCredentials, setLoggedInStatus } from "../authSlice/authSlice";
 import { useDispatch } from "react-redux";
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,10 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data } = await login({ data: inputData, password: password });
-    if (data) dispatch(setUserCredentials(data));
+    if (data) {
+      dispatch(setUserCredentials(data));
+      dispatch(setLoggedInStatus(true));
+    }
   };
 
   return (

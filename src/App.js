@@ -13,14 +13,21 @@ import ArtisanDetails from "./Pages/ArtisanDetails";
 import ArtisanProfile from "./Pages/ArtisanProfile";
 
 import { useDispatch } from "react-redux";
-import { setUserCredentials } from "./features/authSlice/authSlice";
+import {
+  setUserCredentials,
+  setLoggedInStatus,
+} from "./features/authSlice/authSlice";
 import ErrorPage from "./Pages/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
   const loginData = localStorage.getItem("login data");
-
-  dispatch(setUserCredentials(JSON.parse(loginData)));
+  if (loginData === "null") {
+    dispatch(setLoggedInStatus(false));
+  } else {
+    dispatch(setUserCredentials(JSON.parse(loginData)));
+    dispatch(setLoggedInStatus(true));
+  }
 
   return (
     <>

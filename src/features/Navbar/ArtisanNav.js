@@ -4,6 +4,7 @@ import {
   selectLoggedInStatus,
   selectUserId,
   logout,
+  setLoggedInStatus
 } from "../authSlice/authSlice";
 
 import { useGetArtisanQuery } from "../api/apiSlice";
@@ -75,6 +76,7 @@ const ArtisanNav = (props) => {
   // LOGOUT
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(setLoggedInStatus(false));
   };
 
   const container =
