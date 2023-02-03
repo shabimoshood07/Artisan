@@ -20,7 +20,7 @@ export const apiSlice = createApi({
       query: () => "/artisan",
       // providesTags: ["Artisans"],
     }),
-    
+
     // GET ARTISAN
     getArtisan: builder.query({
       query: (id) => `/artisan/${id}`,
@@ -86,7 +86,16 @@ export const apiSlice = createApi({
         method: "PATCH",
         body: { ratingValue },
       }),
-      invalidatesTags: ["Artisans"],
+      invalidatesTags: ["Rating"],
+    }),
+
+    // GET RATINGS
+    getRatings: builder.query({
+      query: (artisanId) => ({
+        url: `artisan/ratings/${artisanId}`,
+        method: "GET",
+      }),
+      providesTags:["Rating"]
     }),
   }),
 });
@@ -101,4 +110,5 @@ export const {
   useAddCommentMutation,
   useAddRatingMutation,
   useGetAllCommentsQuery,
+  useGetRatingsQuery
 } = apiSlice;

@@ -26,7 +26,7 @@ const FeaturedArtisans = () => {
     isLoading,
     isSuccess,
     refetch,
-  } = useGetAllArtisansQuery();
+  } = useGetAllArtisansQuery("getAllArtisans");
   useEffect(() => {
     refetch();
   }, []);

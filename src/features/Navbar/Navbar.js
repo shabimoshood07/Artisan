@@ -21,11 +21,7 @@ import {
   Badge,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import {
-  CommentOutlined,
-  StarOutline,
-  LogoutOutlined,
-} from "@mui/icons-material";
+
 
 // Import the different navs
 import ArtisanNav from "./ArtisanNav";
@@ -46,9 +42,9 @@ let Navbar = (props) => {
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
-  const { data: artisans, isSuccess } = useGetAllArtisansQuery("getArtisans");
+  // const { data: artisans, isSuccess } = useGetAllArtisansQuery("getAllArtisans");
 
-  const { data: users, isSuccess: userSuccess } = useGetAllUsersQuery();
+  // const { data: users, isSuccess: userSuccess } = useGetAllUsersQuery();
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);

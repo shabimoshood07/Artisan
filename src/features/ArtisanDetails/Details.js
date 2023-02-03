@@ -9,15 +9,24 @@ import {
   Grid,
 } from "@mui/material";
 
-import { useGetAllCommentsQuery } from "../api/apiSlice";
+import { useGetAllCommentsQuery, useGetRatingsQuery } from "../api/apiSlice";
 import { useParams } from "react-router-dom";
 
 const Details = ({ artisan }) => {
   // TO GET COMMENT COUNT
   const { id: artisanId } = useParams();
-  const { data, isLoading, isSuccess } = useGetAllCommentsQuery(artisanId);
-
+  const {
+    data: commentData,
+    isLoading,
+    isSuccess,
+  } = useGetAllCommentsQuery(artisanId);
+  const { data: ratingsData, isSuccess: ratingsSuccess } =
+    useGetRatingsQuery(artisanId);
   const { profileImage, name, username, profession, rating } = artisan;
+
+  if (ratingsSuccess) {
+    console.log(ratingsData);
+  }
 
   return (
     <>
@@ -80,10 +89,7 @@ const Details = ({ artisan }) => {
           >
             {name}
           </Typography>
-          <Grid
-            container
-            columns={{ xs: 2 }}
-          >
+          <Grid container columns={{ xs: 2 }}>
             <Box sx={{ flex: "1", border: "solid 1px #000729 " }}>
               <Rating
                 value={rating}
@@ -96,7 +102,7 @@ const Details = ({ artisan }) => {
                 }}
               />
               <Typography align="center" variant="h5" color="#000729">
-                {rating}
+                {ratingsSuccess && ratingsData.rating}
               </Typography>
             </Box>
             <Box sx={{ flex: "1", border: "solid 1px #000729 " }}>
@@ -104,7 +110,7 @@ const Details = ({ artisan }) => {
                 Comments
               </Typography>
               <Typography align="center" variant="h5" color="#000729">
-                {isSuccess && data.comments.length}
+                {isSuccess && commentData.comments.length}
               </Typography>
             </Box>
           </Grid>

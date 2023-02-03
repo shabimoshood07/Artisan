@@ -3,7 +3,6 @@ import { apiSlice } from "../api/apiSlice";
 import authSlice from "../authSlice/authSlice";
 import SearchSlice from "../Search/SearchSlice";
 import toggleSlice from "../ArtisanDetails/toggleSlice";
-import { apiAuthSlice } from "../api/apiAuthSlice";
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
@@ -13,5 +12,5 @@ export const store = configureStore({
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware, apiAuthSlice.middleware),
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });

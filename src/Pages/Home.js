@@ -9,13 +9,13 @@ import FeaturedArtisans from "../features/featuredArtisans/FeaturedArtisans";
 import Welcome from "../features/Welcome/Welcome";
 
 const Home = () => {
-  const {
-    artisans: data,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetAllArtisansQuery("getArtisans");
+  // const {
+  //   artisans: data,
+  //   isLoading,
+  //   isSuccess,
+  //   isError,
+  //   error,
+  // } = useGetAllArtisansQuery("getArtisans");
 
   return (
     <Container className = "container">

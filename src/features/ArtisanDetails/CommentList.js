@@ -9,7 +9,7 @@ import {
 // AUTH SLICE
 import { selectUserId } from "../authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetAllArtisansQuery } from "../api/apiSlice";
+
 let CommentList = ({ comment }) => {
   const {
     _id,
