@@ -23,7 +23,7 @@ let CommentList = ({ comment }) => {
 
   const dispatch = useDispatch();
 
-  const userId = useSelector((state) => selectUserId(state));
+  const userId = useSelector(selectUserId);
 
   const [likeComment, { isLoading, isError }] = useLikeCommentMutation();
 

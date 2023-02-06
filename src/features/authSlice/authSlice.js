@@ -51,14 +51,4 @@ export const selectUserId = (state) => state.authSlice.userCredentials.id;
 export const selectName = (state) => state.authSlice.userCredentials.name;
 export const selectUsertoken = (state) => state.authSlice.userCredentials.token;
 
-// export const selectUserId = createSelector(
-//   [(state) => state.authSlice.userCredentials.id],
-//   (state) => state
-// );
-
-// export const selectUserCredentials = createSelector(
-//   [authSlice.getInitialState],
-//   (state) => state.userCredentials
-// );
-
 export default authSlice.reducer;

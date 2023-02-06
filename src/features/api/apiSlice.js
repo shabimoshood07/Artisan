@@ -95,7 +95,15 @@ export const apiSlice = createApi({
         url: `artisan/ratings/${artisanId}`,
         method: "GET",
       }),
-      providesTags:["Rating"]
+      providesTags: ["Rating"],
+    }),
+
+    // SEARCH ARTISAN
+    searchArtisan: builder.query({
+      query: ({ location, profession }) => ({
+        url: `artisan/search?location=${location}&profession=${profession}`,
+        method: "GET",
+      }),
     }),
   }),
 });
@@ -110,5 +118,6 @@ export const {
   useAddCommentMutation,
   useAddRatingMutation,
   useGetAllCommentsQuery,
-  useGetRatingsQuery
+  useGetRatingsQuery,
+  useSearchArtisanQuery,
 } = apiSlice;

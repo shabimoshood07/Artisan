@@ -1,11 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Artisan from "./Artisan";
-import {
-  selectSearchError,
-  selectSearchList,
-  selectSearchStatus,
-  searchArtisan,
-} from "../Search/SearchSlice";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Container,
@@ -15,22 +9,26 @@ import {
   CircularProgress,
 } from "@mui/material";
 
+import { useSearchArtisanQuery } from "../../features/api/apiSlice";
 // CSS
 import "./style.css";
 
 const ArtisanList = () => {
   const dispatch = useDispatch();
+  const [location, setLocation] = useState("");
+  const [profession, setProfession] = useState("");
 
-  const status = useSelector(selectSearchStatus);
-  const searchList = useSelector(selectSearchList);
-  const error = useSelector(selectSearchError);
 
-  console.log(status);
+  // const { isLoading, data, isError, error, isSuccess } = useSearchArtisanQuery({
+  //   location,
+  //   profession,
+  // });
+
   let content;
 
-  if (status === "failed") {
+  if (error) {
     content = <p>{error}</p>;
-  } else if (status === "loading") {
+  } else if (isLoading) {
     content = (
       <Box
         sx={{
@@ -43,11 +41,11 @@ const ArtisanList = () => {
         <CircularProgress size={100} />
       </Box>
     );
-  } else if (status === "succeeded") {
-    if (searchList.length == 0) {
+  } else if (isSuccess) {
+    if (data.length == 0) {
       content = <Typography>NO Artisan found!</Typography>;
     } else {
-      content = searchList.map((artisan) => {
+      content = data.map((artisan) => {
         return <Artisan key={artisan.id} artisan={artisan} />;
       });
     }
@@ -55,7 +53,7 @@ const ArtisanList = () => {
   return (
     <Container
       sx={{
-        padding:"0",
+        padding: "0",
         paddingTop: "2rem",
         paddingBottom: "2rem",
         background: "#000729",
@@ -66,7 +64,7 @@ const ArtisanList = () => {
     >
       <Box
         sx={{
-        //   border: "solid red",
+          //   border: "solid red",
           margin: "0 auto",
           width: { xs: "100%", sm: "60%", md: "100%" },
           maxWidth: 1500,

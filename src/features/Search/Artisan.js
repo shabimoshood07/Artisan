@@ -57,7 +57,7 @@ const Artisan = ({ artisan }) => {
           />
         }
         action={
-          <Link to={`/details/${artisan.id}`}>
+          <Link to={`/details/${artisan._id}`}>
             <IconButton aria-label="settings">
               <ArrowForwardOutlined />
             </IconButton>
