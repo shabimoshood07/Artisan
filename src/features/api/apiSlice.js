@@ -13,7 +13,7 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Artisans", "Users", "Ratings", "Comments"],
+  tagTypes: ["Artisans", "Users", "Ratings", "Comments", "Search"],
   endpoints: (builder) => ({
     // GET ALL ARTISAN
     getAllArtisans: builder.query({
@@ -104,6 +104,7 @@ export const apiSlice = createApi({
         url: `artisan/search?location=${location}&profession=${profession}`,
         method: "GET",
       }),
+      providesTags:["Search"]
     }),
   }),
 });

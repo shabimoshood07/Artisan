@@ -10,6 +10,14 @@ import {
 } from "@mui/material";
 
 import { useSearchArtisanQuery } from "../../features/api/apiSlice";
+
+import {
+  searchArtisan,
+  selectAllArtisan,
+  selectSearchStatus,
+  selectSearchError,
+} from "../Search/SearchSlice";
+
 // CSS
 import "./style.css";
 
@@ -18,17 +26,23 @@ const ArtisanList = () => {
   const [location, setLocation] = useState("");
   const [profession, setProfession] = useState("");
 
+  const status = useSelector(selectSearchStatus);
+  const searchResult = useSelector(selectAllArtisan);
+  const error = useSelector(selectSearchError);
 
-  // const { isLoading, data, isError, error, isSuccess } = useSearchArtisanQuery({
-  //   location,
-  //   profession,
-  // });
+  useEffect(() => {
+    if (status == "idle") {
+      dispatch(searchArtisan({ location, profession }));
+    }
+  }, []);
 
   let content;
 
-  if (error) {
+  if (status == "failed") {
     content = <p>{error}</p>;
-  } else if (isLoading) {
+  }
+
+  if (status == "loading") {
     content = (
       <Box
         sx={{
@@ -41,12 +55,14 @@ const ArtisanList = () => {
         <CircularProgress size={100} />
       </Box>
     );
-  } else if (isSuccess) {
-    if (data.length == 0) {
+  }
+
+  if (status == "succeeded") {
+    if (searchResult.length == 0) {
       content = <Typography>NO Artisan found!</Typography>;
     } else {
-      content = data.map((artisan) => {
-        return <Artisan key={artisan.id} artisan={artisan} />;
+      content = searchResult.map((artisan) => {
+        return <Artisan key={artisan._id} artisan={artisan} />;
       });
     }
   }

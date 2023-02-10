@@ -17,9 +17,7 @@ const Welcome = () => {
     <Container className="main-con">
       <Box
         sx={{
-          //  border: "solid",
           height: "100%",
-          //  background: "rgba(0,0,0,.6)"
         }}
       >
         <Grid
@@ -77,8 +75,12 @@ const Welcome = () => {
               </Link>
             ) : (
               <>
-                <Button className="btn">Login</Button>
-                <Button className="btn">Sign up</Button>
+                <Link to="/login">
+                  <Button className="btn">Login</Button>
+                </Link>
+                <Link to="/signup">
+                  <Button className="btn">Sign up</Button>
+                </Link>
                 <Link to="/search">
                   <Button className="btn">Search Artisans</Button>
                 </Link>

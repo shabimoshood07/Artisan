@@ -1,7 +1,7 @@
 import { Button, Container, Typography } from "@mui/material";
 import React, { useState } from "react";
 import FeaturedArtisans from "../features/featuredArtisans/FeaturedArtisans";
-import LoginForm from "../features/LoginForm/Login";
+import LoginForm from "../features/LoginForm/LoginForm";
 const Login = () => {
   return (
     <Container

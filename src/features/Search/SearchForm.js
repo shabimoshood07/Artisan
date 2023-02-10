@@ -3,27 +3,20 @@ import { Box, Button, TextField } from "@mui/material";
 import "./style.css";
 import { searchArtisan } from "../Search/SearchSlice";
 import { useDispatch } from "react-redux";
-import { useSearchArtisanQuery } from "../../features/api/apiSlice";
 
 const SearchForm = () => {
   const dispatch = useDispatch();
   const [location, setLocation] = useState("");
   const [profession, setProfession] = useState("");
-
-  const { isLoading, data, isError, error, isSuccess, refetch,} =
-    useSearchArtisanQuery({
-      location,
-      profession,
-    });
+  const [skip, setSkip] = useState(true);
 
   // useEffect(() => {
   //   dispatch(searchArtisan({ profession, location }));
   // }, []);
 
   const handleSearch = (e) => {
+    dispatch(searchArtisan({ profession, location }));
     e.preventDefault();
-    // dispatch(searchArtisan({ profession, location }));
-    refetch();
   };
 
   return (

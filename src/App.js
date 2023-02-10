@@ -18,6 +18,7 @@ import {
   setLoggedInStatus,
 } from "./features/authSlice/authSlice";
 import ErrorPage from "./Pages/ErrorPage";
+import Signup from "./Pages/Signup";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/search" element={<Search />} />
             <Route path="/details/:id" element={<ArtisanDetails />} />
