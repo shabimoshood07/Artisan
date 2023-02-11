@@ -18,7 +18,6 @@ export const apiSlice = createApi({
     // GET ALL ARTISAN
     getAllArtisans: builder.query({
       query: () => "/artisan",
-      // providesTags: ["Artisans"],
     }),
 
     // GET ARTISAN
@@ -128,4 +127,5 @@ export const {
   useGetAllCommentsQuery,
   useGetRatingsQuery,
   useSearchArtisanQuery,
+  useArtisanSignupMutation,
 } = apiSlice;

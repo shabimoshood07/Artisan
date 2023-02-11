@@ -33,12 +33,12 @@ const SignupForm = () => {
   const schema = yup.object({
     name: yup.string().required("Enter full name"),
     email: yup.string().email().required(),
-    phoneNumber: yup.string(),
-    businessName: yup.string(),
-    about: yup.string(),
-    gender: yup.string(),
-    profession: yup.string(),
-    address: yup.string(),
+    phoneNumber: yup.string().required(),
+    businessName: yup.string().required(),
+    about: yup.string().required(),
+    gender: yup.string().required(),
+    profession: yup.string().required(),
+    address: yup.string().required(),
     password: yup.string().required().min(6),
     confirmPassword: yup
       .string()
@@ -51,12 +51,12 @@ const SignupForm = () => {
       .test(
         "Fichier taille",
         "too large file",
-        ({ size }) => !size || (size && size.split("")[0] <= 1024 * 1024)
+        (size) => !size || (size && size.split("")[0] <= 1024 * 1024)
       )
       .test(
         "format",
         "format file",
-        ({ type }) => !type || (type && SUPPORTED_FORMATS.includes(type))
+        (type) => !type || (type && SUPPORTED_FORMATS.includes(type))
       ),
   });
 
@@ -79,17 +79,12 @@ const SignupForm = () => {
     console.log(user);
   };
 
-  // Callback~
   const getFiles = (files) => {
-    // setValue("profileImage", files[0].base64);
-    console.log(files[0]);
-    setValue("profileImage", files[0]);
-
-    // register("file", files[0].base64);
+    console.log(files);
+    setValue("profileImage", files);
   };
 
   useEffect(() => {
-    // register("profileImage");
     register("profileImage");
   }, [register]);
 
@@ -118,7 +113,7 @@ const SignupForm = () => {
             margin="normal"
             {...register("email")}
           />
-          {errors.email?.message && <p>{errors.name?.message}</p>}
+          {errors.email?.message && <p>{errors.email?.message}</p>}
 
           <TextField
             label="phone Number"
@@ -129,7 +124,7 @@ const SignupForm = () => {
             margin="normal"
             {...register("phoneNumber")}
           />
-          {errors.phoneNumber?.message && <p>{errors.name?.message}</p>}
+          {errors.phoneNumber?.message && <p>{errors.phoneNumber?.message}</p>}
           <TextField
             label="Business name"
             id="standard-basic"
@@ -139,7 +134,9 @@ const SignupForm = () => {
             margin="normal"
             {...register("businessName")}
           />
-          {errors.businessName?.message && <p>{errors.name?.message}</p>}
+          {errors.businessName?.message && (
+            <p>{errors.businessName?.message}</p>
+          )}
           <TextField
             label="Address"
             id="standard-basic"
@@ -149,7 +146,7 @@ const SignupForm = () => {
             margin="normal"
             {...register("address")}
           />
-          {errors.address?.message && <p>{errors.name?.message}</p>}
+          {errors.address?.message && <p>{errors.address?.message}</p>}
           <TextField
             label="Profession"
             id="standard-basic"
@@ -159,7 +156,7 @@ const SignupForm = () => {
             margin="normal"
             {...register("profession")}
           />
-          {errors.profession?.message && <p>{errors.name?.message}</p>}
+          {errors.profession?.message && <p>{errors.profession?.message}</p>}
 
           <TextField
             id="standard-select"
@@ -177,7 +174,7 @@ const SignupForm = () => {
             <option value="male">Male</option>
             <option value="female">Female</option>
           </TextField>
-          {errors.gender?.message && <p>{errors.name?.message}</p>}
+          {errors.gender?.message && <p>{errors.gender?.message}</p>}
           {/* SOCIALS */}
 
           <Typography variant="h6">Socials</Typography>
@@ -223,15 +220,8 @@ const SignupForm = () => {
             margin="normal"
             {...register("about")}
           />
-          {errors.about?.message && <p>{errors.name?.message}</p>}
-          <FileBase64
-            multiple={true}
-            // onDone={() => {
-            //   getFiles.bind(this);
-            //   // {...register("name")}
-            // }}
-            onDone={getFiles.bind(this)}
-          />
+          {errors.about?.message && <p>{errors.about?.message}</p>}
+          <FileBase64 onDone={getFiles.bind(this)} />
           {errors.profileImage?.message && (
             <p>{errors.profileImage?.message}</p>
           )}
@@ -244,7 +234,7 @@ const SignupForm = () => {
             type="password"
             {...register("password")}
           />
-          {errors.password?.message && <p>{errors.name?.message}</p>}
+          {errors.password?.message && <p>{errors.password?.message}</p>}
           <TextField
             id="standard-multiline-static"
             label="Confirm Password"
@@ -254,9 +244,10 @@ const SignupForm = () => {
             type="password"
             {...register("confirmPassword")}
           />
-          {errors.confirmPassword?.message && <p>{errors.name?.message}</p>}
+          {errors.confirmPassword?.message && (
+            <p>{errors.confirmPassword?.message}</p>
+          )}
           <Button type="submit">Submit</Button>
-          {/* <input type="submit" className="submit-btn" /> */}
         </Box>
       </Box>
 
@@ -269,5 +260,3 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-
-
