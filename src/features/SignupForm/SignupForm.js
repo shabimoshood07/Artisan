@@ -14,6 +14,7 @@ import FileBase64 from "react-file-base64";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useArtisanSignupMutation } from "../api/apiSlice";
 
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 
@@ -26,6 +27,9 @@ export const validateImageType = (value) => {
 let FILE_SIZE = 1024 * 1024;
 const SignupForm = () => {
   const [img, setImg] = useState("");
+
+  const [ArtisanSignup, { isLoading, isError, error }] =
+    useArtisanSignupMutation();
   const schema = yup.object({
     name: yup.string().required("Enter full name"),
     email: yup.string().email().required(),
@@ -34,7 +38,6 @@ const SignupForm = () => {
     about: yup.string(),
     gender: yup.string(),
     profession: yup.string(),
-    // profileImage: yup.string(),
     address: yup.string(),
     password: yup.string().required().min(6),
     confirmPassword: yup
@@ -66,8 +69,14 @@ const SignupForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log({ ...data, profileImage: data.profileImage.base64 });
+    const user = await ArtisanSignup({
+      ...data,
+      profileImage: data.profileImage.base64,
+    });
+
+    console.log(user);
   };
 
   // Callback~
@@ -223,7 +232,9 @@ const SignupForm = () => {
             // }}
             onDone={getFiles.bind(this)}
           />
-          {errors.profileImage?.message && <p>{errors.profileImage?.message}</p>}
+          {errors.profileImage?.message && (
+            <p>{errors.profileImage?.message}</p>
+          )}
           <TextField
             id="standard-multiline-static"
             label="Password"
@@ -258,3 +269,5 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+
+
