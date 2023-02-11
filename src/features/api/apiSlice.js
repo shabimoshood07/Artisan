@@ -41,7 +41,14 @@ export const apiSlice = createApi({
         body: { ...credentials },
       }),
     }),
-
+    // SIGNUP ARTISAN
+    ArtisanSignup: builder.mutation({
+      query: (data) => ({
+        url: "/auth/signup/artisan",
+        method: "POST",
+        body: { ...data },
+      }),
+    }),
     // LIKE A COMMENT
     likeComment: builder.mutation({
       query: ({ commentId, userId }) => ({
@@ -104,7 +111,7 @@ export const apiSlice = createApi({
         url: `artisan/search?location=${location}&profession=${profession}`,
         method: "GET",
       }),
-      providesTags:["Search"]
+      providesTags: ["Search"],
     }),
   }),
 });

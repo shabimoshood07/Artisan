@@ -109,6 +109,8 @@ const SignupForm = () => {
             margin="normal"
             {...register("email")}
           />
+          {errors.email?.message && <p>{errors.name?.message}</p>}
+
           <TextField
             label="phone Number"
             id="standard-basic"
@@ -118,6 +120,7 @@ const SignupForm = () => {
             margin="normal"
             {...register("phoneNumber")}
           />
+          {errors.phoneNumber?.message && <p>{errors.name?.message}</p>}
           <TextField
             label="Business name"
             id="standard-basic"
@@ -127,6 +130,7 @@ const SignupForm = () => {
             margin="normal"
             {...register("businessName")}
           />
+          {errors.businessName?.message && <p>{errors.name?.message}</p>}
           <TextField
             label="Address"
             id="standard-basic"
@@ -136,6 +140,7 @@ const SignupForm = () => {
             margin="normal"
             {...register("address")}
           />
+          {errors.address?.message && <p>{errors.name?.message}</p>}
           <TextField
             label="Profession"
             id="standard-basic"
@@ -145,6 +150,7 @@ const SignupForm = () => {
             margin="normal"
             {...register("profession")}
           />
+          {errors.profession?.message && <p>{errors.name?.message}</p>}
 
           <TextField
             id="standard-select"
@@ -162,6 +168,7 @@ const SignupForm = () => {
             <option value="male">Male</option>
             <option value="female">Female</option>
           </TextField>
+          {errors.gender?.message && <p>{errors.name?.message}</p>}
           {/* SOCIALS */}
 
           <Typography variant="h6">Socials</Typography>
@@ -170,7 +177,7 @@ const SignupForm = () => {
               Facebook
             </InputLabel>
             <Input
-              id="standard-adornment-amount"
+              // id="standard-adornment-amount"
               startAdornment={
                 <InputAdornment position="start">@</InputAdornment>
               }
@@ -179,7 +186,7 @@ const SignupForm = () => {
           <FormControl fullWidth variant="standard">
             <InputLabel htmlFor="standard-adornment-amount">Twitter</InputLabel>
             <Input
-              id="standard-adornment-amount"
+              // id="standard-adornment-amount"
               startAdornment={
                 <InputAdornment position="start">@</InputAdornment>
               }
@@ -190,7 +197,7 @@ const SignupForm = () => {
               Instagram
             </InputLabel>
             <Input
-              id="standard-adornment-amount"
+              // id="standard-adornment-amount"
               startAdornment={
                 <InputAdornment position="start">@</InputAdornment>
               }
@@ -207,6 +214,7 @@ const SignupForm = () => {
             margin="normal"
             {...register("about")}
           />
+          {errors.about?.message && <p>{errors.name?.message}</p>}
           <FileBase64
             multiple={true}
             // onDone={() => {
@@ -215,23 +223,27 @@ const SignupForm = () => {
             // }}
             onDone={getFiles.bind(this)}
           />
-          {errors.file?.message && <p>{errors.file?.message}</p>}
+          {errors.profileImage?.message && <p>{errors.profileImage?.message}</p>}
           <TextField
             id="standard-multiline-static"
             label="Password"
             variant="standard"
             fullWidth
             margin="normal"
+            type="password"
             {...register("password")}
           />
+          {errors.password?.message && <p>{errors.name?.message}</p>}
           <TextField
             id="standard-multiline-static"
             label="Confirm Password"
             variant="standard"
             fullWidth
             margin="normal"
+            type="password"
             {...register("confirmPassword")}
           />
+          {errors.confirmPassword?.message && <p>{errors.name?.message}</p>}
           <Button type="submit">Submit</Button>
           {/* <input type="submit" className="submit-btn" /> */}
         </Box>
