@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -9,7 +10,6 @@ import {
   FormControl,
   Button,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
 import FileBase64 from "react-file-base64";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -17,14 +17,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useArtisanSignupMutation } from "../api/apiSlice";
 
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-export const validateImageType = (value) => {
-  if (value) {
-    let type = value.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
-    return SUPPORTED_FORMATS.includes(type);
-  }
-};
-let FILE_SIZE = 1024 * 1024;
+  // const phoneRegex = RegExp(
+  //   /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+  // );
+
 const SignupForm = () => {
   const [img, setImg] = useState("");
 
@@ -33,7 +32,10 @@ const SignupForm = () => {
   const schema = yup.object({
     name: yup.string().required("Enter full name"),
     email: yup.string().email().required(),
-    phoneNumber: yup.string().required(),
+    phoneNumber: yup
+      .string()
+      .required("Enter a phone number")
+      .matches(phoneRegExp, "Phone number is not valid"),
     businessName: yup.string().required(),
     about: yup.string().required(),
     gender: yup.string().required(),
@@ -51,12 +53,12 @@ const SignupForm = () => {
       .test(
         "Fichier taille",
         "too large file",
-        (size) => !size || (size && size.split("")[0] <= 1024 * 1024)
+        (file) => !file || (file && file.file.size <= 1024 * 1024)
       )
       .test(
         "format",
         "format file",
-        (type) => !type || (type && SUPPORTED_FORMATS.includes(type))
+        (file) => !file || (file.type && SUPPORTED_FORMATS.includes(file.type))
       ),
   });
 
@@ -80,7 +82,7 @@ const SignupForm = () => {
   };
 
   const getFiles = (files) => {
-    console.log(files);
+    console.log(files.file.size);
     setValue("profileImage", files);
   };
 
