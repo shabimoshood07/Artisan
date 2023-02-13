@@ -16,26 +16,26 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useArtisanSignupMutation } from "../api/apiSlice";
 
-const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+import "yup-phone";
 
-  // const phoneRegex = RegExp(
-  //   /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-  // );
+const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 
 const SignupForm = () => {
   const [img, setImg] = useState("");
 
   const [ArtisanSignup, { isLoading, isError, error }] =
     useArtisanSignupMutation();
+
+  let phoneschema = yup.object().shape({
+    phone: yup
+      .string()
+      .phone("NG", "Please enter a valid phone number")
+      .required("A phone number is required"),
+  });
+
   const schema = yup.object({
     name: yup.string().required("Enter full name"),
     email: yup.string().email().required(),
-    phoneNumber: yup
-      .string()
-      .required("Enter a phone number")
-      .matches(phoneRegExp, "Phone number is not valid"),
     businessName: yup.string().required(),
     about: yup.string().required(),
     gender: yup.string().required(),
@@ -60,6 +60,19 @@ const SignupForm = () => {
         "format file",
         (file) => !file || (file.type && SUPPORTED_FORMATS.includes(file.type))
       ),
+    phoneNumber: yup
+      .string()
+      .required("Enter a phone number")
+      .phone(
+        "NG",
+        "Please enter a valid phone number",
+        "Please enter a valid phone number"
+      )
+      .test(
+        "phone validate",
+        "invalid phone number",
+        (phoneNumber) => !phoneschema.validateSync({ phoneNumber: phoneNumber })
+      ),
   });
 
   const {
@@ -82,7 +95,7 @@ const SignupForm = () => {
   };
 
   const getFiles = (files) => {
-    console.log(files.file.size);
+    console.log(files);
     setValue("profileImage", files);
   };
 
