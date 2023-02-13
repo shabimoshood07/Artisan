@@ -68,11 +68,11 @@ const SignupForm = () => {
         "Please enter a valid phone number",
         "Please enter a valid phone number"
       )
-      .test(
-        "phone validate",
-        "invalid phone number",
-        (phoneNumber) => !phoneschema.validateSync({ phoneNumber: phoneNumber })
-      ),
+      // .test(
+      //   "phone validate",
+      //   "invalid phone number",
+      //   (phoneNumber) => !phoneschema.validateSync({ phoneNumber: phoneNumber })
+      // ),
   });
 
   const {
@@ -85,6 +85,7 @@ const SignupForm = () => {
   });
 
   const onSubmit = async (data) => {
+    console.log("clicked")
     console.log({ ...data, profileImage: data.profileImage.base64 });
     const user = await ArtisanSignup({
       ...data,
@@ -275,3 +276,6 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+
+
+
