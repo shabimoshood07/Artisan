@@ -19,7 +19,7 @@ import { ArrowForwardOutlined } from "@mui/icons-material";
 import "./style.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { useFeaturedArtisansQuery } from "../api/apiSlice";
 const FeaturedArtisans = () => {
   const {
     data: artisans,

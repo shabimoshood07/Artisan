@@ -25,6 +25,7 @@ const ArtisanDetails = () => {
     isSuccess,
     isError,
     error,
+    currentData,
   } = useGetArtisanQuery(id);
 
   const artisanId = useSelector(selectUserId);

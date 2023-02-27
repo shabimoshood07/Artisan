@@ -112,8 +112,17 @@ export const apiSlice = createApi({
       }),
       providesTags: ["Search"],
     }),
+    // GEt fetured artisans
+    featuredArtisans: builder.query({
+      query: () =>( {
+        url: "artisan/featured",
+        method: "GET",
+      }),
+    }),
   }),
 });
+
+
 
 export const {
   useGetAllArtisansQuery,
@@ -128,4 +137,5 @@ export const {
   useGetRatingsQuery,
   useSearchArtisanQuery,
   useArtisanSignupMutation,
+  useFeaturedArtisansQuery,
 } = apiSlice;
