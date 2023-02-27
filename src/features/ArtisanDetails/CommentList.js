@@ -31,8 +31,9 @@ let CommentList = ({ comment }) => {
     useUnlikeCommentMutation();
 
   // handle like comment
-  const handleLikeComment = async (commentId, userId) => {
-    const data = await likeComment({ commentId, userId });
+  const handleLikeComment = async (commentId) => {
+    const data = await likeComment(commentId);
+    console.log(data);
   };
 
   // handle unlike comment

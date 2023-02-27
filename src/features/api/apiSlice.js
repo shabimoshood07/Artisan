@@ -50,8 +50,8 @@ export const apiSlice = createApi({
     }),
     // LIKE A COMMENT
     likeComment: builder.mutation({
-      query: ({ commentId, userId }) => ({
-        url: `/user/like/${commentId}/${userId}`,
+      query: (commentId) => ({
+        url: `/user/like/${commentId}`,
         method: "PATCH",
       }),
       invalidatesTags: ["Comments"],

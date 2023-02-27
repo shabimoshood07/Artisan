@@ -17,7 +17,7 @@ const NotificationPopup = () => {
   }, []);
   let content;
 
-  if (isSuccess) {
+  if (isSuccess && data.comments.length > 0) {
     const unreadComment = data.comments.filter(
       (comment) => comment.read == false
     );
