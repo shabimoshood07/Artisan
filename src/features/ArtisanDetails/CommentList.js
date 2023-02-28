@@ -9,6 +9,7 @@ import {
 // AUTH SLICE
 import { selectUserId } from "../authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { format, parseISO } from "date-fns";
 
 let CommentList = ({ comment }) => {
   const {
@@ -20,7 +21,10 @@ let CommentList = ({ comment }) => {
     likesCount,
     likes,
   } = comment;
-
+  const dateString = createdAt;
+  const dateObject = parseISO(dateString);
+  const month = format(dateObject, "MMMM");
+  const year = format(dateObject, "yyyy");
   const dispatch = useDispatch();
 
   const userId = useSelector(selectUserId);
@@ -55,7 +59,7 @@ let CommentList = ({ comment }) => {
         </Grid>
         <Grid>
           <Typography align="right" sx={{ fontSize: 13 }}>
-            {createdAt}
+            {month} {year}
           </Typography>
         </Grid>
       </Grid>

@@ -4,7 +4,7 @@ import {
   selectLoggedInStatus,
   selectUserId,
   logout,
-  setLoggedInStatus
+  setLoggedInStatus,
 } from "../authSlice/authSlice";
 
 import { useGetArtisanQuery } from "../api/apiSlice";
@@ -21,11 +21,8 @@ import {
   Typography,
   Button,
   Avatar,
-  MenuItem,
-  Popover,
   Toolbar,
   Badge,
-  Menu,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -44,7 +41,6 @@ import { useDispatch } from "react-redux";
 import "./style.css";
 
 import NotificationPopup from "./NotificationPopup";
-import zIndex from "@mui/material/styles/zIndex";
 
 const drawerWidth = 240;
 
@@ -124,16 +120,18 @@ const ArtisanNav = (props) => {
                 },
               }}
             >
-              <Button
-                sx={{
-                  display: {
-                    xs: "none",
-                    sm: "inline-flex",
-                  },
-                }}
-              >
-                <Avatar src={artisan.profileImage} alt={artisan.name} />
-              </Button>
+              <Link to={`/profile/${artisanId}`}>
+                <Button
+                  sx={{
+                    display: {
+                      xs: "none",
+                      sm: "inline-flex",
+                    },
+                  }}
+                >
+                  <Avatar src={artisan.profileImage} alt={artisan.name} />
+                </Button>
+              </Link>
               <IconButton
                 size="large"
                 className="icon"
