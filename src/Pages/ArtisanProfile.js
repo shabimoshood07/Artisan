@@ -20,6 +20,7 @@ import { useGetArtisanQuery } from "../features/api/apiSlice";
 import { selectUserId } from "../features/authSlice/authSlice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { format, parseISO } from "date-fns";
+import { Link } from "react-router-dom";
 
 const ArtisanProfile = () => {
   const artisanId = useSelector(selectUserId);
@@ -154,21 +155,27 @@ const ArtisanProfile = () => {
                 Comments
               </Typography>
             </Box>
-            <Button
-              fullWidth
-              sx={{
-                backgroundColor: "#d32f2f",
-                color: "#d7c1ce",
-                transition: "all 0.9s",
-                fontSize: "20px",
-                "&:hover": {
-                  color: "red",
-                  background: "#d7c1ce",
-                },
-              }}
-            >
-              Edit profile
-            </Button>
+            {/* <Link to={`/edit/${artisanId}`}> */}
+            {/* <Link
+              to={{ pathname: `/edit/${artisanId}`, state: { access: true } }}
+            > */}
+            <Link to={`/edit/${artisanId}`} state={{ access: true }}>
+              <Button
+                fullWidth
+                sx={{
+                  backgroundColor: "#d32f2f",
+                  color: "#d7c1ce",
+                  transition: "all 0.9s",
+                  fontSize: "20px",
+                  "&:hover": {
+                    color: "red",
+                    background: "#d7c1ce",
+                  },
+                }}
+              >
+                Edit profile
+              </Button>
+            </Link>
           </Grid>
           <Grid
             item
@@ -184,7 +191,7 @@ const ArtisanProfile = () => {
               About
             </Typography>
             <Box mb={3} sx={{ borderBottom: "solid 1px" }}>
-              <Typography my={2} variant="h5">
+              <Typography my={2} variant="h5" textTransform="capitalize">
                 {profession}
               </Typography>
               <Typography component="p" my={2}>

@@ -19,6 +19,7 @@ import {
 } from "./features/authSlice/authSlice";
 import ErrorPage from "./Pages/ErrorPage";
 import Signup from "./Pages/Signup";
+import EditProfile from "./features/EditProfile/EditProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,8 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/details/:id" element={<ArtisanDetails />} />
             <Route path="/profile/:id" element={<ArtisanProfile />} />
+
+            <Route path="/edit/:id" element={<EditProfile />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
