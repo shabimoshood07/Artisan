@@ -1,0 +1,58 @@
+.css-lfwcke-MuiTabs-flexContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.css-10d9dml-MuiTabs-indicator {
+  display: none;
+}
+
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+  text-transform: capitalize;
+}
+
+.tabs .Mui-selected {
+  color: #d32f2f;
+  border-bottom: solid 3px #000729;
+  font-weight: bolder;
+}
+
+.btn {
+  background-color: #d32f2f;
+  color: #d7c1ce;
+  font-weight: bold;
+  transition: all 0.9s;
+  border: transparent;
+  display: block;
+  margin: auto;
+  margin-top: 2rem;
+  width: 50%;
+}
+.btn:hover {
+  color: #d32f2f;
+  background-color: #d7c1ce;
+}
+
+@media screen and (min-width: 600px) {
+  .css-lfwcke-MuiTabs-flexContainer {
+    flex-direction: column;
+  }
+  .tabs .Mui-selected {
+    color: #d32f2f;
+    border-bottom: none;
+    border-right: solid 5px #000729;
+    transition: border-right .5s;
+  }
+
+  .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: #d32f2f;
+    width: 100%;
+  }
+}

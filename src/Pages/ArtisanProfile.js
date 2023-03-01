@@ -155,10 +155,6 @@ const ArtisanProfile = () => {
                 Comments
               </Typography>
             </Box>
-            {/* <Link to={`/edit/${artisanId}`}> */}
-            {/* <Link
-              to={{ pathname: `/edit/${artisanId}`, state: { access: true } }}
-            > */}
             <Link to={`/edit/${artisanId}`} state={{ access: true }}>
               <Button
                 fullWidth

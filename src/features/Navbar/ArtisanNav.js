@@ -79,7 +79,7 @@ const ArtisanNav = (props) => {
     window !== undefined ? () => window().document.body : undefined;
   let content;
 
-  if (isLoggedIn && isSuccess) {
+  if (isLoggedIn) {
     content = (
       <Box
         sx={{
@@ -120,31 +120,37 @@ const ArtisanNav = (props) => {
                 },
               }}
             >
-              <Link to={`/profile/${artisanId}`}>
-                <Button
-                  sx={{
-                    display: {
-                      xs: "none",
-                      sm: "inline-flex",
-                    },
-                  }}
-                >
-                  <Avatar src={artisan.profileImage} alt={artisan.name} />
-                </Button>
-              </Link>
+              {artisan && (
+                <Link to={`/profile/${artisanId}`}>
+                  <Button
+                    sx={{
+                      display: {
+                        xs: "none",
+                        sm: "inline-flex",
+                      },
+                    }}
+                  >
+                    <Avatar src={artisan.profileImage} alt={artisan.name} />
+                  </Button>
+                </Link>
+              )}
               <IconButton
                 size="large"
                 className="icon"
                 onClick={handleToggleNotification}
               >
-                <Badge badgeContent={artisan.unreadCount} color="error">
-                  <CommentOutlined />
-                </Badge>
+                {artisan && (
+                  <Badge badgeContent={artisan.unreadCount} color="error">
+                    <CommentOutlined />
+                  </Badge>
+                )}
               </IconButton>
               <IconButton size="large" className="icon" sx={{ mr: 2 }}>
-                <Badge badgeContent={artisan.ratingsCount} color="error">
-                  <StarOutline />
-                </Badge>
+                {artisan && (
+                  <Badge badgeContent={artisan.ratingsCount} color="error">
+                    <StarOutline />
+                  </Badge>
+                )}
               </IconButton>
               <Button
                 className="logout-btn"
@@ -210,7 +216,7 @@ const ArtisanNav = (props) => {
                   <ListItemButton
                     sx={{ textAlign: "center", justifyContent: "center" }}
                   >
-                    <Avatar src={artisan.profileImage} />
+                    {artisan && <Avatar src={artisan.profileImage} />}
                     <p>Profile</p>
                   </ListItemButton>
                 </ListItem>

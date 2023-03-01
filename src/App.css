@@ -21,3 +21,14 @@
     margin: 0;
     max-width: unset;
   }
+  MuiTextField-root{
+    color: #000729;
+  }
+  MuiTextField-root:active{
+    color: #000729;
+    
+  }
+  MuiTextField:active{
+    color: #000729;
+
+  }
