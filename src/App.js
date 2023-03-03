@@ -24,7 +24,8 @@ import EditProfile from "./features/EditProfile/EditProfile";
 function App() {
   const dispatch = useDispatch();
   const loginData = localStorage.getItem("login data");
-  if (loginData === "null") {
+  console.log(loginData);
+  if (loginData === "null" || !loginData || loginData == undefined) {
     dispatch(setLoggedInStatus(false));
   } else {
     dispatch(setUserCredentials(JSON.parse(loginData)));

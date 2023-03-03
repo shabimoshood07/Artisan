@@ -124,7 +124,6 @@ const EditProfileForm = ({ artisan }) => {
       <Box mt={2} sx={{ border: "solid" }}>
         <Typography m={1}>choose profile picture</Typography>
         <Box
-        // sx={{ display: "flex", flexWrap: "wrap" }}
         >
           <FileBase64 onDone={getFiles.bind(this)} />
           <Avatar src={img} sx={{ width: 150, height: 150, marginTop: 2 }} />

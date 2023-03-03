@@ -22,12 +22,9 @@ const Welcome = () => {
       >
         <Grid
           direction="column"
-          // direction={{ xs: "column", md: "row" }}
           container
           spacing={2}
-          // columns={16}
           sx={{
-            // border: "solid blue",
             margin: "0 auto",
             width: { xs: "95%", sm: "80%" },
             alignItems: "center",
@@ -35,11 +32,11 @@ const Welcome = () => {
             borderRadius: "20px",
             height: "80vh",
             backgroundColor: "rgba(215, 193, 206, .7)",
-            flexWrap: "wrap",
+            // flexWrap: "wrap",
+            WebkitFlexWrap:"nowrap"
           }}
         >
           <Grid
-            //  sm={8}
             className="grid-con"
             sx={{
               width: { xs: "100%", md: "70%" },

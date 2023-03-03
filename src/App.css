@@ -1,34 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Montserrat', sans-serif;
-    line-height: 1.5;
-    font-size: 0.875rem;
-    background-color: #d7c1ce;
-  }
-  a {
-    text-decoration: none;
-    color: unset;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.5;
+  font-size: 0.875rem;
+  background-color: #d7c1ce;
+}
+a {
+  text-decoration: none;
+  color: unset;
+}
 
-  .container{
-    padding: 0;
-    margin: 0;
-    max-width: unset;
-  }
-  MuiTextField-root{
-    color: #000729;
-  }
-  MuiTextField-root:active{
-    color: #000729;
-    
-  }
-  MuiTextField:active{
-    color: #000729;
+.container {
+  padding: 0;
+  margin: 0;
+  max-width: unset;
+}
+.Mui-focused {
+}
 
-  }
+.MuiInputBase-root {
+  /* font-size: 1.5rem; */
+  /* color: #000729; */
+  /* color: yellow; */
+}
+
+/* .MuiInputBase-root label.Mui-focused {
+  color: red,
+} */
+
+
+.MuiInputBase-input{
+  /* border: solid red; */
+  /* border: none; */
+  /* outline: red; */
+}
+
+/* .MuiInputBase-root::fieldset{
+  color:  red;
+font-size: 3rem;
+} */
+
+
+/* .Mui-focused fieldset{
+  color: yellow;
+} */
+
+/* .MuiInputLabel-root{
+  color: red;
+} */

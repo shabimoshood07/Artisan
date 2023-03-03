@@ -13,6 +13,8 @@ import {
   Stack,
   Rating,
   Divider,
+  Box,
+  CircularProgress,
 } from "@mui/material";
 
 import { ArrowForwardOutlined } from "@mui/icons-material";
@@ -35,7 +37,20 @@ const FeaturedArtisans = () => {
 
   let content;
   if (isLoading) {
-    content = <Typography align="center">Loading...</Typography>;
+    content = (
+      <Box
+        sx={{
+          gridColumnStart: "1",
+          gridColumnEnd: { xs: "unset", sm: "4", md:"5" },
+          display: "flex",
+          justifyContent: "center",
+          width: "80%",
+          margin:"0 auto"
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   if (isSuccess) {
@@ -127,6 +142,7 @@ const FeaturedArtisans = () => {
       >
         Featured Artisans
       </Typography>
+
       <Stack
         sx={{
           margin: "0 auto",
