@@ -24,21 +24,6 @@
   font-weight: bolder;
 }
 
-.btn {
-  background-color: #d32f2f;
-  color: #d7c1ce;
-  font-weight: bold;
-  transition: all 0.9s;
-  border: transparent;
-  display: block;
-  margin: auto;
-  margin-top: 2rem;
-  width: 50%;
-}
-.btn:hover {
-  color: #d32f2f;
-  background-color: #d7c1ce;
-}
 
 @media screen and (min-width: 600px) {
   .css-lfwcke-MuiTabs-flexContainer {

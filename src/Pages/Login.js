@@ -11,7 +11,6 @@ const Login = () => {
         maxWidth: "unset !important",
       }}
     >
-      <Typography>LOGIN</Typography>
       <LoginForm />
       <FeaturedArtisans />
     </Container>

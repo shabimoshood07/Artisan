@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   CircularProgress,
+  styled,
   TextField,
   Typography,
 } from "@mui/material";
@@ -13,12 +14,22 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
-import "./style.css";
+// import "./style.css";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const [login, { isLoading, isSuccess }] = useLoginMutation();
-  const [inputData, setInputData] = useState("");
-  const [password, setPassword] = useState("");
+
+  const style = {
+    "& label.Mui-focused": {
+      color: "#000729",
+      fontSize: "1.2rem",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "#000729",
+      },
+    },
+  };
 
   const schema = yup.object({
     email: yup.string().email().required("Please provide an email"),
@@ -45,25 +56,39 @@ const LoginForm = () => {
   return (
     <div>
       <Box
+        p={2}
         component="form"
         onSubmit={handleSubmit(submit)}
         sx={{
           // border: "solid",
           width: { xs: "90%", sm: "80%" },
           margin: "auto",
+          marginTop: "1rem",
           minHeight: "80vh",
-          maxWidth: "900px",
+          maxWidth: "600px",
           background: "#fff",
+          borderRadius: "10px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
         }}
       >
+        <Typography
+          variant="h4"
+          align="center"
+          textTransform="uppercase"
+          color="#000729"
+        >
+          Login
+        </Typography>
         <TextField
           label="Email"
           fullWidth
-          variant="outlined"
+          variant="standard"
           margin="normal"
           size="medium"
           {...register("email")}
-          // sx={{border:"solid red"}}
+          sx={style}
         />
         <TextField
           label="Password"
@@ -72,28 +97,64 @@ const LoginForm = () => {
           margin="normal"
           type="password"
           {...register("password")}
-          // sx={{
-          //   "& fieldset": { border: 'none' },
-          // }}
+          sx={style}
+          className="input"
         />
-        <Button type="submit" fullWidth>
+        <Button
+          type="submit"
+          fullWidth
+          className="btn login-btn"
+          disabled={isLoading}
+        >
           {isLoading ? (
             <>
-              <CircularProgress />
-              Loading...
+              <CircularProgress size={15}  />
             </>
           ) : (
             "submit"
           )}
         </Button>
-        <Box>
+        <Box
+          px={1}
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            flexWrap: "wrap",
+          }}
+        >
           <Link>
-            <Typography>forgot password?</Typography>
-          </Link>
-          <Link to="/signup">
-            <Typography>Sign up</Typography>
+            <Typography
+              textTransform="capitalize"
+              mt={2}
+              // mb={2}
+              color="#d32f2f"
+              sx={{
+                "&:hover": {
+                  borderBottom: "solid 1px #000729",
+                },
+              }}
+            >
+              forgot password?
+            </Typography>
           </Link>
         </Box>
+        <Typography align="center" m={2}>
+          Don't have an account
+          <Link to="/signup">
+            <Box
+              color="#d32f2f"
+              sx={{
+                "&:hover": {
+                  borderBottom: "solid 2px #000729",
+                },
+                display: "inline",
+              }}
+              ml={1}
+            >
+              Sign up
+            </Box>
+          </Link>
+        </Typography>
       </Box>
     </div>
   );

@@ -17,6 +17,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useArtisanSignupMutation } from "../api/apiSlice";
 
 import "yup-phone";
+import { Link } from "react-router-dom";
 
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 
@@ -67,12 +68,12 @@ const SignupForm = () => {
         "NG",
         "Please enter a valid phone number",
         "Please enter a valid phone number"
-      )
-      // .test(
-      //   "phone validate",
-      //   "invalid phone number",
-      //   (phoneNumber) => !phoneschema.validateSync({ phoneNumber: phoneNumber })
-      // ),
+      ),
+    // .test(
+    //   "phone validate",
+    //   "invalid phone number",
+    //   (phoneNumber) => !phoneschema.validateSync({ phoneNumber: phoneNumber })
+    // ),
   });
 
   const {
@@ -85,7 +86,6 @@ const SignupForm = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("clicked")
     console.log({ ...data, profileImage: data.profileImage.base64 });
     const user = await ArtisanSignup({
       ...data,
@@ -105,12 +105,34 @@ const SignupForm = () => {
   }, [register]);
 
   return (
-    <Container sx={{ border: "solid", display: "flex", alignItems: "center" }}>
-      <Box sx={{ flex: "1" }}>
-        <Typography variant="h4">Create an account</Typography>
+    <Container
+      sx={{
+        display: "flex",
+        margin: "2rem auto",
+        background: "#fff",
+        borderRadius: "20px",
+        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+        flexDirection: { xs: "column", md: "row" },
+        width: { xs: "95%", sm:"70%", md: "90%" },
+        maxWidth: "900px",
+        padding: { xs: "1rem", md: 0 },
+        paddingRight: { md: "0" },
+        paddingLeft:{md:"1rem"},
+        overflow: "hidden",
+      }}
+      maxWidth="900px"
+    >
+      <Box pb={2} sx={{ flex: "1" }}>
+        <Typography color="#000729" variant="h4" my={2} align="center">
+          Create an account
+        </Typography>
+
+        <Typography color="#000729" my={2} align="center">
+          Already have an account? <Link to="/login">Sign in</Link>
+        </Typography>
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
           <TextField
-            label="Fullname"
+            label="Full Name"
             id="standard-basic"
             variant="standard"
             fullWidth
@@ -132,7 +154,7 @@ const SignupForm = () => {
           {errors.email?.message && <p>{errors.email?.message}</p>}
 
           <TextField
-            label="phone Number"
+            label="Phone Number"
             id="standard-basic"
             variant="standard"
             fullWidth
@@ -142,7 +164,7 @@ const SignupForm = () => {
           />
           {errors.phoneNumber?.message && <p>{errors.phoneNumber?.message}</p>}
           <TextField
-            label="Business name"
+            label="Business Name"
             id="standard-basic"
             variant="standard"
             fullWidth
@@ -193,7 +215,7 @@ const SignupForm = () => {
           {errors.gender?.message && <p>{errors.gender?.message}</p>}
           {/* SOCIALS */}
 
-          <Typography variant="h6">Socials</Typography>
+          {/* <Typography variant="h6">Socials</Typography>
           <FormControl fullWidth variant="standard">
             <InputLabel htmlFor="standard-adornment-amount">
               Facebook
@@ -224,7 +246,7 @@ const SignupForm = () => {
                 <InputAdornment position="start">@</InputAdornment>
               }
             />
-          </FormControl>
+          </FormControl> */}
 
           <TextField
             id="standard-multiline-static"
@@ -237,10 +259,12 @@ const SignupForm = () => {
             {...register("about")}
           />
           {errors.about?.message && <p>{errors.about?.message}</p>}
-          <FileBase64 onDone={getFiles.bind(this)} />
+
+          {/* <FileBase64 onDone={getFiles.bind(this)} />
           {errors.profileImage?.message && (
             <p>{errors.profileImage?.message}</p>
-          )}
+          )} */}
+
           <TextField
             id="standard-multiline-static"
             label="Password"
@@ -263,19 +287,31 @@ const SignupForm = () => {
           {errors.confirmPassword?.message && (
             <p>{errors.confirmPassword?.message}</p>
           )}
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="btn">
+            Submit
+          </Button>
         </Box>
       </Box>
 
       {/* IMAGE CONTAINER */}
-      <Box sx={{ flex: "1", border: "solid red", height: "fit-content" }}>
-        <h1>Moshood</h1>
+      <Box
+        sx={{
+          flex: "1",
+          background: "#000729",
+          display:{xs:"none", md:"flex"} 
+        }}
+      >
+        <Typography
+          align="center"
+          variant="h4"
+          color="#d32f2f"
+          sx={{ margin: "auto"}}
+        >
+          A World of Artisans at Your Fingertips: Start Exploring Today
+        </Typography>
       </Box>
     </Container>
   );
 };
 
 export default SignupForm;
-
-
-

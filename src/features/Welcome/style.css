@@ -4,31 +4,21 @@
   max-width: unset;
   background-color: #d7c1ce;
   height: 80vh;
-  background-image: url("../../assests/hero.jpg");
+  background-image: url("../../../public/hero.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .welcome-text {
-  /* font-size:1rem ; */
   color:#000729 ;
   text-shadow: 1px 1px #d7c1ce;
   text-transform: capitalize;
 }
 
 .grid-con {
-  /* border: solid yellow; */
-  /* height: 100%; */
   padding: 2rem;
-  /* min-height: 70vh; */
-  /* width: 70%; */
   display: flex;
-  /* justify-content: center; */
   align-items: center;
 }
 
-.btn{
-    border: solid;
-    /* margin: 1rem 0; */
-}

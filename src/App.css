@@ -21,36 +21,43 @@ a {
   margin: 0;
   max-width: unset;
 }
-.Mui-focused {
+
+.btn {
+  background-color: #d32f2f;
+  color: #d7c1ce;
+  font-weight: bold;
+  transition: all 0.9s;
+  border: transparent;
+  display: block;
+  margin: auto;
+  margin-top: 2rem;
+  width: 50%;
+}
+.btn:hover {
+  color: #d32f2f;
+  background-color: #d7c1ce;
+}
+.login-btn {
+  margin: 1rem auto;
+}
+.MuiFormControl-root label {
+  color: #000729;
 }
 
-.MuiInputBase-root {
-  /* font-size: 1.5rem; */
-  /* color: #000729; */
-  /* color: yellow; */
+.MuiInputBase-root:focus > label {
+  color: #000729;
 }
 
-/* .MuiInputBase-root label.Mui-focused {
-  color: red,
-} */
-
-
-.MuiInputBase-input{
-  /* border: solid red; */
-  /* border: none; */
-  /* outline: red; */
+.MuiInputBase-root::after {
+  border-bottom: solid 2px #000729;
 }
 
-/* .MuiInputBase-root::fieldset{
-  color:  red;
-font-size: 3rem;
-} */
+.Mui-focused  {
+  color: #000729 !important;
+  /* font-size: 1.2rem; */
+}
 
 
-/* .Mui-focused fieldset{
-  color: yellow;
-} */
-
-/* .MuiInputLabel-root{
-  color: red;
-} */
+.MuiOutlinedInput-root .Mui-focused fieldset {
+  border-color: #000729;
+}
