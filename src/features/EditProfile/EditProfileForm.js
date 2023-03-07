@@ -7,10 +7,13 @@ import {
   Avatar,
   Box,
   Button,
+  CircularProgress,
   InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
+
+import { useUpdateProfileMutation } from "../api/apiSlice";
 
 const EditProfileForm = ({ artisan }) => {
   const {
@@ -24,6 +27,8 @@ const EditProfileForm = ({ artisan }) => {
   } = artisan;
   const [img, setImg] = useState(profileImage);
 
+  const [updateProfile, { isLoading, data }] = useUpdateProfileMutation();
+
   const schema = yup.object({});
 
   const {
@@ -32,8 +37,24 @@ const EditProfileForm = ({ artisan }) => {
     setValue,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const submit = (data) => {
-    console.log(data);
+
+  const submit = async (data) => {
+    console.log({
+      ...data,
+      profileImage: data?.profileImage?.base64,
+      " socials.twitter": data.twitter,
+      " socials.instagram": data.instagram,
+      " socials.facebook": data.facebook,
+    });
+    // const updatedUser = await updateProfile(data);
+    const updatedUser = await updateProfile({
+      ...data,
+      profileImage: data?.profileImage?.base64,
+      "socials.twitter": data?.twitter,
+      "socials.instagram": data?.instagram,
+      "socials.facebook": data?.facebook,
+    });
+    console.log(updatedUser);
   };
 
   const getFiles = (files) => {
@@ -123,15 +144,18 @@ const EditProfileForm = ({ artisan }) => {
       />
       <Box mt={2} sx={{ border: "solid" }}>
         <Typography m={1}>choose profile picture</Typography>
-        <Box
-        >
+        <Box>
           <FileBase64 onDone={getFiles.bind(this)} />
           <Avatar src={img} sx={{ width: 150, height: 150, marginTop: 2 }} />
         </Box>
       </Box>
-      <Button type="submit" className="btn">Submit</Button>
+      <Button type="submit" className="btn">
+        {isLoading ? <CircularProgress /> : "Submit"}
+      </Button>
     </Box>
   );
 };
 
 export default EditProfileForm;
+
+

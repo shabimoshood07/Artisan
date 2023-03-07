@@ -114,15 +114,23 @@ export const apiSlice = createApi({
     }),
     // GEt fetured artisans
     featuredArtisans: builder.query({
-      query: () =>( {
+      query: () => ({
         url: "artisan/featured",
         method: "GET",
       }),
     }),
+
+    // Update Profile
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: "auth/updateprofile",
+        method: "PATCH",
+        body: { ...data },
+      }),
+      invalidatesTags: ["Artisans"],
+    }),
   }),
 });
-
-
 
 export const {
   useGetAllArtisansQuery,
@@ -138,4 +146,5 @@ export const {
   useSearchArtisanQuery,
   useArtisanSignupMutation,
   useFeaturedArtisansQuery,
+  useUpdateProfileMutation,
 } = apiSlice;

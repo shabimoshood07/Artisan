@@ -61,3 +61,7 @@ a {
 .MuiOutlinedInput-root .Mui-focused fieldset {
   border-color: #000729;
 }
+
+.error-msg{
+  color: #d32f2f;
+}

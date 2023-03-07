@@ -9,6 +9,7 @@ import {
   InputLabel,
   FormControl,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import FileBase64 from "react-file-base64";
 import * as yup from "yup";
@@ -35,32 +36,34 @@ const SignupForm = () => {
   });
 
   const schema = yup.object({
-    name: yup.string().required("Enter full name"),
-    email: yup.string().email().required(),
-    businessName: yup.string().required(),
-    about: yup.string().required(),
-    gender: yup.string().required(),
-    profession: yup.string().required(),
-    address: yup.string().required(),
-    password: yup.string().required().min(6),
+    name: yup.string().required("Please enter your full name"),
+    email: yup.string().email("Invalid email").required("Please enter email"),
+    businessName: yup.string().required("Please provide your business name"),
+    about: yup
+      .string()
+      .required("Provide a clear description about what you do"),
+    gender: yup.string().required("choose a gender"),
+    profession: yup.string().required("Enter a profession"),
+    address: yup.string().required("Provide the address of your business"),
+    password: yup.string().required("Please provide a password").min(6),
     confirmPassword: yup
       .string()
-      .required()
+      .required("please confirm your password")
       .oneOf([yup.ref("password"), null], "Passwords must match"),
-    profileImage: yup
-      .mixed()
-      .nullable()
-      .required("A file is required")
-      .test(
-        "Fichier taille",
-        "too large file",
-        (file) => !file || (file && file.file.size <= 1024 * 1024)
-      )
-      .test(
-        "format",
-        "format file",
-        (file) => !file || (file.type && SUPPORTED_FORMATS.includes(file.type))
-      ),
+    // profileImage: yup
+    //   .mixed()
+    //   .nullable()
+    //   .required("A file is required")
+    //   .test(
+    //     "Fichier taille",
+    //     "too large file",
+    //     (file) => !file || (file && file.file.size <= 1024 * 1024)
+    //   )
+    //   .test(
+    //     "format",
+    //     "format file",
+    //     (file) => !file || (file.type && SUPPORTED_FORMATS.includes(file.type))
+    //   ),
     phoneNumber: yup
       .string()
       .required("Enter a phone number")
@@ -86,11 +89,9 @@ const SignupForm = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log({ ...data, profileImage: data.profileImage.base64 });
-    const user = await ArtisanSignup({
-      ...data,
-      profileImage: data.profileImage.base64,
-    });
+    // console.log({ ...data, profileImage: data.profileImage.base64 });
+    console.log("clicked");
+    const user = await ArtisanSignup(data);
 
     console.log(user);
   };
@@ -113,11 +114,11 @@ const SignupForm = () => {
         borderRadius: "20px",
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         flexDirection: { xs: "column", md: "row" },
-        width: { xs: "95%", sm:"70%", md: "90%" },
+        width: { xs: "95%", sm: "70%", md: "90%" },
         maxWidth: "900px",
         padding: { xs: "1rem", md: 0 },
         paddingRight: { md: "0" },
-        paddingLeft:{md:"1rem"},
+        paddingLeft: { md: "1rem" },
         overflow: "hidden",
       }}
       maxWidth="900px"
@@ -139,9 +140,10 @@ const SignupForm = () => {
             size="small"
             margin="normal"
             {...register("name")}
-            error={errors.name?.message}
           />
-          {errors.name?.message && <p>{errors.name?.message}</p>}
+          {errors.name?.message && (
+            <p className="error-msg">{errors.name?.message}</p>
+          )}
           <TextField
             label="Email"
             id="standard-basic"
@@ -151,7 +153,9 @@ const SignupForm = () => {
             margin="normal"
             {...register("email")}
           />
-          {errors.email?.message && <p>{errors.email?.message}</p>}
+          {errors.email?.message && (
+            <p className="error-msg">{errors.email?.message}</p>
+          )}
 
           <TextField
             label="Phone Number"
@@ -162,7 +166,9 @@ const SignupForm = () => {
             margin="normal"
             {...register("phoneNumber")}
           />
-          {errors.phoneNumber?.message && <p>{errors.phoneNumber?.message}</p>}
+          {errors.phoneNumber?.message && (
+            <p className="error-msg">{errors.phoneNumber?.message}</p>
+          )}
           <TextField
             label="Business Name"
             id="standard-basic"
@@ -173,7 +179,7 @@ const SignupForm = () => {
             {...register("businessName")}
           />
           {errors.businessName?.message && (
-            <p>{errors.businessName?.message}</p>
+            <p className="error-msg">{errors.businessName?.message}</p>
           )}
           <TextField
             label="Address"
@@ -184,7 +190,9 @@ const SignupForm = () => {
             margin="normal"
             {...register("address")}
           />
-          {errors.address?.message && <p>{errors.address?.message}</p>}
+          {errors.address?.message && (
+            <p className="error-msg">{errors.address?.message}</p>
+          )}
           <TextField
             label="Profession"
             id="standard-basic"
@@ -194,7 +202,9 @@ const SignupForm = () => {
             margin="normal"
             {...register("profession")}
           />
-          {errors.profession?.message && <p>{errors.profession?.message}</p>}
+          {errors.profession?.message && (
+            <p className="error-msg">{errors.profession?.message}</p>
+          )}
 
           <TextField
             id="standard-select"
@@ -212,7 +222,9 @@ const SignupForm = () => {
             <option value="male">Male</option>
             <option value="female">Female</option>
           </TextField>
-          {errors.gender?.message && <p>{errors.gender?.message}</p>}
+          {errors.gender?.message && (
+            <p className="error-msg">{errors.gender?.message}</p>
+          )}
           {/* SOCIALS */}
 
           {/* <Typography variant="h6">Socials</Typography>
@@ -258,7 +270,9 @@ const SignupForm = () => {
             margin="normal"
             {...register("about")}
           />
-          {errors.about?.message && <p>{errors.about?.message}</p>}
+          {errors.about?.message && (
+            <p className="error-msg">{errors.about?.message}</p>
+          )}
 
           {/* <FileBase64 onDone={getFiles.bind(this)} />
           {errors.profileImage?.message && (
@@ -274,7 +288,9 @@ const SignupForm = () => {
             type="password"
             {...register("password")}
           />
-          {errors.password?.message && <p>{errors.password?.message}</p>}
+          {errors.password?.message && (
+            <p className="error-msg">{errors.password?.message}</p>
+          )}
           <TextField
             id="standard-multiline-static"
             label="Confirm Password"
@@ -285,10 +301,10 @@ const SignupForm = () => {
             {...register("confirmPassword")}
           />
           {errors.confirmPassword?.message && (
-            <p>{errors.confirmPassword?.message}</p>
+            <p className="error-msg">{errors.confirmPassword?.message}</p>
           )}
           <Button type="submit" className="btn">
-            Submit
+            {isLoading ? <CircularProgress /> : "Submit"}
           </Button>
         </Box>
       </Box>
@@ -298,14 +314,14 @@ const SignupForm = () => {
         sx={{
           flex: "1",
           background: "#000729",
-          display:{xs:"none", md:"flex"} 
+          display: { xs: "none", md: "flex" },
         }}
       >
         <Typography
           align="center"
           variant="h4"
           color="#d32f2f"
-          sx={{ margin: "auto"}}
+          sx={{ margin: "auto" }}
         >
           A World of Artisans at Your Fingertips: Start Exploring Today
         </Typography>
