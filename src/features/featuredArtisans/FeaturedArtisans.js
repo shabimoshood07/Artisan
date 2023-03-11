@@ -41,11 +41,11 @@ const FeaturedArtisans = () => {
       <Box
         sx={{
           gridColumnStart: "1",
-          gridColumnEnd: { xs: "unset", sm: "4", md:"5" },
+          gridColumnEnd: { xs: "unset", sm: "4", md: "5" },
           display: "flex",
           justifyContent: "center",
           width: "80%",
-          margin:"0 auto"
+          margin: "0 auto",
         }}
       >
         <CircularProgress />
@@ -54,9 +54,8 @@ const FeaturedArtisans = () => {
   }
 
   if (isSuccess) {
-    const sortedArtisan = artisans
-      .slice()
-      .sort((a, b) => b.ratings - a.ratings)
+    const sortedArtisan = [...artisans]
+      .sort((a, b) => Number(b.rating) - Number(a.rating))
       .slice(0, 5);
 
     content = sortedArtisan.map((artisan) => {
@@ -73,7 +72,7 @@ const FeaturedArtisans = () => {
               <Rating
                 precision={0.5}
                 name="rating"
-                value={artisan.rating}
+                value={Number(artisan.rating)}
                 readOnly
                 size="medium"
               />

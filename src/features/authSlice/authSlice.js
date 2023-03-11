@@ -34,6 +34,7 @@ const authSlice = createSlice({
       state.userCredentials.id = null;
       state.userCredentials.username = null;
       state.userCredentials.email = null;
+      state.userCredentials.name = null;
       localStorage.removeItem("login data");
     },
   },

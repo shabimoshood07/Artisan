@@ -129,6 +129,15 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Artisans"],
     }),
+
+    // change Password
+    changePassword: builder.mutation({
+      query: ({newPassword, currentPassword}) => ({
+        url: "auth/changepassword",
+        method: "PATCH",
+        body: { newPassword, currentPassword },
+      }),
+    }),
   }),
 });
 
@@ -147,4 +156,5 @@ export const {
   useArtisanSignupMutation,
   useFeaturedArtisansQuery,
   useUpdateProfileMutation,
+  useChangePasswordMutation,
 } = apiSlice;

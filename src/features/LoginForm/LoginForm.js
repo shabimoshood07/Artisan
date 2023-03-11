@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLoginMutation } from "../api/apiSlice";
 import { setUserCredentials, setLoggedInStatus } from "../authSlice/authSlice";
 import { useDispatch } from "react-redux";
 import {
+  Alert,
   Box,
   Button,
   CircularProgress,
+  Snackbar,
   styled,
   TextField,
   Typography,
@@ -13,11 +15,14 @@ import {
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Notification from "../PopNotification/Notification";
 // import "./style.css";
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const [login, { isLoading, isSuccess }] = useLoginMutation();
+  const navigate = useNavigate()
+  const [login, { isLoading, isSuccess, data: loginData, isError, error }] =
+    useLoginMutation();
 
   const style = {
     "& label.Mui-focused": {
@@ -32,8 +37,8 @@ const LoginForm = () => {
   };
 
   const schema = yup.object({
-    email: yup.string().email().required("Please provide an email"),
-    password: yup.string().required("Please provide a passsword"),
+    email: yup.string().email().required("Please provide email"),
+    password: yup.string().required("Please provide  passsword"),
   });
 
   const {
@@ -44,12 +49,12 @@ const LoginForm = () => {
 
   const submit = async (data) => {
     const { email, password } = data;
-    console.log(data);
-    const res = await login({ data: email, password: password });
-    console.log(res);
-    if (res) {
-      dispatch(setUserCredentials(res.data));
+    const response = await login({ data: email, password: password });
+    console.log(response);
+    if (response) {
+      dispatch(setUserCredentials(response.data));
       dispatch(setLoggedInStatus(true));
+      navigate("/")
     }
   };
 
@@ -60,7 +65,6 @@ const LoginForm = () => {
         component="form"
         onSubmit={handleSubmit(submit)}
         sx={{
-          // border: "solid",
           width: { xs: "90%", sm: "80%" },
           margin: "auto",
           marginTop: "1rem",
@@ -73,6 +77,23 @@ const LoginForm = () => {
           justifyContent: "center",
         }}
       >
+        {isError && (
+          <Notification
+            message={error?.data?.message}
+            severity="error"
+            isError={isError}
+            isSuccess={isSuccess}
+          />
+        )}
+        {isSuccess && (
+          <Notification
+            message="Login successful"
+            severity="success"
+            isError={isError}
+            isSuccess={isSuccess}
+          />
+        )}
+
         <Typography
           variant="h4"
           align="center"
@@ -90,6 +111,11 @@ const LoginForm = () => {
           {...register("email")}
           sx={style}
         />
+        {errors?.email?.message && (
+          <Typography variant="p" color="red">
+            {errors.email.message}
+          </Typography>
+        )}
         <TextField
           label="Password"
           fullWidth
@@ -100,6 +126,11 @@ const LoginForm = () => {
           sx={style}
           className="input"
         />
+        {errors?.password?.message && (
+          <Typography variant="p" color="red">
+            {errors.password.message}
+          </Typography>
+        )}
         <Button
           type="submit"
           fullWidth
@@ -108,7 +139,7 @@ const LoginForm = () => {
         >
           {isLoading ? (
             <>
-              <CircularProgress size={15}  />
+              <CircularProgress size={15} />
             </>
           ) : (
             "submit"
@@ -126,7 +157,6 @@ const LoginForm = () => {
             <Typography
               textTransform="capitalize"
               mt={2}
-              // mb={2}
               color="#d32f2f"
               sx={{
                 "&:hover": {

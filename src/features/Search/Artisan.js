@@ -29,17 +29,12 @@ const Artisan = ({ artisan }) => {
   return (
     <Card
       sx={{
-        // maxWidth: 300,
-        // minWidth: 300,
-        // minHeight: 320,
-        // maxHeight: 500,
-        // flex: 1,
+        maxWidth: { xs: 420, md: "unset" },
+        minWidth: {xs:200, sm:"unset"},
         height: { sm: 420, md: 420 },
-        width:{xs:250, sm:"unset"},
-        margin:"0 auto",
-        //     float: {xs:"unset",md:"left"},
-        //     margin: "10px",
-        //    border:"solid yellow"
+        margin: "0 auto",
+        width: "100%",
+        // border: "solid yellow",
       }}
     >
       <CardHeader

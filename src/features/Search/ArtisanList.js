@@ -80,14 +80,16 @@ const ArtisanList = () => {
     >
       <Box
         sx={{
-          //   border: "solid red",
+          // border: "solid red",
           margin: "0 auto",
-          width: { xs: "100%", sm: "60%", md: "100%" },
+          width: { xs: "90%", sm: "80%", md: "100%" },
           maxWidth: 1500,
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gridTemplateColumns: {
+            xs: "repeat(auto-fill, minmax(250px, 1fr))",
+            sm: "repeat(auto-fill, minmax(300px, 1fr))",
+          },
           gap: "20px",
-          alignItems: "stretch",
         }}
       >
         {content}

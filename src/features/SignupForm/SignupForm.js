@@ -4,10 +4,6 @@ import {
   Container,
   TextField,
   Typography,
-  Input,
-  InputAdornment,
-  InputLabel,
-  FormControl,
   Button,
   CircularProgress,
 } from "@mui/material";
@@ -18,16 +14,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useArtisanSignupMutation } from "../api/apiSlice";
 
 import "yup-phone";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Notification from "../PopNotification/Notification";
+import { useDispatch } from "react-redux";
+import { setLoggedInStatus, setUserCredentials } from "../authSlice/authSlice";
 
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 
 const SignupForm = () => {
   const [img, setImg] = useState("");
 
-  const [ArtisanSignup, { isLoading, isError, error }] =
+  const [ArtisanSignup, { isLoading, isError, error, isSuccess }] =
     useArtisanSignupMutation();
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   let phoneschema = yup.object().shape({
     phone: yup
       .string()
@@ -72,11 +72,6 @@ const SignupForm = () => {
         "Please enter a valid phone number",
         "Please enter a valid phone number"
       ),
-    // .test(
-    //   "phone validate",
-    //   "invalid phone number",
-    //   (phoneNumber) => !phoneschema.validateSync({ phoneNumber: phoneNumber })
-    // ),
   });
 
   const {
@@ -90,14 +85,16 @@ const SignupForm = () => {
 
   const onSubmit = async (data) => {
     // console.log({ ...data, profileImage: data.profileImage.base64 });
-    console.log("clicked");
     const user = await ArtisanSignup(data);
-
+    if (user) {
+      dispatch(setUserCredentials(user));
+      dispatch(setLoggedInStatus(true));
+      navigate("/");
+    }
     console.log(user);
   };
 
   const getFiles = (files) => {
-    console.log(files);
     setValue("profileImage", files);
   };
 
@@ -123,6 +120,22 @@ const SignupForm = () => {
       }}
       maxWidth="900px"
     >
+      {isError && (
+        <Notification
+          message={error?.data?.message}
+          severity="error"
+          isError={isError}
+          isSuccess={isSuccess}
+        />
+      )}
+      {isSuccess && (
+        <Notification
+          message="Sign up successful, please login"
+          severity="success"
+          isError={isError}
+          isSuccess={isSuccess}
+        />
+      )}
       <Box pb={2} sx={{ flex: "1" }}>
         <Typography color="#000729" variant="h4" my={2} align="center">
           Create an account
@@ -304,7 +317,7 @@ const SignupForm = () => {
             <p className="error-msg">{errors.confirmPassword?.message}</p>
           )}
           <Button type="submit" className="btn">
-            {isLoading ? <CircularProgress /> : "Submit"}
+            {isLoading ? <CircularProgress size={15} /> : "Submit"}
           </Button>
         </Box>
       </Box>

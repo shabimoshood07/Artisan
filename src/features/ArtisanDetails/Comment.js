@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Button, Typography } from "@mui/material";
 import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "./CommentList";
 import { useGetAllCommentsQuery } from "../api/apiSlice";
@@ -8,6 +8,19 @@ import { useParams } from "react-router-dom";
 const Comment = () => {
   const { id: artisanId } = useParams();
   const { data, isLoading, isSuccess } = useGetAllCommentsQuery(artisanId);
+
+  const [commentChunk, setCommentChunk] = useState(10);
+  const [showmoreBtn, setShowMoreBtn] = useState(true);
+
+  useEffect(() => {
+    if (data && commentChunk >= data.comments.length) {
+      setShowMoreBtn(false);
+    }
+  }, [commentChunk]);
+
+  const handleShowMore = () => {
+    setCommentChunk(commentChunk + 10);
+  };
 
   let content;
 
@@ -28,7 +41,7 @@ const Comment = () => {
         }}
         p={2}
       >
-        {sortedComment.map((comment) => {
+        {sortedComment.slice(0, commentChunk).map((comment) => {
           return <CommentList key={comment._id} comment={comment} />;
         })}
       </Box>
@@ -38,6 +51,23 @@ const Comment = () => {
     <>
       <CommentForm />
       {content}
+      {showmoreBtn && data && (
+        <Button
+          fullWidth
+          sx={{
+            backgroundColor: "#d32f2f",
+            color: "#d7c1ce",
+            transition: "all 0.5s",
+            fontSize: "20px",
+            "&:hover": {
+              background: "#000729",
+            },
+          }}
+          onClick={handleShowMore}
+        >
+          Show more
+        </Button>
+      )}
     </>
   );
 };
