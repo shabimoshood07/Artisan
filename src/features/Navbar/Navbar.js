@@ -22,7 +22,6 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-
 // Import the different navs
 import ArtisanNav from "./ArtisanNav";
 import USerNav from "./UserNav";
@@ -30,21 +29,14 @@ import "./style.css";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
-const navItems = ["Login", "Sign Up"];
+const navItems = ["login", "Sign Up"];
 
 let Navbar = (props) => {
-
   // User Credentials
   const role = useSelector(selectUserRole);
 
-  // const { user, token, role, email } = useSelector(selectUserCredentials);
-
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
-
-  // const { data: artisans, isSuccess } = useGetAllArtisansQuery("getAllArtisans");
-
-  // const { data: users, isSuccess: userSuccess } = useGetAllUsersQuery();
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -114,12 +106,41 @@ let Navbar = (props) => {
           >
             <Link to="/">ARTISAN</Link>
           </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
-              </Button>
-            ))}
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                sm: "flex",
+                gap: 10,
+                alignItems: "center",
+              },
+            }}
+            className="con"
+          >
+            <Button
+              className="btn"
+              sx={{
+                color: "#fff",
+                "&.btn": {
+                  marginTop: 0,
+                  width: "fit-content",
+                },
+              }}
+            >
+              <Link to="/login">Login</Link>
+            </Button>
+            <Button
+              className="btn"
+              sx={{
+                color: "#fff",
+                "&.btn": {
+                  marginTop: 0,
+                  width: "fit-content",
+                },
+              }}
+            >
+              <Link to="/signup">Sign up</Link>
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
@@ -130,7 +151,7 @@ let Navbar = (props) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -149,6 +170,5 @@ let Navbar = (props) => {
     </Box>
   );
 };
-
 
 export default Navbar;

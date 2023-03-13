@@ -1,7 +1,7 @@
 import React from "react";
 
 // MATERIAL UI IMPORT
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Icon, Typography } from "@mui/material";
 
 import { selectLoggedInStatus } from "../authSlice/authSlice";
 import { useSelector } from "react-redux";
@@ -32,8 +32,7 @@ const Welcome = () => {
             borderRadius: "20px",
             height: "80vh",
             backgroundColor: "rgba(215, 193, 206, .7)",
-            // flexWrap: "wrap",
-            WebkitFlexWrap:"nowrap"
+            WebkitFlexWrap: "nowrap",
           }}
         >
           <Grid
@@ -68,20 +67,25 @@ const Welcome = () => {
           >
             {isLoggedIn ? (
               <Link to="/search">
-                <Button className="btn">Search Artisans</Button>
+                <Button
+                  sx={{
+                    "&.btn": {
+                      width: "fit-content",
+                    },
+                  }}
+                  className="btn"
+                >
+                  Search Artisans
+                </Button>
               </Link>
             ) : (
-              <>
-                <Link to="/login">
-                  <Button className="btn">Login</Button>
-                </Link>
-                <Link to="/signup">
-                  <Button className="btn">Sign up</Button>
-                </Link>
+              <Box sx={{ width: "100%" }}>
                 <Link to="/search">
-                  <Button className="btn">Search Artisans</Button>
+                  <Button sx={{ padding: 1 }} className="btn">
+                    Search Artisans
+                  </Button>
                 </Link>
-              </>
+              </Box>
             )}
           </Grid>
         </Grid>

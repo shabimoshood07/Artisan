@@ -69,13 +69,14 @@ export const {
   selectIds: selectArtisanIds,
 } = searchAdapter.getSelectors((state) => state.searchSlice);
 
-
 export const selectIds = searchAdapter.getSelectors((state) => {
   return state.searchSlice._id;
 });
 
-
 export const selectSearchStatus = (state) => state.searchSlice.status;
 export const selectSearchError = (state) => state.searchSlice.error;
+
+export const selectCurrentPage = (state) => state.searchSlice.currentPage;
+export const selectNumberOfPage = (state) => state.searchSlice.numberOfPages;
 
 export default searchSlice.reducer;

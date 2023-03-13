@@ -7,6 +7,7 @@ import {
   Typography,
   Box,
   CircularProgress,
+  Pagination,
 } from "@mui/material";
 
 import { useSearchArtisanQuery } from "../../features/api/apiSlice";
@@ -16,6 +17,8 @@ import {
   selectAllArtisan,
   selectSearchStatus,
   selectSearchError,
+  selectNumberOfPage,
+  selectCurrentPage,
 } from "../Search/SearchSlice";
 
 // CSS
@@ -29,12 +32,23 @@ const ArtisanList = () => {
   const status = useSelector(selectSearchStatus);
   const searchResult = useSelector(selectAllArtisan);
   const error = useSelector(selectSearchError);
+  const pages = useSelector(selectNumberOfPage);
+  const currentPage = useSelector(selectCurrentPage);
 
   useEffect(() => {
     if (status == "idle") {
       dispatch(searchArtisan({ location, profession, page }));
     }
   }, []);
+
+  useEffect(() => {
+    dispatch(searchArtisan({ location, profession, page }));
+  }, [page]);
+
+  const handleChange = (e, value) => {
+    console.log(value);
+    setPage(value);
+  };
 
   let content;
 
@@ -75,7 +89,6 @@ const ArtisanList = () => {
         background: "#000729",
         minHeight: "80vh",
         maxWidth: "unset !important",
-        // border:"solid green"
       }}
     >
       <Box
@@ -94,6 +107,7 @@ const ArtisanList = () => {
       >
         {content}
       </Box>
+      <Pagination count={10} page={currentPage} onChange={handleChange} />
     </Container>
   );
 };
