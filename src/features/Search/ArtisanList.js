@@ -25,14 +25,14 @@ const ArtisanList = () => {
   const dispatch = useDispatch();
   const [location, setLocation] = useState("");
   const [profession, setProfession] = useState("");
-
+  const [page, setPage] = useState(1);
   const status = useSelector(selectSearchStatus);
   const searchResult = useSelector(selectAllArtisan);
   const error = useSelector(selectSearchError);
 
   useEffect(() => {
     if (status == "idle") {
-      dispatch(searchArtisan({ location, profession }));
+      dispatch(searchArtisan({ location, profession, page }));
     }
   }, []);
 

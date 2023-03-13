@@ -87,11 +87,20 @@ const SignupForm = () => {
     // console.log({ ...data, profileImage: data.profileImage.base64 });
     const user = await ArtisanSignup(data);
     if (user) {
-      dispatch(setUserCredentials(user));
+      const { artisan, token } = user.data;
+      const loginData = {
+        token: token,
+        role: artisan.artisan.role,
+        email: artisan.artisan.email,
+        id: artisan.artisan._id,
+        name: artisan.artisan.name,
+      };
+      dispatch(setUserCredentials(loginData));
       dispatch(setLoggedInStatus(true));
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     }
-    console.log(user);
   };
 
   const getFiles = (files) => {
@@ -130,7 +139,7 @@ const SignupForm = () => {
       )}
       {isSuccess && (
         <Notification
-          message="Sign up successful, please login"
+          message="Sign up successful, redirecting..."
           severity="success"
           isError={isError}
           isSuccess={isSuccess}

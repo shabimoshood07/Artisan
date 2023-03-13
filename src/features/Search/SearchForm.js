@@ -8,6 +8,8 @@ const SearchForm = () => {
   const dispatch = useDispatch();
   const [location, setLocation] = useState("");
   const [profession, setProfession] = useState("");
+  const [page, setPage] = useState(1);
+
   const [skip, setSkip] = useState(true);
 
   // useEffect(() => {
@@ -15,7 +17,7 @@ const SearchForm = () => {
   // }, []);
 
   const handleSearch = (e) => {
-    dispatch(searchArtisan({ profession, location }));
+    dispatch(searchArtisan({ profession, location, page }));
     e.preventDefault();
   };
 

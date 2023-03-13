@@ -68,8 +68,8 @@ export const apiSlice = createApi({
 
     // ADD COMMENT
     addComment: builder.mutation({
-      query: ({ artisanId, userId, commentText }) => ({
-        url: `user/comment/${artisanId}/${userId}`,
+      query: ({ artisanId, commentText }) => ({
+        url: `user/comment/${artisanId}`,
         method: "POST",
         body: { commentText },
       }),

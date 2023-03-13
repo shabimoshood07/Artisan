@@ -5,6 +5,8 @@ import {
 } from "@reduxjs/toolkit";
 import { CreateApi } from "@reduxjs/toolkit/dist/query";
 import axios from "axios";
+import { selectUsertoken } from "../authSlice/authSlice";
+import { useSelector } from "react-redux";
 
 const searchAdapter = createEntityAdapter({
   selectId: (artisan) => artisan._id,
@@ -14,15 +16,26 @@ const searchAdapter = createEntityAdapter({
 const initialState = searchAdapter.getInitialState({
   status: "idle",
   error: null,
+  currentPage: 0,
+  numberOfPages: 0,
 });
 
+// const token = useSelector(selectUsertoken);
 export const searchArtisan = createAsyncThunk(
   "artisan/searchArtisan",
-  async ({ profession, location }) => {
-    let url = `http://localhost:5000/artisan/search?location=${location}&profession=${profession}`;
-    console.log(url);
-    const response = await axios.get(url);
-    console.log(response.data);
+  async ({ profession, location, page }, { getState }) => {
+    let url = `http://localhost:5000/artisan/search?location=${location}&profession=${profession}&page=${Number(
+      page
+    )}`;
+    // console.log(url);
+    const token = getState().authSlice.userCredentials.token;
+
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // console.log(response);
     return response.data;
   }
 );
@@ -38,8 +51,10 @@ const searchSlice = createSlice({
       })
       .addCase(searchArtisan.fulfilled, (state, action) => {
         state.status = "succeeded";
-        searchAdapter.setAll(state, action.payload);
-        // searchAdapter.upsertMany(state, action.payload);
+        console.log(action.payload);
+        searchAdapter.setAll(state, action.payload.artisans);
+        state.currentPage = action.payload.currentPage;
+        state.numberOfPages = action.payload.numberOfPages;
       })
       .addCase(searchArtisan.rejected, (state, action) => {
         state.status = "failed";
@@ -48,30 +63,17 @@ const searchSlice = createSlice({
   },
 });
 
-// Export the customized selectors for this adapter using `getSelectors`
 export const {
   selectAll: selectAllArtisan,
   selectById: selectArtisanById,
   selectIds: selectArtisanIds,
-  // Pass in a selector that returns the posts slice of state
 } = searchAdapter.getSelectors((state) => state.searchSlice);
 
-// The `selectId` implementation: function (instance) {
-//         return instance.id;
-//       }
+
 export const selectIds = searchAdapter.getSelectors((state) => {
   return state.searchSlice._id;
 });
 
-// export const selectIds = (art)=>{
-//   searchAdapter.getSelectors((state) => state.searchSlice)
-//   return art._id
-// }
-
-// export const sele = createSelector(
-//   [selectAllPosts, (state, userId) => userId],
-//   (posts, userId) => posts.filter((post) => post.user === userId)
-// );
 
 export const selectSearchStatus = (state) => state.searchSlice.status;
 export const selectSearchError = (state) => state.searchSlice.error;
