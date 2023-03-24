@@ -31,7 +31,7 @@ const Details = ({ artisan }) => {
   return (
     <Box
       sx={{
-        width: { lg: "50%", xs: "90% " },
+        width: { lg: "50%", xs: "100% " },
         position: { lg: "sticky" },
         height: "fit-content",
         top:"64px"

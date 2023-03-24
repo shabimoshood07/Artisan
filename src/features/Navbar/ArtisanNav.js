@@ -212,14 +212,16 @@ const ArtisanNav = (props) => {
               </Typography>
               <Divider />
               <List>
-                <ListItem className="list-items">
-                  <ListItemButton
-                    sx={{ textAlign: "center", justifyContent: "center" }}
-                  >
-                    {artisan && <Avatar src={artisan.profileImage} />}
-                    <p>Profile</p>
-                  </ListItemButton>
-                </ListItem>
+                <Link to={`/profile/${artisanId}`}>
+                  <ListItem className="list-items">
+                    <ListItemButton
+                      sx={{ textAlign: "center", justifyContent: "center" }}
+                    >
+                      {artisan && <Avatar src={artisan.profileImage} />}
+                      <Typography ml={1}>Profile</Typography>
+                    </ListItemButton>
+                  </ListItem>
+                </Link>
 
                 <ListItem
                   disablePadding

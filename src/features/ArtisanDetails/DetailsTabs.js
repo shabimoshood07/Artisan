@@ -57,7 +57,7 @@ const DetailsTab = ({ artisan }) => {
 
   return (
     <Box
-      sx={{ width: { lg: "50%", xs: "90% " }, border: "solid 1px #000729 " }}
+      sx={{ width: { lg: "50%", xs: "100% " }, border: "solid 1px #000729 " }}
     >
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs

@@ -52,14 +52,15 @@ const ArtisanDetails = () => {
           <Button sx={{ border: "solid" }}>Back</Button>
         </Box>
         <Stack
-          p={{ xs: 1, md: 2 }}
+          // p={{ xs: 1, md: 2 }}
           direction={{ xs: "column", lg: "row" }}
           sx={{
             justifyContent: "center",
             alignItems: { xs: "center", lg: "unset" },
-            width: { xs: "90%", md: "85%" },
+            width: { xs: "98%", md: "85%" },
             maxWidth: "1200px",
             margin: "0 auto",
+            border:"solid red"
           }}
         >
           <Details artisan={artisan} />
