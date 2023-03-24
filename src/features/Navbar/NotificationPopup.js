@@ -15,6 +15,7 @@ const NotificationPopup = () => {
   useEffect(() => {
     refetch();
   }, []);
+
   let content;
 
   if (isSuccess && data.comments.length > 0) {
@@ -29,12 +30,7 @@ const NotificationPopup = () => {
 
     content = sortedComment.map((comment) => {
       const { commentId, commentText, createdAt, createdBy, _id } = comment;
-      let backendDate = createdAt
-        .split(":")[0]
-        .slice(0, -3)
-        .split("-")
-        .join(",");
-      const dateFromComment = formatDistance(new Date(backendDate), new Date());
+      const dateFromComment = formatDistance(new Date(createdAt), new Date());
 
       return (
         <MenuItem
@@ -57,7 +53,6 @@ const NotificationPopup = () => {
           </Box>
           <Typography
             sx={{
-              // border: "solid",
               width: "100%",
               textTransform: "capitalize",
             }}

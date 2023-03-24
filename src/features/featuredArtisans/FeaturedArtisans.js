@@ -28,7 +28,7 @@ const FeaturedArtisans = () => {
     isLoading,
     isSuccess,
     refetch,
-  } = useGetAllArtisansQuery("getAllArtisans");
+  } = useFeaturedArtisansQuery();
   useEffect(() => {
     refetch();
   }, []);
@@ -54,11 +54,11 @@ const FeaturedArtisans = () => {
   }
 
   if (isSuccess) {
-    const sortedArtisan = [...artisans]
-      .sort((a, b) => Number(b.rating) - Number(a.rating))
-      .slice(0, 5);
+    // const sortedArtisan = [...artisans]
+    //   .sort((a, b) => Number(b.rating) - Number(a.rating))
+    //   .slice(0, 5);
 
-    content = sortedArtisan.map((artisan) => {
+    content = artisans.map((artisan) => {
       return (
         <Card
           key={artisan._id}

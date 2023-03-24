@@ -25,19 +25,13 @@ import { useEffect } from "react";
 function App() {
   const dispatch = useDispatch();
 
-
-  // useEffect(() => {
-    const loginData = localStorage.getItem("login data");
-
-    console.log(loginData);
-    console.log(typeof loginData);
-    if (loginData === "null" || !loginData ||  loginData === "undefined") {
-      dispatch(setLoggedInStatus(false));
-    } else {
-      dispatch(setUserCredentials(JSON.parse(loginData)));
-      dispatch(setLoggedInStatus(true));
-    }
-  // }, []);
+  const loginData = localStorage.getItem("login data");
+  if (loginData === "null" || !loginData || loginData === "undefined") {
+    dispatch(setLoggedInStatus(false));
+  } else {
+    dispatch(setUserCredentials(JSON.parse(loginData)));
+    dispatch(setLoggedInStatus(true));
+  }
 
   return (
     <>

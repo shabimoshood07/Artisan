@@ -91,6 +91,22 @@ const ArtisanList = () => {
         maxWidth: "unset !important",
       }}
     >
+      <Pagination
+        count={pages}
+        page={currentPage}
+        onChange={handleChange}
+        color="secondary"
+        variant="outlined"
+        size="large"
+        sx={{
+          border: "solid red",
+          color: "#fff",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom:2
+        }}
+      />
       <Box
         sx={{
           // border: "solid red",
@@ -107,15 +123,6 @@ const ArtisanList = () => {
       >
         {content}
       </Box>
-      <Pagination
-        count={10}
-        page={currentPage}
-        onChange={handleChange}
-        color="secondary"
-        variant="outlined" 
-        size="large" 
-        sx={{border:"solid red", color:"#fff"}}
-      />
     </Container>
   );
 };
