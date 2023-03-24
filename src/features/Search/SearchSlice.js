@@ -24,7 +24,7 @@ const initialState = searchAdapter.getInitialState({
 export const searchArtisan = createAsyncThunk(
   "artisan/searchArtisan",
   async ({ profession, location, page }, { getState }) => {
-    let url = `http://localhost:5000/artisan/search?location=${location}&profession=${profession}&page=${Number(
+    let url = `https://artisan-backend-eight.vercel.app/artisan/search?location=${location}&profession=${profession}&page=${Number(
       page
     )}`;
     // console.log(url);
