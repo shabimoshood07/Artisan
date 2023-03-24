@@ -107,7 +107,15 @@ const ArtisanList = () => {
       >
         {content}
       </Box>
-      <Pagination count={10} page={currentPage} onChange={handleChange} />
+      <Pagination
+        count={10}
+        page={currentPage}
+        onChange={handleChange}
+        color="secondary"
+        variant="outlined" 
+        size="large" 
+        sx={{border:"solid red", color:"#fff"}}
+      />
     </Container>
   );
 };
