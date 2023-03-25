@@ -4,7 +4,7 @@ import {
   selectLoggedInStatus,
   selectUsername,
   logout,
-  setLoggedInStatus
+  setLoggedInStatus,
 } from "../authSlice/authSlice";
 
 import { useGetAllUsersQuery } from "../api/apiSlice";
@@ -43,7 +43,7 @@ const USerNav = (props) => {
   const dispatch = useDispatch();
 
   // User Credentials
-  const username  = useSelector(selectUsername);
+  const username = useSelector(selectUsername);
   // logged in status
   const isLoggedIn = useSelector(selectLoggedInStatus);
 
@@ -67,7 +67,6 @@ const USerNav = (props) => {
   let content;
 
   if (isLoggedIn && isSuccess) {
- 
     const user = users.find(
       (user) => user.username.toLowerCase() == username.toLowerCase()
     );
@@ -144,9 +143,11 @@ const USerNav = (props) => {
             }}
           >
             <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-              <Typography variant="h6" sx={{ my: 2 }}>
-                ARTISAN
-              </Typography>
+              <Link to="/">
+                <Typography variant="h6" sx={{ my: 2 }}>
+                  ARTISAN
+                </Typography>
+              </Link>
               <Divider />
               <List>
                 <ListItem className="list-items">
@@ -183,6 +184,5 @@ const USerNav = (props) => {
 
   return content;
 };
-
 
 export default USerNav;
