@@ -20,7 +20,7 @@ import Notification from "../PopNotification/Notification";
 // import "./style.css";
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [login, { isLoading, isSuccess, data: loginData, isError, error }] =
     useLoginMutation();
 
@@ -51,10 +51,12 @@ const LoginForm = () => {
     const { email, password } = data;
     const response = await login({ data: email, password: password });
     console.log(response);
-    if (response) {
-      dispatch(setUserCredentials(response.data));
-      dispatch(setLoggedInStatus(true));
-      navigate("/")
+    if (response.data) {
+      setTimeout(() => {
+        dispatch(setUserCredentials(response.data));
+        dispatch(setLoggedInStatus(true));
+        navigate("/");
+      }, 2000);
     }
   };
 
