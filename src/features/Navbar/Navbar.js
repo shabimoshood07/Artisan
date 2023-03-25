@@ -47,18 +47,27 @@ let Navbar = (props) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        ARTISAN
-      </Typography>
+      <Link to="/">
+        <Typography variant="h6" sx={{ my: 2 }}>
+          ARTISAN
+        </Typography>
+      </Link>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+        <Link to="/login">
+          <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText primary="Login" />
             </ListItemButton>
           </ListItem>
-        ))}
+        </Link>
+        <Link to="/signup">
+          <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText primary="Sign up" />
+            </ListItemButton>
+          </ListItem>
+        </Link>
       </List>
     </Box>
   );

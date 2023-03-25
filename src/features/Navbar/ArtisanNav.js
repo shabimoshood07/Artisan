@@ -207,9 +207,11 @@ const ArtisanNav = (props) => {
             }}
           >
             <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-              <Typography variant="h6" sx={{ my: 2 }}>
-                ARTISAN
-              </Typography>
+              <Link to="/">
+                <Typography variant="h6" sx={{ my: 2 }}>
+                  ARTISAN
+                </Typography>
+              </Link>
               <Divider />
               <List>
                 <Link to={`/profile/${artisanId}`}>
