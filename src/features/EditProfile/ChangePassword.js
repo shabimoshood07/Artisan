@@ -12,15 +12,19 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./style.css";
+import Notification from "../PopNotification/Notification";
 const ChangePassword = () => {
-  const [changePassword, { isLoading, isSuccess, data }] =
+  const [changePassword, { isLoading, isSuccess, data, isError }] =
     useChangePasswordMutation();
 
   const schema = yup.object({
     currentPassword: yup
       .string()
       .required("Please input your current password"),
-    newPassword: yup.string().required("Please input your new password"),
+    newPassword: yup
+      .string()
+      .required("Please input your new password")
+      .min(6, "password must be at least 6 characters"),
     confirmPassword: yup
       .string()
       .required("please confirm your password")
@@ -44,6 +48,22 @@ const ChangePassword = () => {
 
   return (
     <Box component="form" onSubmit={handleSubmit(submit)}>
+      {isSuccess && (
+        <Notification
+          message="password updated successfully"
+          severity="success"
+          isError={isError}
+          isSuccess={isSuccess}
+        />
+      )}
+      {isError && (
+        <Notification
+          message="Error"
+          severity="error"
+          isError={isError}
+          isSuccess={isSuccess}
+        />
+      )}
       <TextField
         fullWidth
         margin="normal"

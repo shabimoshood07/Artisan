@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 
 import { useUpdateProfileMutation } from "../api/apiSlice";
+import Notification from "../PopNotification/Notification";
 
 const EditProfileForm = ({ artisan }) => {
   const {
@@ -26,27 +27,32 @@ const EditProfileForm = ({ artisan }) => {
     profileImage,
   } = artisan;
   const [img, setImg] = useState(profileImage);
+  const [updateProfile, { isLoading, isSuccess, isError }] =
+    useUpdateProfileMutation();
 
-  const [updateProfile, { isLoading, data }] = useUpdateProfileMutation();
-
-  const schema = yup.object({});
+  const schema = yup.object({
+    about: yup.string().required("About can not be empty"),
+    address: yup.string().required("address can not be empty"),
+  });
 
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+    formState: { errors, isValid },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const submit = async (data) => {
-    console.log({
-      ...data,
-      profileImage: data?.profileImage?.base64,
-      " socials.twitter": data.twitter,
-      " socials.instagram": data.instagram,
-      " socials.facebook": data.facebook,
-    });
-    // const updatedUser = await updateProfile(data);
+    const oldData = {
+      about: artisan.about,
+      address: artisan.address,
+      facebook: artisan.socials.facebook,
+      instagram: artisan.socials.instagram,
+      twitter: artisan.socials.twitter,
+    };
+
     const updatedUser = await updateProfile({
       ...data,
       profileImage: data?.profileImage?.base64,
@@ -54,17 +60,23 @@ const EditProfileForm = ({ artisan }) => {
       "socials.instagram": data?.instagram,
       "socials.facebook": data?.facebook,
     });
-    console.log(updatedUser);
   };
 
   const getFiles = (files) => {
-    console.log(files);
     setImg(files.base64);
     setValue("profileImage", files);
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit(submit)}>
+      {isSuccess && (
+        <Notification
+          message="Profile updated successfully"
+          severity="success"
+          isError={isError}
+          isSuccess={isSuccess}
+        />
+      )}
       <TextField
         label="Business Name"
         variant="standard"
@@ -101,6 +113,11 @@ const EditProfileForm = ({ artisan }) => {
         rows={5}
         {...register("about")}
       />
+      {errors?.about?.message && (
+        <Typography variant="p" color="red">
+          {errors.about.message}
+        </Typography>
+      )}
       <TextField
         label="Address"
         variant="standard"
@@ -109,6 +126,11 @@ const EditProfileForm = ({ artisan }) => {
         defaultValue={address}
         {...register("address")}
       />
+      {errors?.address?.message && (
+        <Typography variant="p" color="red">
+          {errors.address.message}
+        </Typography>
+      )}
       <TextField
         label="Twitter"
         variant="standard"
@@ -150,12 +172,10 @@ const EditProfileForm = ({ artisan }) => {
         </Box>
       </Box>
       <Button type="submit" className="btn">
-        {isLoading ? <CircularProgress /> : "Submit"}
+        {isLoading ? <CircularProgress size={15} /> : "Submit"}
       </Button>
     </Box>
   );
 };
 
 export default EditProfileForm;
-
-
