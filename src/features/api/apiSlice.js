@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://artisan-backend-eight.vercel.app",
+    baseUrl: "https://artisan-backend-eight.vercel.app/",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().authSlice.userCredentials.token;
