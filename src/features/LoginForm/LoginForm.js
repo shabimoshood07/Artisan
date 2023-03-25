@@ -3,12 +3,9 @@ import { useLoginMutation } from "../api/apiSlice";
 import { setUserCredentials, setLoggedInStatus } from "../authSlice/authSlice";
 import { useDispatch } from "react-redux";
 import {
-  Alert,
   Box,
   Button,
   CircularProgress,
-  Snackbar,
-  styled,
   TextField,
   Typography,
 } from "@mui/material";
@@ -17,7 +14,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
 import Notification from "../PopNotification/Notification";
-// import "./style.css";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,7 +33,7 @@ const LoginForm = () => {
   };
 
   const schema = yup.object({
-    email: yup.string().email().required("Please provide email"),
+    inputData: yup.string().required("Please provide email or username"),
     password: yup.string().required("Please provide  passsword"),
   });
 
@@ -48,8 +44,8 @@ const LoginForm = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const submit = async (data) => {
-    const { email, password } = data;
-    const response = await login({ data: email, password: password });
+    const { inputData, password } = data;
+    const response = await login({ data: inputData, password: password });
     console.log(response);
     if (response.data) {
       setTimeout(() => {
@@ -105,12 +101,12 @@ const LoginForm = () => {
           Login
         </Typography>
         <TextField
-          label="Email"
+          label="Email/Username"
           fullWidth
           variant="standard"
           margin="normal"
           size="medium"
-          {...register("email")}
+          {...register("inputData")}
           sx={style}
         />
         {errors?.email?.message && (
