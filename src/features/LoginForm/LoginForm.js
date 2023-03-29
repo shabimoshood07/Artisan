@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLoginMutation } from "../api/apiSlice";
 import { setUserCredentials, setLoggedInStatus } from "../authSlice/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { selectLoggedInStatus } from "../authSlice/authSlice";
+import { useDispatch } from "react-redux";
 import {
   Box,
   Button,
@@ -16,18 +15,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
 import Notification from "../PopNotification/Notification";
 const LoginForm = () => {
-  const loggedInStatus = useSelector(selectLoggedInStatus);
-  console.log(loggedInStatus);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading, isSuccess, data: loginData, isError, error }] =
     useLoginMutation();
-
-  useEffect(() => {
-    if (!loggedInStatus) {
-      navigate("/login");
-    }
-  }, []);
 
   const style = {
     "& label.Mui-focused": {
