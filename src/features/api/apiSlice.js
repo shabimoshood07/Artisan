@@ -29,7 +29,6 @@ export const apiSlice = createApi({
     // GET ALL USERS
     getAllUsers: builder.query({
       query: () => "/user",
-      providesTags: ["Users"],
     }),
 
     // LOGIN
@@ -44,6 +43,14 @@ export const apiSlice = createApi({
     ArtisanSignup: builder.mutation({
       query: (data) => ({
         url: "/auth/signup/artisan",
+        method: "POST",
+        body: { ...data },
+      }),
+    }),
+    // SIGNUP USER
+    UserSignup: builder.mutation({
+      query: (data) => ({
+        url: "/auth/signup/user",
         method: "POST",
         body: { ...data },
       }),
